@@ -1,0 +1,439 @@
+Dump of assembler code for function server:
+   0x08048fc7 <+0>:	push   %ebp
+   0x08048fc8 <+1>:	mov    %esp,%ebp
+   0x08048fca <+3>:	push   %edi
+   0x08048fcb <+4>:	push   %esi
+   0x08048fcc <+5>:	push   %ebx
+   0x08048fcd <+6>:	sub    $0xfc,%esp
+   0x08048fd3 <+12>:	movl   $0x1,-0x40(%ebp)
+   0x08048fda <+19>:	movl   $0x0,0x8(%esp)
+   0x08048fe2 <+27>:	movl   $0x1,0x4(%esp)
+   0x08048fea <+35>:	movl   $0x2,(%esp)
+   0x08048ff1 <+42>:	call   0x8048840 <socket@plt>
+   0x08048ff6 <+47>:	mov    %eax,-0x30(%ebp)
+   0x08048ff9 <+50>:	cmpl   $0xffffffff,-0x30(%ebp)
+   0x08048ffd <+54>:	jne    0x8049015 <server+78>
+   0x08048fff <+56>:	movl   $0x80499d4,(%esp)
+   0x08049006 <+63>:	call   0x8048910 <puts@plt>
+   0x0804900b <+68>:	mov    $0x0,%eax
+   0x08049010 <+73>:	jmp    0x804968f <server+1736>
+   0x08049015 <+78>:	movl   $0x4,0x10(%esp)
+   0x0804901d <+86>:	lea    -0x40(%ebp),%eax
+   0x08049020 <+89>:	mov    %eax,0xc(%esp)
+   0x08049024 <+93>:	movl   $0x2,0x8(%esp)
+   0x0804902c <+101>:	movl   $0x1,0x4(%esp)
+   0x08049034 <+109>:	mov    -0x30(%ebp),%eax
+   0x08049037 <+112>:	mov    %eax,(%esp)
+   0x0804903a <+115>:	call   0x8048920 <setsockopt@plt>
+   0x0804903f <+120>:	cmp    $0xffffffff,%eax
+   0x08049042 <+123>:	jne    0x804905b <server+148>
+   0x08049044 <+125>:	call   0x8048770 <__errno_location@plt>
+   0x08049049 <+130>:	mov    (%eax),%eax
+   0x0804904b <+132>:	mov    %eax,0x4(%esp)
+   0x0804904f <+136>:	movl   $0x80499f4,(%esp)
+   0x08049056 <+143>:	call   0x8048890 <printf@plt>
+   0x0804905b <+148>:	movw   $0x2,0x8052da0
+   0x08049064 <+157>:	mov    0x804ae38,%eax
+   0x08049069 <+162>:	movzwl %ax,%eax
+   0x0804906c <+165>:	mov    %eax,(%esp)
+   0x0804906f <+168>:	call   0x8048800 <htons@plt>
+   0x08049074 <+173>:	mov    %ax,0x8052da2
+   0x0804907a <+179>:	movl   $0x0,(%esp)
+   0x08049081 <+186>:	call   0x8048940 <htonl@plt>
+   0x08049086 <+191>:	mov    %eax,0x8052da4
+   0x0804908b <+196>:	movl   $0x10,0x8(%esp)
+   0x08049093 <+204>:	movl   $0x8052da0,0x4(%esp)
+   0x0804909b <+212>:	mov    -0x30(%ebp),%eax
+   0x0804909e <+215>:	mov    %eax,(%esp)
+   0x080490a1 <+218>:	call   0x80488a0 <bind@plt>
+   0x080490a6 <+223>:	cmp    $0xffffffff,%eax
+   0x080490a9 <+226>:	jne    0x80490cc <server+261>
+   0x080490ab <+228>:	call   0x8048770 <__errno_location@plt>
+   0x080490b0 <+233>:	mov    (%eax),%eax
+   0x080490b2 <+235>:	mov    %eax,0x4(%esp)
+   0x080490b6 <+239>:	movl   $0x8049a22,(%esp)
+   0x080490bd <+246>:	call   0x8048890 <printf@plt>
+   0x080490c2 <+251>:	mov    $0x0,%eax
+   0x080490c7 <+256>:	jmp    0x804968f <server+1736>
+   0x080490cc <+261>:	movl   $0xa,0x4(%esp)
+   0x080490d4 <+269>:	mov    -0x30(%ebp),%eax
+   0x080490d7 <+272>:	mov    %eax,(%esp)
+   0x080490da <+275>:	call   0x80487e0 <listen@plt>
+   0x080490df <+280>:	test   %eax,%eax
+   0x080490e1 <+282>:	jns    0x80490f9 <server+306>
+   0x080490e3 <+284>:	movl   $0x8049a3a,(%esp)
+   0x080490ea <+291>:	call   0x8048910 <puts@plt>
+   0x080490ef <+296>:	mov    $0x0,%eax
+   0x080490f4 <+301>:	jmp    0x804968f <server+1736>
+   0x080490f9 <+306>:	mov    -0x30(%ebp),%eax
+   0x080490fc <+309>:	mov    %eax,-0x24(%ebp)
+   0x080490ff <+312>:	mov    $0x0,%eax
+   0x08049104 <+317>:	mov    $0x20,%ecx
+   0x08049109 <+322>:	mov    $0x8052d20,%edx
+   0x0804910e <+327>:	mov    %edx,%edi
+   0x08049110 <+329>:	cld    
+   0x08049111 <+330>:	rep stos %eax,%es:(%edi)
+   0x08049113 <+332>:	mov    %edi,%edx
+   0x08049115 <+334>:	mov    %ecx,-0x34(%ebp)
+   0x08049118 <+337>:	mov    %edx,-0x38(%ebp)
+   0x0804911b <+340>:	mov    -0x30(%ebp),%eax
+   0x0804911e <+343>:	lea    0x1f(%eax),%edx
+   0x08049121 <+346>:	test   %eax,%eax
+   0x08049123 <+348>:	cmovs  %edx,%eax
+   0x08049126 <+351>:	sar    $0x5,%eax
+   0x08049129 <+354>:	mov    0x8052d20(,%eax,4),%ebx
+   0x08049130 <+361>:	mov    -0x30(%ebp),%edx
+   0x08049133 <+364>:	mov    %edx,%ecx
+   0x08049135 <+366>:	sar    $0x1f,%ecx
+   0x08049138 <+369>:	shr    $0x1b,%ecx
+   0x0804913b <+372>:	add    %ecx,%edx
+   0x0804913d <+374>:	and    $0x1f,%edx
+   0x08049140 <+377>:	sub    %ecx,%edx
+   0x08049142 <+379>:	mov    $0x1,%esi
+   0x08049147 <+384>:	mov    %edx,%ecx
+   0x08049149 <+386>:	shl    %cl,%esi
+   0x0804914b <+388>:	mov    %esi,%edx
+   0x0804914d <+390>:	or     %ebx,%edx
+   0x0804914f <+392>:	mov    %edx,0x8052d20(,%eax,4)
+   0x08049156 <+399>:	movl   $0x0,-0x28(%ebp)
+   0x0804915d <+406>:	movl   $0x1,-0xd8(%ebp)
+   0x08049167 <+416>:	movl   $0x0,-0xd4(%ebp)
+   0x08049171 <+426>:	movl   $0x8049a57,(%esp)
+   0x08049178 <+433>:	call   0x8048910 <puts@plt>
+   0x0804917d <+438>:	lea    -0xc0(%ebp),%edx
+   0x08049183 <+444>:	mov    $0x8052d20,%ebx
+   0x08049188 <+449>:	mov    $0x20,%eax
+   0x0804918d <+454>:	mov    %edx,%edi
+   0x0804918f <+456>:	mov    %ebx,%esi
+   0x08049191 <+458>:	mov    %eax,%ecx
+   0x08049193 <+460>:	rep movsl %ds:(%esi),%es:(%edi)
+   0x08049195 <+462>:	mov    -0x24(%ebp),%eax
+   0x08049198 <+465>:	lea    0x1(%eax),%edx
+   0x0804919b <+468>:	lea    -0xd8(%ebp),%eax
+   0x080491a1 <+474>:	mov    %eax,0x10(%esp)
+   0x080491a5 <+478>:	movl   $0x0,0xc(%esp)
+   0x080491ad <+486>:	movl   $0x0,0x8(%esp)
+   0x080491b5 <+494>:	lea    -0xc0(%ebp),%eax
+   0x080491bb <+500>:	mov    %eax,0x4(%esp)
+   0x080491bf <+504>:	mov    %edx,(%esp)
+   0x080491c2 <+507>:	call   0x80488c0 <select@plt>
+   0x080491c7 <+512>:	mov    -0x30(%ebp),%eax
+   0x080491ca <+515>:	lea    0x1f(%eax),%edx
+   0x080491cd <+518>:	test   %eax,%eax
+   0x080491cf <+520>:	cmovs  %edx,%eax
+   0x080491d2 <+523>:	sar    $0x5,%eax
+   0x080491d5 <+526>:	mov    -0xc0(%ebp,%eax,4),%ebx
+   0x080491dc <+533>:	mov    -0x30(%ebp),%eax
+   0x080491df <+536>:	cltd   
+   0x080491e0 <+537>:	shr    $0x1b,%edx
+   0x080491e3 <+540>:	add    %edx,%eax
+   0x080491e5 <+542>:	and    $0x1f,%eax
+   0x080491e8 <+545>:	sub    %edx,%eax
+   0x080491ea <+547>:	mov    %eax,%ecx
+   0x080491ec <+549>:	sar    %cl,%ebx
+   0x080491ee <+551>:	mov    %ebx,%eax
+   0x080491f0 <+553>:	and    $0x1,%eax
+   0x080491f3 <+556>:	test   %eax,%eax
+   0x080491f5 <+558>:	je     0x8049388 <server+961>
+   0x080491fb <+564>:	cmpl   $0x1e,-0x28(%ebp)
+   0x080491ff <+568>:	jg     0x804937e <server+951>
+   0x08049205 <+574>:	movl   $0x8049a61,(%esp)
+   0x0804920c <+581>:	call   0x8048910 <puts@plt>
+   0x08049211 <+586>:	movl   $0x10,-0xdc(%ebp)
+   0x0804921b <+596>:	mov    -0x28(%ebp),%ebx
+   0x0804921e <+599>:	lea    0x1(%ebx),%eax
+   0x08049221 <+602>:	mov    %eax,-0x28(%ebp)
+   0x08049224 <+605>:	lea    -0xdc(%ebp),%eax
+   0x0804922a <+611>:	mov    %eax,0x8(%esp)
+   0x0804922e <+615>:	lea    -0xd0(%ebp),%eax
+   0x08049234 <+621>:	mov    %eax,0x4(%esp)
+   0x08049238 <+625>:	mov    -0x30(%ebp),%eax
+   0x0804923b <+628>:	mov    %eax,(%esp)
+   0x0804923e <+631>:	call   0x8048830 <accept@plt>
+   0x08049243 <+636>:	imul   $0x3f4,%ebx,%edx
+   0x08049249 <+642>:	add    $0x804ae80,%edx
+   0x0804924f <+648>:	mov    %eax,(%edx)
+   0x08049251 <+650>:	mov    -0x28(%ebp),%eax
+   0x08049254 <+653>:	sub    $0x1,%eax
+   0x08049257 <+656>:	imul   $0x3f4,%eax,%eax
+   0x0804925d <+662>:	add    $0x804ae80,%eax
+   0x08049262 <+667>:	mov    (%eax),%eax
+   0x08049264 <+669>:	test   %eax,%eax
+   0x08049266 <+671>:	jns    0x8049289 <server+706>
+   0x08049268 <+673>:	call   0x8048770 <__errno_location@plt>
+   0x0804926d <+678>:	mov    (%eax),%eax
+   0x0804926f <+680>:	mov    %eax,0x4(%esp)
+   0x08049273 <+684>:	movl   $0x8049a6f,(%esp)
+   0x0804927a <+691>:	call   0x8048890 <printf@plt>
+   0x0804927f <+696>:	mov    $0x0,%eax
+   0x08049284 <+701>:	jmp    0x804968f <server+1736>
+   0x08049289 <+706>:	mov    -0x28(%ebp),%eax
+   0x0804928c <+709>:	sub    $0x1,%eax
+   0x0804928f <+712>:	imul   $0x3f4,%eax,%eax
+   0x08049295 <+718>:	add    $0x804ae80,%eax
+   0x0804929a <+723>:	mov    (%eax),%eax
+   0x0804929c <+725>:	cmp    -0x24(%ebp),%eax
+   0x0804929f <+728>:	jle    0x80492b7 <server+752>
+   0x080492a1 <+730>:	mov    -0x28(%ebp),%eax
+   0x080492a4 <+733>:	sub    $0x1,%eax
+   0x080492a7 <+736>:	imul   $0x3f4,%eax,%eax
+   0x080492ad <+742>:	add    $0x804ae80,%eax
+   0x080492b2 <+747>:	mov    (%eax),%eax
+   0x080492b4 <+749>:	mov    %eax,-0x24(%ebp)
+   0x080492b7 <+752>:	movl   $0x0,0x4(%esp)
+   0x080492bf <+760>:	movl   $0x8052d00,(%esp)
+   0x080492c6 <+767>:	call   0x8048820 <gettimeofday@plt>
+   0x080492cb <+772>:	mov    -0x28(%ebp),%eax
+   0x080492ce <+775>:	lea    -0x1(%eax),%edx
+   0x080492d1 <+778>:	mov    0x8052d00,%eax
+   0x080492d6 <+783>:	imul   $0x3f4,%edx,%edx
+   0x080492dc <+789>:	add    $0x804b270,%edx
+   0x080492e2 <+795>:	mov    %eax,(%edx)
+   0x080492e4 <+797>:	mov    -0x28(%ebp),%eax
+   0x080492e7 <+800>:	sub    $0x1,%eax
+   0x080492ea <+803>:	imul   $0x3f4,%eax,%eax
+   0x080492f0 <+809>:	add    $0x804ae80,%eax
+   0x080492f5 <+814>:	add    $0x4,%eax
+   0x080492f8 <+817>:	movl   $0x3e8,0x4(%esp)
+   0x08049300 <+825>:	mov    %eax,(%esp)
+   0x08049303 <+828>:	call   0x8048930 <bzero@plt>
+   0x08049308 <+833>:	mov    -0x28(%ebp),%eax
+   0x0804930b <+836>:	sub    $0x1,%eax
+   0x0804930e <+839>:	imul   $0x3f4,%eax,%eax
+   0x08049314 <+845>:	add    $0x804b260,%eax
+   0x08049319 <+850>:	movl   $0x0,0xc(%eax)
+   0x08049320 <+857>:	mov    -0x28(%ebp),%eax
+   0x08049323 <+860>:	sub    $0x1,%eax
+   0x08049326 <+863>:	imul   $0x3f4,%eax,%eax
+   0x0804932c <+869>:	add    $0x804ae80,%eax
+   0x08049331 <+874>:	mov    (%eax),%eax
+   0x08049333 <+876>:	lea    0x1f(%eax),%edx
+   0x08049336 <+879>:	test   %eax,%eax
+   0x08049338 <+881>:	cmovs  %edx,%eax
+   0x0804933b <+884>:	sar    $0x5,%eax
+   0x0804933e <+887>:	mov    0x8052d20(,%eax,4),%ebx
+   0x08049345 <+894>:	mov    -0x28(%ebp),%edx
+   0x08049348 <+897>:	sub    $0x1,%edx
+   0x0804934b <+900>:	imul   $0x3f4,%edx,%edx
+   0x08049351 <+906>:	add    $0x804ae80,%edx
+   0x08049357 <+912>:	mov    (%edx),%edx
+   0x08049359 <+914>:	mov    %edx,%ecx
+   0x0804935b <+916>:	sar    $0x1f,%ecx
+   0x0804935e <+919>:	shr    $0x1b,%ecx
+   0x08049361 <+922>:	add    %ecx,%edx
+   0x08049363 <+924>:	and    $0x1f,%edx
+   0x08049366 <+927>:	sub    %ecx,%edx
+   0x08049368 <+929>:	mov    $0x1,%esi
+   0x0804936d <+934>:	mov    %edx,%ecx
+   0x0804936f <+936>:	shl    %cl,%esi
+   0x08049371 <+938>:	mov    %esi,%edx
+   0x08049373 <+940>:	or     %ebx,%edx
+   0x08049375 <+942>:	mov    %edx,0x8052d20(,%eax,4)
+   0x0804937c <+949>:	jmp    0x8049388 <server+961>
+   0x0804937e <+951>:	mov    $0x0,%eax
+   0x08049383 <+956>:	jmp    0x804968f <server+1736>
+   0x08049388 <+961>:	movl   $0x0,-0x2c(%ebp)
+   0x0804938f <+968>:	jmp    0x8049571 <server+1450>
+   0x08049394 <+973>:	mov    -0x2c(%ebp),%eax
+   0x08049397 <+976>:	imul   $0x3f4,%eax,%eax
+   0x0804939d <+982>:	add    $0x804ae80,%eax
+   0x080493a2 <+987>:	mov    (%eax),%eax
+   0x080493a4 <+989>:	test   %eax,%eax
+   0x080493a6 <+991>:	jns    0x80493ad <server+998>
+   0x080493a8 <+993>:	jmp    0x804956d <server+1446>
+   0x080493ad <+998>:	mov    -0x2c(%ebp),%eax
+   0x080493b0 <+1001>:	imul   $0x3f4,%eax,%eax
+   0x080493b6 <+1007>:	add    $0x804ae80,%eax
+   0x080493bb <+1012>:	mov    (%eax),%eax
+   0x080493bd <+1014>:	lea    0x1f(%eax),%edx
+   0x080493c0 <+1017>:	test   %eax,%eax
+   0x080493c2 <+1019>:	cmovs  %edx,%eax
+   0x080493c5 <+1022>:	sar    $0x5,%eax
+   0x080493c8 <+1025>:	mov    -0xc0(%ebp,%eax,4),%ebx
+   0x080493cf <+1032>:	mov    -0x2c(%ebp),%eax
+   0x080493d2 <+1035>:	imul   $0x3f4,%eax,%eax
+   0x080493d8 <+1041>:	add    $0x804ae80,%eax
+   0x080493dd <+1046>:	mov    (%eax),%eax
+   0x080493df <+1048>:	cltd   
+   0x080493e0 <+1049>:	shr    $0x1b,%edx
+   0x080493e3 <+1052>:	add    %edx,%eax
+   0x080493e5 <+1054>:	and    $0x1f,%eax
+   0x080493e8 <+1057>:	sub    %edx,%eax
+   0x080493ea <+1059>:	mov    %eax,%ecx
+   0x080493ec <+1061>:	sar    %cl,%ebx
+   0x080493ee <+1063>:	mov    %ebx,%eax
+   0x080493f0 <+1065>:	and    $0x1,%eax
+   0x080493f3 <+1068>:	test   %eax,%eax
+   0x080493f5 <+1070>:	je     0x804956d <server+1446>
+   0x080493fb <+1076>:	movl   $0x0,-0x3c(%ebp)
+   0x08049402 <+1083>:	mov    -0x2c(%ebp),%eax
+   0x08049405 <+1086>:	imul   $0x3f4,%eax,%eax
+   0x0804940b <+1092>:	add    $0x804b260,%eax
+   0x08049410 <+1097>:	mov    0xc(%eax),%eax
+   0x08049413 <+1100>:	mov    $0x3e7,%edx
+   0x08049418 <+1105>:	sub    %eax,%edx
+   0x0804941a <+1107>:	mov    %edx,%eax
+   0x0804941c <+1109>:	mov    %eax,%edx
+   0x0804941e <+1111>:	mov    -0x2c(%ebp),%eax
+   0x08049421 <+1114>:	imul   $0x3f4,%eax,%eax
+   0x08049427 <+1120>:	add    $0x804b260,%eax
+   0x0804942c <+1125>:	mov    0xc(%eax),%eax
+   0x0804942f <+1128>:	mov    -0x2c(%ebp),%ecx
+   0x08049432 <+1131>:	imul   $0x3f4,%ecx,%ecx
+   0x08049438 <+1137>:	add    %ecx,%eax
+   0x0804943a <+1139>:	add    $0x804ae80,%eax
+   0x0804943f <+1144>:	lea    0x4(%eax),%ecx
+   0x08049442 <+1147>:	mov    -0x2c(%ebp),%eax
+   0x08049445 <+1150>:	imul   $0x3f4,%eax,%eax
+   0x0804944b <+1156>:	add    $0x804ae80,%eax
+   0x08049450 <+1161>:	mov    (%eax),%eax
+   0x08049452 <+1163>:	mov    %edx,0x8(%esp)
+   0x08049456 <+1167>:	mov    %ecx,0x4(%esp)
+   0x0804945a <+1171>:	mov    %eax,(%esp)
+   0x0804945d <+1174>:	call   0x8048810 <read@plt>
+   0x08049462 <+1179>:	mov    %eax,-0x3c(%ebp)
+   0x08049465 <+1182>:	mov    -0x2c(%ebp),%eax
+   0x08049468 <+1185>:	imul   $0x3f4,%eax,%eax
+   0x0804946e <+1191>:	add    $0x804b260,%eax
+   0x08049473 <+1196>:	mov    0xc(%eax),%edx
+   0x08049476 <+1199>:	mov    -0x3c(%ebp),%eax
+   0x08049479 <+1202>:	add    %eax,%edx
+   0x0804947b <+1204>:	mov    -0x2c(%ebp),%eax
+   0x0804947e <+1207>:	imul   $0x3f4,%eax,%eax
+   0x08049484 <+1213>:	add    $0x804b260,%eax
+   0x08049489 <+1218>:	mov    %edx,0xc(%eax)
+   0x0804948c <+1221>:	cmpl   $0x0,-0x3c(%ebp)
+   0x08049490 <+1225>:	jne    0x80494ad <server+1254>
+   0x08049492 <+1227>:	mov    -0x2c(%ebp),%eax
+   0x08049495 <+1230>:	imul   $0x3f4,%eax,%eax
+   0x0804949b <+1236>:	add    $0x804ae80,%eax
+   0x080494a0 <+1241>:	mov    %eax,(%esp)
+   0x080494a3 <+1244>:	call   0x8048ab0 <close_connec>
+   0x080494a8 <+1249>:	jmp    0x8049543 <server+1404>
+   0x080494ad <+1254>:	mov    -0x2c(%ebp),%eax
+   0x080494b0 <+1257>:	imul   $0x3f4,%eax,%eax
+   0x080494b6 <+1263>:	add    $0x804ae80,%eax
+   0x080494bb <+1268>:	lea    0x4(%eax),%edx
+   0x080494be <+1271>:	mov    -0x2c(%ebp),%eax
+   0x080494c1 <+1274>:	imul   $0x3f4,%eax,%eax
+   0x080494c7 <+1280>:	add    $0x804b260,%eax
+   0x080494cc <+1285>:	mov    0xc(%eax),%eax
+   0x080494cf <+1288>:	mov    %edx,0x4(%esp)
+   0x080494d3 <+1292>:	mov    %eax,(%esp)
+   0x080494d6 <+1295>:	call   0x8048bfa <validatebuf>
+   0x080494db <+1300>:	test   %eax,%eax
+   0x080494dd <+1302>:	je     0x8049522 <server+1371>
+   0x080494df <+1304>:	mov    -0x2c(%ebp),%eax
+   0x080494e2 <+1307>:	imul   $0x3f4,%eax,%eax
+   0x080494e8 <+1313>:	add    $0x804ae80,%eax
+   0x080494ed <+1318>:	mov    (%eax),%edx
+   0x080494ef <+1320>:	mov    -0x2c(%ebp),%eax
+   0x080494f2 <+1323>:	imul   $0x3f4,%eax,%eax
+   0x080494f8 <+1329>:	add    $0x804b260,%eax
+   0x080494fd <+1334>:	mov    0xc(%eax),%eax
+   0x08049500 <+1337>:	mov    -0x2c(%ebp),%ecx
+   0x08049503 <+1340>:	imul   $0x3f4,%ecx,%ecx
+   0x08049509 <+1346>:	add    $0x804ae80,%ecx
+   0x0804950f <+1352>:	add    $0x4,%ecx
+   0x08049512 <+1355>:	mov    %edx,0x8(%esp)
+   0x08049516 <+1359>:	mov    %eax,0x4(%esp)
+   0x0804951a <+1363>:	mov    %ecx,(%esp)
+   0x0804951d <+1366>:	call   0x8048d77 <processbuf>
+   0x08049522 <+1371>:	mov    -0x2c(%ebp),%eax
+   0x08049525 <+1374>:	imul   $0x3f4,%eax,%eax
+   0x0804952b <+1380>:	add    $0x804ae80,%eax
+   0x08049530 <+1385>:	add    $0x4,%eax
+   0x08049533 <+1388>:	movl   $0x3e8,0x4(%esp)
+   0x0804953b <+1396>:	mov    %eax,(%esp)
+   0x0804953e <+1399>:	call   0x8048930 <bzero@plt>
+   0x08049543 <+1404>:	movl   $0x0,0x4(%esp)
+   0x0804954b <+1412>:	movl   $0x8052d00,(%esp)
+   0x08049552 <+1419>:	call   0x8048820 <gettimeofday@plt>
+   0x08049557 <+1424>:	mov    0x8052d00,%eax
+   0x0804955c <+1429>:	mov    -0x2c(%ebp),%edx
+   0x0804955f <+1432>:	imul   $0x3f4,%edx,%edx
+   0x08049565 <+1438>:	add    $0x804b270,%edx
+   0x0804956b <+1444>:	mov    %eax,(%edx)
+   0x0804956d <+1446>:	addl   $0x1,-0x2c(%ebp)
+   0x08049571 <+1450>:	mov    -0x2c(%ebp),%eax
+   0x08049574 <+1453>:	cmp    -0x28(%ebp),%eax
+   0x08049577 <+1456>:	jl     0x8049394 <server+973>
+   0x0804957d <+1462>:	movl   $0x0,0x4(%esp)
+   0x08049585 <+1470>:	movl   $0x8052d00,(%esp)
+   0x0804958c <+1477>:	call   0x8048820 <gettimeofday@plt>
+   0x08049591 <+1482>:	movl   $0x0,-0x2c(%ebp)
+   0x08049598 <+1489>:	jmp    0x80495e9 <server+1570>
+   0x0804959a <+1491>:	mov    -0x2c(%ebp),%eax
+   0x0804959d <+1494>:	imul   $0x3f4,%eax,%eax
+   0x080495a3 <+1500>:	add    $0x804ae80,%eax
+   0x080495a8 <+1505>:	mov    (%eax),%eax
+   0x080495aa <+1507>:	test   %eax,%eax
+   0x080495ac <+1509>:	jns    0x80495b0 <server+1513>
+   0x080495ae <+1511>:	jmp    0x80495e5 <server+1566>
+   0x080495b0 <+1513>:	mov    0x8052d00,%edx
+   0x080495b6 <+1519>:	mov    -0x2c(%ebp),%eax
+   0x080495b9 <+1522>:	imul   $0x3f4,%eax,%eax
+   0x080495bf <+1528>:	add    $0x804b270,%eax
+   0x080495c4 <+1533>:	mov    (%eax),%eax
+   0x080495c6 <+1535>:	sub    %eax,%edx
+   0x080495c8 <+1537>:	mov    %edx,%eax
+   0x080495ca <+1539>:	cmp    $0x5,%eax
+   0x080495cd <+1542>:	jle    0x80495e5 <server+1566>
+   0x080495cf <+1544>:	mov    -0x2c(%ebp),%eax
+   0x080495d2 <+1547>:	imul   $0x3f4,%eax,%eax
+   0x080495d8 <+1553>:	add    $0x804ae80,%eax
+   0x080495dd <+1558>:	mov    %eax,(%esp)
+   0x080495e0 <+1561>:	call   0x8048ab0 <close_connec>
+   0x080495e5 <+1566>:	addl   $0x1,-0x2c(%ebp)
+   0x080495e9 <+1570>:	mov    -0x2c(%ebp),%eax
+   0x080495ec <+1573>:	cmp    -0x28(%ebp),%eax
+   0x080495ef <+1576>:	jl     0x804959a <server+1491>
+   0x080495f1 <+1578>:	cmpl   $0xa,-0x28(%ebp)
+   0x080495f5 <+1582>:	jne    0x804968a <server+1731>
+   0x080495fb <+1588>:	movl   $0x0,-0x20(%ebp)
+   0x08049602 <+1595>:	movl   $0x0,-0x1c(%ebp)
+   0x08049609 <+1602>:	jmp    0x8049677 <server+1712>
+   0x0804960b <+1604>:	mov    -0x1c(%ebp),%eax
+   0x0804960e <+1607>:	imul   $0x3f4,%eax,%eax
+   0x08049614 <+1613>:	add    $0x804ae80,%eax
+   0x08049619 <+1618>:	mov    (%eax),%eax
+   0x0804961b <+1620>:	test   %eax,%eax
+   0x0804961d <+1622>:	js     0x8049673 <server+1708>
+   0x0804961f <+1624>:	mov    -0x20(%ebp),%eax
+   0x08049622 <+1627>:	cmp    -0x1c(%ebp),%eax
+   0x08049625 <+1630>:	jne    0x804962d <server+1638>
+   0x08049627 <+1632>:	addl   $0x1,-0x20(%ebp)
+   0x0804962b <+1636>:	jmp    0x8049673 <server+1708>
+   0x0804962d <+1638>:	mov    -0x20(%ebp),%eax
+   0x08049630 <+1641>:	lea    0x1(%eax),%edx
+   0x08049633 <+1644>:	mov    %edx,-0x20(%ebp)
+   0x08049636 <+1647>:	imul   $0x3f4,%eax,%eax
+   0x0804963c <+1653>:	lea    0x804ae80(%eax),%edx
+   0x08049642 <+1659>:	mov    -0x1c(%ebp),%eax
+   0x08049645 <+1662>:	imul   $0x3f4,%eax,%eax
+   0x0804964b <+1668>:	add    $0x804ae80,%eax
+   0x08049650 <+1673>:	mov    %eax,%ebx
+   0x08049652 <+1675>:	mov    $0xfd,%eax
+   0x08049657 <+1680>:	mov    %edx,%edi
+   0x08049659 <+1682>:	mov    %ebx,%esi
+   0x0804965b <+1684>:	mov    %eax,%ecx
+   0x0804965d <+1686>:	rep movsl %ds:(%esi),%es:(%edi)
+   0x0804965f <+1688>:	mov    -0x1c(%ebp),%eax
+   0x08049662 <+1691>:	imul   $0x3f4,%eax,%eax
+   0x08049668 <+1697>:	add    $0x804ae80,%eax
+   0x0804966d <+1702>:	movl   $0xffffffff,(%eax)
+   0x08049673 <+1708>:	addl   $0x1,-0x1c(%ebp)
+   0x08049677 <+1712>:	mov    -0x1c(%ebp),%eax
+   0x0804967a <+1715>:	cmp    -0x28(%ebp),%eax
+   0x0804967d <+1718>:	jl     0x804960b <server+1604>
+   0x0804967f <+1720>:	mov    -0x20(%ebp),%eax
+   0x08049682 <+1723>:	mov    %eax,-0x28(%ebp)
+   0x08049685 <+1726>:	jmp    0x804917d <server+438>
+   0x0804968a <+1731>:	jmp    0x804917d <server+438>
+   0x0804968f <+1736>:	add    $0xfc,%esp
+   0x08049695 <+1742>:	pop    %ebx
+   0x08049696 <+1743>:	pop    %esi
+   0x08049697 <+1744>:	pop    %edi
+   0x08049698 <+1745>:	pop    %ebp
+   0x08049699 <+1746>:	ret    
+End of assembler dump.

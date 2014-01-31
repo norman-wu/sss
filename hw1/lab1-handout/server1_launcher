@@ -1,0 +1,44 @@
+Dump of assembler code for function launcher:
+   0x0804969a <+0>:	push   %ebp
+   0x0804969b <+1>:	mov    %esp,%ebp
+   0x0804969d <+3>:	sub    $0x38,%esp
+   0x080496a0 <+6>:	mov    0x8(%ebp),%eax
+   0x080496a3 <+9>:	mov    %eax,0x804ae4c
+   0x080496a8 <+14>:	mov    0xc(%ebp),%eax
+   0x080496ab <+17>:	mov    %eax,0x804ae50
+   0x080496b0 <+22>:	movl   $0x0,0x14(%esp)
+   0x080496b8 <+30>:	movl   $0x0,0x10(%esp)
+   0x080496c0 <+38>:	movl   $0x22,0xc(%esp)
+   0x080496c8 <+46>:	movl   $0x7,0x8(%esp)
+   0x080496d0 <+54>:	movl   $0x100000,0x4(%esp)
+   0x080496d8 <+62>:	movl   $0x55385c00,(%esp)
+   0x080496df <+69>:	call   0x8048790 <mmap@plt>
+   0x080496e4 <+74>:	mov    %eax,-0xc(%ebp)
+   0x080496e7 <+77>:	cmpl   $0xffffffff,-0xc(%ebp)
+   0x080496eb <+81>:	jne    0x804971e <launcher+132>
+   0x080496ed <+83>:	mov    0x804ae40,%eax
+   0x080496f2 <+88>:	mov    %eax,0xc(%esp)
+   0x080496f6 <+92>:	movl   $0x23,0x8(%esp)
+   0x080496fe <+100>:	movl   $0x1,0x4(%esp)
+   0x08049706 <+108>:	movl   $0x8049a8c,(%esp)
+   0x0804970d <+115>:	call   0x80488f0 <fwrite@plt>
+   0x08049712 <+120>:	movl   $0x1,(%esp)
+   0x08049719 <+127>:	call   0x8048970 <exit@plt>
+   0x0804971e <+132>:	mov    -0xc(%ebp),%eax
+   0x08049721 <+135>:	add    $0xffff8,%eax
+   0x08049726 <+140>:	mov    %eax,0x8052d08
+   0x0804972b <+145>:	mov    0x8052d08,%edx
+   0x08049731 <+151>:	mov    %esp,%eax
+   0x08049733 <+153>:	mov    %edx,%esp
+   0x08049735 <+155>:	mov    %eax,%edx
+   0x08049737 <+157>:	mov    %edx,0x804ae54
+   0x0804973d <+163>:	call   0x8048fc7 <server>
+   0x08049742 <+168>:	mov    0x804ae54,%eax
+   0x08049747 <+173>:	mov    %eax,%esp
+   0x08049749 <+175>:	movl   $0x100000,0x4(%esp)
+   0x08049751 <+183>:	mov    -0xc(%ebp),%eax
+   0x08049754 <+186>:	mov    %eax,(%esp)
+   0x08049757 <+189>:	call   0x8048960 <munmap@plt>
+   0x0804975c <+194>:	leave  
+   0x0804975d <+195>:	ret    
+End of assembler dump.
