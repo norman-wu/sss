@@ -1,0 +1,40 @@
+Dump of assembler code for function close_connec:
+   0x08048b70 <+0>:	push   %ebp
+   0x08048b71 <+1>:	mov    %esp,%ebp
+   0x08048b73 <+3>:	push   %esi
+   0x08048b74 <+4>:	push   %ebx
+   0x08048b75 <+5>:	sub    $0x10,%esp
+   0x08048b78 <+8>:	mov    0x8(%ebp),%eax
+   0x08048b7b <+11>:	mov    (%eax),%eax
+   0x08048b7d <+13>:	lea    0x1f(%eax),%edx
+   0x08048b80 <+16>:	test   %eax,%eax
+   0x08048b82 <+18>:	cmovs  %edx,%eax
+   0x08048b85 <+21>:	sar    $0x5,%eax
+   0x08048b88 <+24>:	mov    0x8052e20(,%eax,4),%ebx
+   0x08048b8f <+31>:	mov    0x8(%ebp),%edx
+   0x08048b92 <+34>:	mov    (%edx),%edx
+   0x08048b94 <+36>:	mov    %edx,%ecx
+   0x08048b96 <+38>:	sar    $0x1f,%ecx
+   0x08048b99 <+41>:	shr    $0x1b,%ecx
+   0x08048b9c <+44>:	add    %ecx,%edx
+   0x08048b9e <+46>:	and    $0x1f,%edx
+   0x08048ba1 <+49>:	sub    %ecx,%edx
+   0x08048ba3 <+51>:	mov    $0x1,%esi
+   0x08048ba8 <+56>:	mov    %edx,%ecx
+   0x08048baa <+58>:	shl    %cl,%esi
+   0x08048bac <+60>:	mov    %esi,%edx
+   0x08048bae <+62>:	not    %edx
+   0x08048bb0 <+64>:	and    %ebx,%edx
+   0x08048bb2 <+66>:	mov    %edx,0x8052e20(,%eax,4)
+   0x08048bb9 <+73>:	mov    0x8(%ebp),%eax
+   0x08048bbc <+76>:	mov    (%eax),%eax
+   0x08048bbe <+78>:	mov    %eax,(%esp)
+   0x08048bc1 <+81>:	call   0x8048988 <close@plt>
+   0x08048bc6 <+86>:	mov    0x8(%ebp),%eax
+   0x08048bc9 <+89>:	movl   $0xffffffff,(%eax)
+   0x08048bcf <+95>:	add    $0x10,%esp
+   0x08048bd2 <+98>:	pop    %ebx
+   0x08048bd3 <+99>:	pop    %esi
+   0x08048bd4 <+100>:	pop    %ebp
+   0x08048bd5 <+101>:	ret    
+End of assembler dump.
