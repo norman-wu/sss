@@ -2,14 +2,33 @@ Dump of assembler code for function launcher:
    0x08049755 <+0>:	push   %ebp
    0x08049756 <+1>:	mov    %esp,%ebp
    0x08049758 <+3>:	sub    $0x38,%esp
+
+    1. Push old base pointer onto stack.
+    2. Copy old stack pointer to be new base pointer.
+    3. Move stack pointer to allocate 56 new bytes for local variables.
+
    0x0804975b <+6>:	mov    0x8(%ebp),%eax
    0x0804975e <+9>:	mov    %eax,0x804af4c
+
+    1. Copy the input to launcher (probably int nitro) to global_nitro
+       however, this is NEVER USED
+
    0x08049763 <+14>:	mov    0xc(%ebp),%eax
    0x08049766 <+17>:	mov    %eax,0x804af50
+
+    1. Copy the input to launcher (probably int offset) to global_offset
+       however, this is NEVER USED
+
    0x0804976b <+22>:	movl   $0x0,(%esp)
    0x08049772 <+29>:	call   0x80489b8 <time@plt>
+
+    1. Call time(null) - returns current UNIX time into %eax
+
    0x08049777 <+34>:	mov    %eax,(%esp)
    0x0804977a <+37>:	call   0x8048978 <srandom@plt>
+
+    1. Call srandom(current_time). Seeds random with current UNIX time.
+
    0x0804977f <+42>:	call   0x8048838 <random@plt>
    0x08049784 <+47>:	and    $0xff000,%eax
    0x08049789 <+52>:	mov    %eax,-0xc(%ebp)
