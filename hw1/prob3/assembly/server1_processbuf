@@ -5,59 +5,59 @@ Dump of assembler code for function processbuf:
    0x08048d80 <+9>:	mov    0xc(%ebp),%edx
    0x08048d83 <+12>:	mov    0x8(%ebp),%eax
    0x08048d86 <+15>:	add    %edx,%eax
-   0x08048d88 <+17>:	movb   $0x0,(%eax)
-   0x08048d8b <+20>:	movl   $0x4,-0x2dc(%ebp)
-   0x08048d95 <+30>:	movl   $0x0,-0x2d8(%ebp)
+   0x08048d88 <+17>:	movb   $0x0,(%eax)			; buf[buflen] = 0
+   0x08048d8b <+20>:	movl   $0x4,-0x2dc(%ebp)	; counters.i = 4
+   0x08048d95 <+30>:	movl   $0x0,-0x2d8(%ebp)	; counters.j = 0
    0x08048d9f <+40>:	jmp    0x8048ddc <processbuf+101>
-   0x08048da1 <+42>:	mov    -0x2d8(%ebp),%eax
-   0x08048da7 <+48>:	mov    -0x2dc(%ebp),%edx
+   0x08048da1 <+42>:	mov    -0x2d8(%ebp),%eax	; counters.j
+   0x08048da7 <+48>:	mov    -0x2dc(%ebp),%edx	; counters.i
    0x08048dad <+54>:	mov    %edx,%ecx
-   0x08048daf <+56>:	mov    0x8(%ebp),%edx
-   0x08048db2 <+59>:	add    %ecx,%edx
-   0x08048db4 <+61>:	movzbl (%edx),%edx
-   0x08048db7 <+64>:	mov    %dl,-0x2d4(%ebp,%eax,1)
+   0x08048daf <+56>:	mov    0x8(%ebp),%edx		; *buf
+   0x08048db2 <+59>:	add    %ecx,%edx			; *buf+counters.i
+   0x08048db4 <+61>:	movzbl (%edx),%edx			; buf[counters.i] value
+   0x08048db7 <+64>:	mov    %dl,-0x2d4(%ebp,%eax,1) ; gt.img[counters.j] = buf[counters.i]
    0x08048dbe <+71>:	mov    -0x2dc(%ebp),%eax
    0x08048dc4 <+77>:	add    $0x1,%eax
-   0x08048dc7 <+80>:	mov    %eax,-0x2dc(%ebp)
+   0x08048dc7 <+80>:	mov    %eax,-0x2dc(%ebp)	; counters.i++
    0x08048dcd <+86>:	mov    -0x2d8(%ebp),%eax
    0x08048dd3 <+92>:	add    $0x1,%eax
-   0x08048dd6 <+95>:	mov    %eax,-0x2d8(%ebp)
-   0x08048ddc <+101>:	mov    -0x2dc(%ebp),%eax
+   0x08048dd6 <+95>:	mov    %eax,-0x2d8(%ebp)	; counters.j++
+   0x08048ddc <+101>:	mov    -0x2dc(%ebp),%eax	; counters.i
    0x08048de2 <+107>:	mov    %eax,%edx
-   0x08048de4 <+109>:	mov    0x8(%ebp),%eax
-   0x08048de7 <+112>:	add    %edx,%eax
-   0x08048de9 <+114>:	movzbl (%eax),%eax
-   0x08048dec <+117>:	cmp    $0x3b,%al
+   0x08048de4 <+109>:	mov    0x8(%ebp),%eax		; *buf
+   0x08048de7 <+112>:	add    %edx,%eax			;*buf+counters.i
+   0x08048de9 <+114>:	movzbl (%eax),%eax			; buf[counters.i] value
+   0x08048dec <+117>:	cmp    $0x3b,%al			; buf[counters.i] != ';'
    0x08048dee <+119>:	jne    0x8048da1 <processbuf+42>
-   0x08048df0 <+121>:	mov    -0x2dc(%ebp),%eax
+   0x08048df0 <+121>:	mov    -0x2dc(%ebp),%eax	; counters.i
    0x08048df6 <+127>:	mov    %eax,%edx
-   0x08048df8 <+129>:	mov    0x8(%ebp),%eax
-   0x08048dfb <+132>:	add    %edx,%eax
-   0x08048dfd <+134>:	movb   $0x0,(%eax)
+   0x08048df8 <+129>:	mov    0x8(%ebp),%eax		; *buf
+   0x08048dfb <+132>:	add    %edx,%eax			; *buf+counters.i
+   0x08048dfd <+134>:	movb   $0x0,(%eax)			; buf[counters.i] = 0
    0x08048e00 <+137>:	mov    -0x2dc(%ebp),%eax
-   0x08048e06 <+143>:	add    $0x5,%eax
-   0x08048e09 <+146>:	mov    %eax,-0x2dc(%ebp)
-   0x08048e0f <+152>:	movl   $0x0,-0x2d8(%ebp)
+   0x08048e06 <+143>:	add    $0x5,%eax			
+   0x08048e09 <+146>:	mov    %eax,-0x2dc(%ebp)	; counters.i+=5
+   0x08048e0f <+152>:	movl   $0x0,-0x2d8(%ebp)	; counters.j = 0
    0x08048e19 <+162>:	jmp    0x8048e56 <processbuf+223>
-   0x08048e1b <+164>:	mov    -0x2d8(%ebp),%eax
-   0x08048e21 <+170>:	mov    -0x2dc(%ebp),%edx
+   0x08048e1b <+164>:	mov    -0x2d8(%ebp),%eax	; counters.j
+   0x08048e21 <+170>:	mov    -0x2dc(%ebp),%edx	; counters.i
    0x08048e27 <+176>:	mov    %edx,%ecx
-   0x08048e29 <+178>:	mov    0x8(%ebp),%edx
-   0x08048e2c <+181>:	add    %ecx,%edx
+   0x08048e29 <+178>:	mov    0x8(%ebp),%edx		; *buf
+   0x08048e2c <+181>:	add    %ecx,%edx			; *buf+counters.i value
    0x08048e2e <+183>:	movzbl (%edx),%edx
-   0x08048e31 <+186>:	mov    %dl,-0x2a4(%ebp,%eax,1)
+   0x08048e31 <+186>:	mov    %dl,-0x2a4(%ebp,%eax,1)	; gt.lat[counters.j] = buf[counters.i]
    0x08048e38 <+193>:	mov    -0x2dc(%ebp),%eax
-   0x08048e3e <+199>:	add    $0x1,%eax
-   0x08048e41 <+202>:	mov    %eax,-0x2dc(%ebp)
+   0x08048e3e <+199>:	add    $0x1,%eax			
+   0x08048e41 <+202>:	mov    %eax,-0x2dc(%ebp)	; counters.i++
    0x08048e47 <+208>:	mov    -0x2d8(%ebp),%eax
-   0x08048e4d <+214>:	add    $0x1,%eax
-   0x08048e50 <+217>:	mov    %eax,-0x2d8(%ebp)
-   0x08048e56 <+223>:	mov    -0x2dc(%ebp),%eax
+   0x08048e4d <+214>:	add    $0x1,%eax			
+   0x08048e50 <+217>:	mov    %eax,-0x2d8(%ebp)	; counters.j++
+   0x08048e56 <+223>:	mov    -0x2dc(%ebp),%eax	; counters.i
    0x08048e5c <+229>:	mov    %eax,%edx
-   0x08048e5e <+231>:	mov    0x8(%ebp),%eax
-   0x08048e61 <+234>:	add    %edx,%eax
+   0x08048e5e <+231>:	mov    0x8(%ebp),%eax		; *buf
+   0x08048e61 <+234>:	add    %edx,%eax			; *buf+counters.i value
    0x08048e63 <+236>:	movzbl (%eax),%eax
-   0x08048e66 <+239>:	cmp    $0x3b,%al
+   0x08048e66 <+239>:	cmp    $0x3b,%al			; buf[counters.i] != ';'
    0x08048e68 <+241>:	jne    0x8048e1b <processbuf+164>
    0x08048e6a <+243>:	mov    -0x2dc(%ebp),%eax
    0x08048e70 <+249>:	mov    %eax,%edx
@@ -75,7 +75,7 @@ Dump of assembler code for function processbuf:
    0x08048ea3 <+300>:	mov    0x8(%ebp),%edx
    0x08048ea6 <+303>:	add    %ecx,%edx
    0x08048ea8 <+305>:	movzbl (%edx),%edx
-   0x08048eab <+308>:	mov    %dl,-0x29a(%ebp,%eax,1)
+   0x08048eab <+308>:	mov    %dl,-0x29a(%ebp,%eax,1) ; gt.lon[counters.j] = buf[counters.i]
    0x08048eb2 <+315>:	mov    -0x2dc(%ebp),%eax
    0x08048eb8 <+321>:	add    $0x1,%eax
    0x08048ebb <+324>:	mov    %eax,-0x2dc(%ebp)
@@ -87,28 +87,28 @@ Dump of assembler code for function processbuf:
    0x08048ed8 <+353>:	mov    0x8(%ebp),%eax
    0x08048edb <+356>:	add    %edx,%eax
    0x08048edd <+358>:	movzbl (%eax),%eax
-   0x08048ee0 <+361>:	cmp    $0x3b,%al
-   0x08048ee2 <+363>:	jne    0x8048e95 <processbuf+286>
-   0x08048ee4 <+365>:	mov    -0x2dc(%ebp),%eax
+   0x08048ee0 <+361>:	cmp    $0x3b,%al			; buf[counters.i] != ';'
+   0x08048ee2 <+363>:	jne    0x8048e95 <processbuf+286> 
+   0x08048ee4 <+365>:	mov    -0x2dc(%ebp),%eax	; counters.i
    0x08048eea <+371>:	mov    %eax,%edx
-   0x08048eec <+373>:	mov    0x8(%ebp),%eax
-   0x08048eef <+376>:	add    %edx,%eax
-   0x08048ef1 <+378>:	movb   $0x0,(%eax)
+   0x08048eec <+373>:	mov    0x8(%ebp),%eax		; *buf
+   0x08048eef <+376>:	add    %edx,%eax			; *buf+counters.i
+   0x08048ef1 <+378>:	movb   $0x0,(%eax)			; buf[counters.i] = 0
    0x08048ef4 <+381>:	mov    -0x2dc(%ebp),%eax
-   0x08048efa <+387>:	add    $0x5,%eax
-   0x08048efd <+390>:	mov    %eax,-0x2dc(%ebp)
-   0x08048f03 <+396>:	mov    -0x2dc(%ebp),%eax
+   0x08048efa <+387>:	add    $0x5,%eax		
+   0x08048efd <+390>:	mov    %eax,-0x2dc(%ebp)	; counters.i += 5
+   0x08048f03 <+396>:	mov    -0x2dc(%ebp),%eax	
    0x08048f09 <+402>:	mov    %eax,%edx
    0x08048f0b <+404>:	mov    0x8(%ebp),%eax
    0x08048f0e <+407>:	add    %edx,%eax
-   0x08048f10 <+409>:	mov    %eax,0x4(%esp)
-   0x08048f14 <+413>:	lea    -0x2d4(%ebp),%eax
-   0x08048f1a <+419>:	add    $0x44,%eax
-   0x08048f1d <+422>:	mov    %eax,(%esp)
-   0x08048f20 <+425>:	call   0x8048880 <strcpy@plt>
-   0x08048f25 <+430>:	lea    -0x2d4(%ebp),%eax
+   0x08048f10 <+409>:	mov    %eax,0x4(%esp)		; buf[counters.i] -> second arg
+   0x08048f14 <+413>:	lea    -0x2d4(%ebp),%eax	; &gt
+   0x08048f1a <+419>:	add    $0x44,%eax			; &gt+0x44 = gt.cap
+   0x08048f1d <+422>:	mov    %eax,(%esp)		
+   0x08048f20 <+425>:	call   0x8048880 <strcpy@plt>	; strcpy(gt.cap, &buf[counters.i])
+   0x08048f25 <+430>:	lea    -0x2d4(%ebp),%eax	; *gt
    0x08048f2b <+436>:	mov    %eax,(%esp)
-   0x08048f2e <+439>:	call   0x8048b90 <store_gt>
+   0x08048f2e <+439>:	call   0x8048b90 <store_gt>	; store(&gt)
    0x08048f33 <+444>:	lea    -0x2d4(%ebp),%eax
    0x08048f39 <+450>:	mov    %eax,0x8(%esp)
    0x08048f3d <+454>:	movl   $0x80499b8,0x4(%esp)
