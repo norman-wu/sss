@@ -9,15 +9,15 @@
 
 #include <stdio.h>
 
+  char *filename = "foobar.txt";
+  char *contents = "I win again!";
+  char *write_flag = "w";
+
 int main() {
 
-  char filename[11] = "foobar.txt\0";
-  char content[13]  = "I win again!\0";
-  char write[2]     = "w\0";
-
   FILE *fp;
-  fp=fopen(filename, write);
-  fprintf(fp, content);
+  fp=fopen(filename, write_flag);
+  fprintf(fp, contents);
   fclose(fp);
 
   return 0;
