@@ -1,152 +1,152 @@
 Dump of assembler code for function processbuf:
-   0x08048e0f <+0>:	push   %ebp
-   0x08048e10 <+1>:	mov    %esp,%ebp
-   0x08048e12 <+3>:	sub    $0x2f8,%esp
-   0x08048e18 <+9>:	mov    0x8(%ebp),%edx
-   0x08048e1b <+12>:	mov    0xc(%ebp),%eax
-   0x08048e1e <+15>:	add    %edx,%eax
-   0x08048e20 <+17>:	movb   $0x0,(%eax)
-   0x08048e23 <+20>:	movl   $0x8049a98,0x4(%esp)
-   0x08048e2b <+28>:	mov    0xc(%ebp),%eax
-   0x08048e2e <+31>:	mov    %eax,(%esp)
-   0x08048e31 <+34>:	call   0x8048a18 <strcspn@plt>
-   0x08048e36 <+39>:	mov    %eax,-0x2e0(%ebp)
-   0x08048e3c <+45>:	movl   $0x0,-0x2dc(%ebp)
-   0x08048e46 <+55>:	jmp    0x8048e83 <processbuf+116>
-   0x08048e48 <+57>:	mov    -0x2dc(%ebp),%eax
-   0x08048e4e <+63>:	mov    -0x2e0(%ebp),%edx
-   0x08048e54 <+69>:	mov    %edx,%ecx
-   0x08048e56 <+71>:	mov    0xc(%ebp),%edx
-   0x08048e59 <+74>:	add    %ecx,%edx
-   0x08048e5b <+76>:	movzbl (%edx),%edx
-   0x08048e5e <+79>:	mov    %dl,-0x2d8(%ebp,%eax,1)
-   0x08048e65 <+86>:	mov    -0x2e0(%ebp),%eax
-   0x08048e6b <+92>:	add    $0x1,%eax
-   0x08048e6e <+95>:	mov    %eax,-0x2e0(%ebp)
-   0x08048e74 <+101>:	mov    -0x2dc(%ebp),%eax
-   0x08048e7a <+107>:	add    $0x1,%eax
-   0x08048e7d <+110>:	mov    %eax,-0x2dc(%ebp)
-   0x08048e83 <+116>:	mov    -0x2e0(%ebp),%eax
-   0x08048e89 <+122>:	mov    %eax,%edx
-   0x08048e8b <+124>:	mov    0xc(%ebp),%eax
-   0x08048e8e <+127>:	add    %edx,%eax
-   0x08048e90 <+129>:	movzbl (%eax),%eax
-   0x08048e93 <+132>:	cmp    $0x3b,%al
-   0x08048e95 <+134>:	jne    0x8048e48 <processbuf+57>
-   0x08048e97 <+136>:	mov    -0x2e0(%ebp),%eax
-   0x08048e9d <+142>:	mov    %eax,%edx
-   0x08048e9f <+144>:	mov    0xc(%ebp),%eax
-   0x08048ea2 <+147>:	add    %edx,%eax
-   0x08048ea4 <+149>:	movb   $0x0,(%eax)
-   0x08048ea7 <+152>:	mov    -0x2e0(%ebp),%eax
-   0x08048ead <+158>:	add    $0x5,%eax
-   0x08048eb0 <+161>:	mov    %eax,-0x2e0(%ebp)
-   0x08048eb6 <+167>:	movl   $0x0,-0x2dc(%ebp)
-   0x08048ec0 <+177>:	jmp    0x8048efd <processbuf+238>
-   0x08048ec2 <+179>:	mov    -0x2dc(%ebp),%eax
-   0x08048ec8 <+185>:	mov    -0x2e0(%ebp),%edx
-   0x08048ece <+191>:	mov    %edx,%ecx
-   0x08048ed0 <+193>:	mov    0xc(%ebp),%edx
-   0x08048ed3 <+196>:	add    %ecx,%edx
-   0x08048ed5 <+198>:	movzbl (%edx),%edx
-   0x08048ed8 <+201>:	mov    %dl,-0x2a6(%ebp,%eax,1)
-   0x08048edf <+208>:	mov    -0x2e0(%ebp),%eax
-   0x08048ee5 <+214>:	add    $0x1,%eax
-   0x08048ee8 <+217>:	mov    %eax,-0x2e0(%ebp)
-   0x08048eee <+223>:	mov    -0x2dc(%ebp),%eax
-   0x08048ef4 <+229>:	add    $0x1,%eax
-   0x08048ef7 <+232>:	mov    %eax,-0x2dc(%ebp)
-   0x08048efd <+238>:	mov    -0x2e0(%ebp),%eax
-   0x08048f03 <+244>:	mov    %eax,%edx
-   0x08048f05 <+246>:	mov    0xc(%ebp),%eax
-   0x08048f08 <+249>:	add    %edx,%eax
-   0x08048f0a <+251>:	movzbl (%eax),%eax
-   0x08048f0d <+254>:	cmp    $0x3b,%al
-   0x08048f0f <+256>:	jne    0x8048ec2 <processbuf+179>
-   0x08048f11 <+258>:	mov    -0x2e0(%ebp),%eax
-   0x08048f17 <+264>:	mov    %eax,%edx
-   0x08048f19 <+266>:	mov    0xc(%ebp),%eax
-   0x08048f1c <+269>:	add    %edx,%eax
-   0x08048f1e <+271>:	movb   $0x0,(%eax)
-   0x08048f21 <+274>:	mov    -0x2e0(%ebp),%eax
-   0x08048f27 <+280>:	add    $0x5,%eax
-   0x08048f2a <+283>:	mov    %eax,-0x2e0(%ebp)
-   0x08048f30 <+289>:	movl   $0x0,-0x2dc(%ebp)
-   0x08048f3a <+299>:	jmp    0x8048f77 <processbuf+360>
-   0x08048f3c <+301>:	mov    -0x2dc(%ebp),%eax
-   0x08048f42 <+307>:	mov    -0x2e0(%ebp),%edx
-   0x08048f48 <+313>:	mov    %edx,%ecx
-   0x08048f4a <+315>:	mov    0xc(%ebp),%edx
-   0x08048f4d <+318>:	add    %ecx,%edx
-   0x08048f4f <+320>:	movzbl (%edx),%edx
-   0x08048f52 <+323>:	mov    %dl,-0x29c(%ebp,%eax,1)
-   0x08048f59 <+330>:	mov    -0x2e0(%ebp),%eax
-   0x08048f5f <+336>:	add    $0x1,%eax
-   0x08048f62 <+339>:	mov    %eax,-0x2e0(%ebp)
-   0x08048f68 <+345>:	mov    -0x2dc(%ebp),%eax
-   0x08048f6e <+351>:	add    $0x1,%eax
-   0x08048f71 <+354>:	mov    %eax,-0x2dc(%ebp)
-   0x08048f77 <+360>:	mov    -0x2e0(%ebp),%eax
-   0x08048f7d <+366>:	mov    %eax,%edx
-   0x08048f7f <+368>:	mov    0xc(%ebp),%eax
-   0x08048f82 <+371>:	add    %edx,%eax
-   0x08048f84 <+373>:	movzbl (%eax),%eax
-   0x08048f87 <+376>:	cmp    $0x3b,%al
-   0x08048f89 <+378>:	jne    0x8048f3c <processbuf+301>
-   0x08048f8b <+380>:	mov    -0x2e0(%ebp),%eax
-   0x08048f91 <+386>:	mov    %eax,%edx
-   0x08048f93 <+388>:	mov    0xc(%ebp),%eax
-   0x08048f96 <+391>:	add    %edx,%eax
-   0x08048f98 <+393>:	movb   $0x0,(%eax)
-   0x08048f9b <+396>:	mov    -0x2e0(%ebp),%eax
-   0x08048fa1 <+402>:	add    $0x5,%eax
-   0x08048fa4 <+405>:	mov    %eax,-0x2e0(%ebp)
-   0x08048faa <+411>:	mov    -0x2e0(%ebp),%eax
-   0x08048fb0 <+417>:	mov    %eax,%edx
-   0x08048fb2 <+419>:	mov    0xc(%ebp),%eax
-   0x08048fb5 <+422>:	add    %edx,%eax
-   0x08048fb7 <+424>:	mov    %eax,0x4(%esp)
-   0x08048fbb <+428>:	lea    -0x2d8(%ebp),%eax
-   0x08048fc1 <+434>:	add    $0x46,%eax
-   0x08048fc4 <+437>:	mov    %eax,(%esp)
-   0x08048fc7 <+440>:	call   0x8048928 <strcpy@plt>
-   0x08048fcc <+445>:	lea    -0x2d8(%ebp),%eax
-   0x08048fd2 <+451>:	mov    %eax,(%esp)
-   0x08048fd5 <+454>:	call   0x8048c50 <store_gt>
-   0x08048fda <+459>:	lea    -0x2d8(%ebp),%eax
-   0x08048fe0 <+465>:	mov    %eax,0x8(%esp)
-   0x08048fe4 <+469>:	movl   $0x8049a9a,0x4(%esp)
-   0x08048fec <+477>:	lea    -0x3a(%ebp),%eax
-   0x08048fef <+480>:	mov    %eax,(%esp)
-   0x08048ff2 <+483>:	call   0x8048818 <sprintf@plt>
-   0x08048ff7 <+488>:	lea    -0x3a(%ebp),%eax
-   0x08048ffa <+491>:	mov    %eax,(%esp)
-   0x08048ffd <+494>:	call   0x8048908 <strlen@plt>
-   0x08049002 <+499>:	mov    %eax,0x8(%esp)
-   0x08049006 <+503>:	lea    -0x3a(%ebp),%eax
-   0x08049009 <+506>:	mov    %eax,0x4(%esp)
-   0x0804900d <+510>:	mov    0x10(%ebp),%eax
-   0x08049010 <+513>:	mov    %eax,(%esp)
-   0x08049013 <+516>:	call   0x8048878 <write@plt>
-   0x08049018 <+521>:	mov    %eax,-0x2e0(%ebp)
-   0x0804901e <+527>:	lea    -0x3a(%ebp),%eax
-   0x08049021 <+530>:	mov    %eax,(%esp)
-   0x08049024 <+533>:	call   0x8048908 <strlen@plt>
-   0x08049029 <+538>:	mov    %eax,%edx
-   0x0804902b <+540>:	mov    -0x2e0(%ebp),%eax
-   0x08049031 <+546>:	mov    %edx,0x8(%esp)
-   0x08049035 <+550>:	mov    %eax,0x4(%esp)
-   0x08049039 <+554>:	lea    -0x9e(%ebp),%eax
-   0x0804903f <+560>:	mov    %eax,(%esp)
-   0x08049042 <+563>:	call   0x8048bd6 <check_error>
-   0x08049047 <+568>:	mov    %eax,-0x2e0(%ebp)
-   0x0804904d <+574>:	mov    -0x2e0(%ebp),%eax
-   0x08049053 <+580>:	cmp    $0x1,%eax
-   0x08049056 <+583>:	jne    0x8049066 <processbuf+599>
-   0x08049058 <+585>:	lea    -0x9e(%ebp),%eax
-   0x0804905e <+591>:	mov    %eax,(%esp)
-   0x08049061 <+594>:	call   0x8048938 <printf@plt>
-   0x08049066 <+599>:	mov    -0x2e0(%ebp),%eax
-   0x0804906c <+605>:	leave  
-   0x0804906d <+606>:	ret    
+   0x08048e0f <+0>:	 55	push   %ebp
+   0x08048e10 <+1>:	 89 e5	mov    %esp,%ebp
+   0x08048e12 <+3>:	 81 ec f8 02 00 00	sub    $0x2f8,%esp
+   0x08048e18 <+9>:	 8b 55 08	mov    0x8(%ebp),%edx
+   0x08048e1b <+12>:	 8b 45 0c	mov    0xc(%ebp),%eax
+   0x08048e1e <+15>:	 01 d0	add    %edx,%eax
+   0x08048e20 <+17>:	 c6 00 00	movb   $0x0,(%eax)
+   0x08048e23 <+20>:	 c7 44 24 04 98 9a 04 08	movl   $0x8049a98,0x4(%esp)
+   0x08048e2b <+28>:	 8b 45 0c	mov    0xc(%ebp),%eax
+   0x08048e2e <+31>:	 89 04 24	mov    %eax,(%esp)
+   0x08048e31 <+34>:	 e8 e2 fb ff ff	call   0x8048a18 <strcspn@plt>
+   0x08048e36 <+39>:	 89 85 20 fd ff ff	mov    %eax,-0x2e0(%ebp)
+   0x08048e3c <+45>:	 c7 85 24 fd ff ff 00 00 00 00	movl   $0x0,-0x2dc(%ebp)
+   0x08048e46 <+55>:	 eb 3b	jmp    0x8048e83 <processbuf+116>
+   0x08048e48 <+57>:	 8b 85 24 fd ff ff	mov    -0x2dc(%ebp),%eax
+   0x08048e4e <+63>:	 8b 95 20 fd ff ff	mov    -0x2e0(%ebp),%edx
+   0x08048e54 <+69>:	 89 d1	mov    %edx,%ecx
+   0x08048e56 <+71>:	 8b 55 0c	mov    0xc(%ebp),%edx
+   0x08048e59 <+74>:	 01 ca	add    %ecx,%edx
+   0x08048e5b <+76>:	 0f b6 12	movzbl (%edx),%edx
+   0x08048e5e <+79>:	 88 94 05 28 fd ff ff	mov    %dl,-0x2d8(%ebp,%eax,1)
+   0x08048e65 <+86>:	 8b 85 20 fd ff ff	mov    -0x2e0(%ebp),%eax
+   0x08048e6b <+92>:	 83 c0 01	add    $0x1,%eax
+   0x08048e6e <+95>:	 89 85 20 fd ff ff	mov    %eax,-0x2e0(%ebp)
+   0x08048e74 <+101>:	 8b 85 24 fd ff ff	mov    -0x2dc(%ebp),%eax
+   0x08048e7a <+107>:	 83 c0 01	add    $0x1,%eax
+   0x08048e7d <+110>:	 89 85 24 fd ff ff	mov    %eax,-0x2dc(%ebp)
+   0x08048e83 <+116>:	 8b 85 20 fd ff ff	mov    -0x2e0(%ebp),%eax
+   0x08048e89 <+122>:	 89 c2	mov    %eax,%edx
+   0x08048e8b <+124>:	 8b 45 0c	mov    0xc(%ebp),%eax
+   0x08048e8e <+127>:	 01 d0	add    %edx,%eax
+   0x08048e90 <+129>:	 0f b6 00	movzbl (%eax),%eax
+   0x08048e93 <+132>:	 3c 3b	cmp    $0x3b,%al
+   0x08048e95 <+134>:	 75 b1	jne    0x8048e48 <processbuf+57>
+   0x08048e97 <+136>:	 8b 85 20 fd ff ff	mov    -0x2e0(%ebp),%eax
+   0x08048e9d <+142>:	 89 c2	mov    %eax,%edx
+   0x08048e9f <+144>:	 8b 45 0c	mov    0xc(%ebp),%eax
+   0x08048ea2 <+147>:	 01 d0	add    %edx,%eax
+   0x08048ea4 <+149>:	 c6 00 00	movb   $0x0,(%eax)
+   0x08048ea7 <+152>:	 8b 85 20 fd ff ff	mov    -0x2e0(%ebp),%eax
+   0x08048ead <+158>:	 83 c0 05	add    $0x5,%eax
+   0x08048eb0 <+161>:	 89 85 20 fd ff ff	mov    %eax,-0x2e0(%ebp)
+   0x08048eb6 <+167>:	 c7 85 24 fd ff ff 00 00 00 00	movl   $0x0,-0x2dc(%ebp)
+   0x08048ec0 <+177>:	 eb 3b	jmp    0x8048efd <processbuf+238>
+   0x08048ec2 <+179>:	 8b 85 24 fd ff ff	mov    -0x2dc(%ebp),%eax
+   0x08048ec8 <+185>:	 8b 95 20 fd ff ff	mov    -0x2e0(%ebp),%edx
+   0x08048ece <+191>:	 89 d1	mov    %edx,%ecx
+   0x08048ed0 <+193>:	 8b 55 0c	mov    0xc(%ebp),%edx
+   0x08048ed3 <+196>:	 01 ca	add    %ecx,%edx
+   0x08048ed5 <+198>:	 0f b6 12	movzbl (%edx),%edx
+   0x08048ed8 <+201>:	 88 94 05 5a fd ff ff	mov    %dl,-0x2a6(%ebp,%eax,1)
+   0x08048edf <+208>:	 8b 85 20 fd ff ff	mov    -0x2e0(%ebp),%eax
+   0x08048ee5 <+214>:	 83 c0 01	add    $0x1,%eax
+   0x08048ee8 <+217>:	 89 85 20 fd ff ff	mov    %eax,-0x2e0(%ebp)
+   0x08048eee <+223>:	 8b 85 24 fd ff ff	mov    -0x2dc(%ebp),%eax
+   0x08048ef4 <+229>:	 83 c0 01	add    $0x1,%eax
+   0x08048ef7 <+232>:	 89 85 24 fd ff ff	mov    %eax,-0x2dc(%ebp)
+   0x08048efd <+238>:	 8b 85 20 fd ff ff	mov    -0x2e0(%ebp),%eax
+   0x08048f03 <+244>:	 89 c2	mov    %eax,%edx
+   0x08048f05 <+246>:	 8b 45 0c	mov    0xc(%ebp),%eax
+   0x08048f08 <+249>:	 01 d0	add    %edx,%eax
+   0x08048f0a <+251>:	 0f b6 00	movzbl (%eax),%eax
+   0x08048f0d <+254>:	 3c 3b	cmp    $0x3b,%al
+   0x08048f0f <+256>:	 75 b1	jne    0x8048ec2 <processbuf+179>
+   0x08048f11 <+258>:	 8b 85 20 fd ff ff	mov    -0x2e0(%ebp),%eax
+   0x08048f17 <+264>:	 89 c2	mov    %eax,%edx
+   0x08048f19 <+266>:	 8b 45 0c	mov    0xc(%ebp),%eax
+   0x08048f1c <+269>:	 01 d0	add    %edx,%eax
+   0x08048f1e <+271>:	 c6 00 00	movb   $0x0,(%eax)
+   0x08048f21 <+274>:	 8b 85 20 fd ff ff	mov    -0x2e0(%ebp),%eax
+   0x08048f27 <+280>:	 83 c0 05	add    $0x5,%eax
+   0x08048f2a <+283>:	 89 85 20 fd ff ff	mov    %eax,-0x2e0(%ebp)
+   0x08048f30 <+289>:	 c7 85 24 fd ff ff 00 00 00 00	movl   $0x0,-0x2dc(%ebp)
+   0x08048f3a <+299>:	 eb 3b	jmp    0x8048f77 <processbuf+360>
+   0x08048f3c <+301>:	 8b 85 24 fd ff ff	mov    -0x2dc(%ebp),%eax
+   0x08048f42 <+307>:	 8b 95 20 fd ff ff	mov    -0x2e0(%ebp),%edx
+   0x08048f48 <+313>:	 89 d1	mov    %edx,%ecx
+   0x08048f4a <+315>:	 8b 55 0c	mov    0xc(%ebp),%edx
+   0x08048f4d <+318>:	 01 ca	add    %ecx,%edx
+   0x08048f4f <+320>:	 0f b6 12	movzbl (%edx),%edx
+   0x08048f52 <+323>:	 88 94 05 64 fd ff ff	mov    %dl,-0x29c(%ebp,%eax,1)
+   0x08048f59 <+330>:	 8b 85 20 fd ff ff	mov    -0x2e0(%ebp),%eax
+   0x08048f5f <+336>:	 83 c0 01	add    $0x1,%eax
+   0x08048f62 <+339>:	 89 85 20 fd ff ff	mov    %eax,-0x2e0(%ebp)
+   0x08048f68 <+345>:	 8b 85 24 fd ff ff	mov    -0x2dc(%ebp),%eax
+   0x08048f6e <+351>:	 83 c0 01	add    $0x1,%eax
+   0x08048f71 <+354>:	 89 85 24 fd ff ff	mov    %eax,-0x2dc(%ebp)
+   0x08048f77 <+360>:	 8b 85 20 fd ff ff	mov    -0x2e0(%ebp),%eax
+   0x08048f7d <+366>:	 89 c2	mov    %eax,%edx
+   0x08048f7f <+368>:	 8b 45 0c	mov    0xc(%ebp),%eax
+   0x08048f82 <+371>:	 01 d0	add    %edx,%eax
+   0x08048f84 <+373>:	 0f b6 00	movzbl (%eax),%eax
+   0x08048f87 <+376>:	 3c 3b	cmp    $0x3b,%al
+   0x08048f89 <+378>:	 75 b1	jne    0x8048f3c <processbuf+301>
+   0x08048f8b <+380>:	 8b 85 20 fd ff ff	mov    -0x2e0(%ebp),%eax
+   0x08048f91 <+386>:	 89 c2	mov    %eax,%edx
+   0x08048f93 <+388>:	 8b 45 0c	mov    0xc(%ebp),%eax
+   0x08048f96 <+391>:	 01 d0	add    %edx,%eax
+   0x08048f98 <+393>:	 c6 00 00	movb   $0x0,(%eax)
+   0x08048f9b <+396>:	 8b 85 20 fd ff ff	mov    -0x2e0(%ebp),%eax
+   0x08048fa1 <+402>:	 83 c0 05	add    $0x5,%eax
+   0x08048fa4 <+405>:	 89 85 20 fd ff ff	mov    %eax,-0x2e0(%ebp)
+   0x08048faa <+411>:	 8b 85 20 fd ff ff	mov    -0x2e0(%ebp),%eax
+   0x08048fb0 <+417>:	 89 c2	mov    %eax,%edx
+   0x08048fb2 <+419>:	 8b 45 0c	mov    0xc(%ebp),%eax
+   0x08048fb5 <+422>:	 01 d0	add    %edx,%eax
+   0x08048fb7 <+424>:	 89 44 24 04	mov    %eax,0x4(%esp)
+   0x08048fbb <+428>:	 8d 85 28 fd ff ff	lea    -0x2d8(%ebp),%eax
+   0x08048fc1 <+434>:	 83 c0 46	add    $0x46,%eax
+   0x08048fc4 <+437>:	 89 04 24	mov    %eax,(%esp)
+   0x08048fc7 <+440>:	 e8 5c f9 ff ff	call   0x8048928 <strcpy@plt>
+   0x08048fcc <+445>:	 8d 85 28 fd ff ff	lea    -0x2d8(%ebp),%eax
+   0x08048fd2 <+451>:	 89 04 24	mov    %eax,(%esp)
+   0x08048fd5 <+454>:	 e8 76 fc ff ff	call   0x8048c50 <store_gt>
+   0x08048fda <+459>:	 8d 85 28 fd ff ff	lea    -0x2d8(%ebp),%eax
+   0x08048fe0 <+465>:	 89 44 24 08	mov    %eax,0x8(%esp)
+   0x08048fe4 <+469>:	 c7 44 24 04 9a 9a 04 08	movl   $0x8049a9a,0x4(%esp)
+   0x08048fec <+477>:	 8d 45 c6	lea    -0x3a(%ebp),%eax
+   0x08048fef <+480>:	 89 04 24	mov    %eax,(%esp)
+   0x08048ff2 <+483>:	 e8 21 f8 ff ff	call   0x8048818 <sprintf@plt>
+   0x08048ff7 <+488>:	 8d 45 c6	lea    -0x3a(%ebp),%eax
+   0x08048ffa <+491>:	 89 04 24	mov    %eax,(%esp)
+   0x08048ffd <+494>:	 e8 06 f9 ff ff	call   0x8048908 <strlen@plt>
+   0x08049002 <+499>:	 89 44 24 08	mov    %eax,0x8(%esp)
+   0x08049006 <+503>:	 8d 45 c6	lea    -0x3a(%ebp),%eax
+   0x08049009 <+506>:	 89 44 24 04	mov    %eax,0x4(%esp)
+   0x0804900d <+510>:	 8b 45 10	mov    0x10(%ebp),%eax
+   0x08049010 <+513>:	 89 04 24	mov    %eax,(%esp)
+   0x08049013 <+516>:	 e8 60 f8 ff ff	call   0x8048878 <write@plt>
+   0x08049018 <+521>:	 89 85 20 fd ff ff	mov    %eax,-0x2e0(%ebp)
+   0x0804901e <+527>:	 8d 45 c6	lea    -0x3a(%ebp),%eax
+   0x08049021 <+530>:	 89 04 24	mov    %eax,(%esp)
+   0x08049024 <+533>:	 e8 df f8 ff ff	call   0x8048908 <strlen@plt>
+   0x08049029 <+538>:	 89 c2	mov    %eax,%edx
+   0x0804902b <+540>:	 8b 85 20 fd ff ff	mov    -0x2e0(%ebp),%eax
+   0x08049031 <+546>:	 89 54 24 08	mov    %edx,0x8(%esp)
+   0x08049035 <+550>:	 89 44 24 04	mov    %eax,0x4(%esp)
+   0x08049039 <+554>:	 8d 85 62 ff ff ff	lea    -0x9e(%ebp),%eax
+   0x0804903f <+560>:	 89 04 24	mov    %eax,(%esp)
+   0x08049042 <+563>:	 e8 8f fb ff ff	call   0x8048bd6 <check_error>
+   0x08049047 <+568>:	 89 85 20 fd ff ff	mov    %eax,-0x2e0(%ebp)
+   0x0804904d <+574>:	 8b 85 20 fd ff ff	mov    -0x2e0(%ebp),%eax
+   0x08049053 <+580>:	 83 f8 01	cmp    $0x1,%eax
+   0x08049056 <+583>:	 75 0e	jne    0x8049066 <processbuf+599>
+   0x08049058 <+585>:	 8d 85 62 ff ff ff	lea    -0x9e(%ebp),%eax
+   0x0804905e <+591>:	 89 04 24	mov    %eax,(%esp)
+   0x08049061 <+594>:	 e8 d2 f8 ff ff	call   0x8048938 <printf@plt>
+   0x08049066 <+599>:	 8b 85 20 fd ff ff	mov    -0x2e0(%ebp),%eax
+   0x0804906c <+605>:	 c9	leave  
+   0x0804906d <+606>:	 c3	ret    
 End of assembler dump.
