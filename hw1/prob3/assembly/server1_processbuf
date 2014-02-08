@@ -109,31 +109,31 @@ Dump of assembler code for function processbuf:
    0x08048f25 <+430>:	lea    -0x2d4(%ebp),%eax	; *gt
    0x08048f2b <+436>:	mov    %eax,(%esp)
    0x08048f2e <+439>:	call   0x8048b90 <store_gt>	; store(&gt)
-   0x08048f33 <+444>:	lea    -0x2d4(%ebp),%eax
-   0x08048f39 <+450>:	mov    %eax,0x8(%esp)
-   0x08048f3d <+454>:	movl   $0x80499b8,0x4(%esp)
-   0x08048f45 <+462>:	lea    -0x38(%ebp),%eax
-   0x08048f48 <+465>:	mov    %eax,(%esp)
-   0x08048f4b <+468>:	call   0x8048780 <sprintf@plt>
-   0x08048f50 <+473>:	lea    -0x38(%ebp),%eax
-   0x08048f53 <+476>:	mov    %eax,(%esp)
-   0x08048f56 <+479>:	call   0x8048860 <strlen@plt>
-   0x08048f5b <+484>:	mov    %eax,0x8(%esp)
-   0x08048f5f <+488>:	lea    -0x38(%ebp),%eax
-   0x08048f62 <+491>:	mov    %eax,0x4(%esp)
-   0x08048f66 <+495>:	mov    0x10(%ebp),%eax
-   0x08048f69 <+498>:	mov    %eax,(%esp)
-   0x08048f6c <+501>:	call   0x80487d0 <write@plt>
-   0x08048f71 <+506>:	mov    %eax,-0x2dc(%ebp)
-   0x08048f77 <+512>:	lea    -0x38(%ebp),%eax
+   0x08048f33 <+444>:	lea    -0x2d4(%ebp),%eax	; gt.img
+   0x08048f39 <+450>:	mov    %eax,0x8(%esp)		; third arg = gt.img
+   0x08048f3d <+454>:	movl   $0x80499b8,0x4(%esp)	; second arg = String
+   0x08048f45 <+462>:	lea    -0x38(%ebp),%eax		; reply
+   0x08048f48 <+465>:	mov    %eax,(%esp)			
+   0x08048f4b <+468>:	call   0x8048780 <sprintf@plt>	; sprintf(reply, "Got geotag for image: %s", gt.img)
+   0x08048f50 <+473>:	lea    -0x38(%ebp),%eax		; reply
+   0x08048f53 <+476>:	mov    %eax,(%esp)			; first arg = reply
+   0x08048f56 <+479>:	call   0x8048860 <strlen@plt>	; strlen(reply)
+   0x08048f5b <+484>:	mov    %eax,0x8(%esp)		; third arg = strlen(reply)
+   0x08048f5f <+488>:	lea    -0x38(%ebp),%eax		; reply
+   0x08048f62 <+491>:	mov    %eax,0x4(%esp)		; second arg = reply
+   0x08048f66 <+495>:	mov    0x10(%ebp),%eax		; nfd
+   0x08048f69 <+498>:	mov    %eax,(%esp)			; third arg = nfd
+   0x08048f6c <+501>:	call   0x80487d0 <write@plt>	; write(nfd, reply, strlen(reply))
+   0x08048f71 <+506>:	mov    %eax,-0x2dc(%ebp)	; counters.i = result
+   0x08048f77 <+512>:	lea    -0x38(%ebp),%eax	
    0x08048f7a <+515>:	mov    %eax,(%esp)
    0x08048f7d <+518>:	call   0x8048860 <strlen@plt>
-   0x08048f82 <+523>:	mov    %eax,%edx
-   0x08048f84 <+525>:	mov    -0x2dc(%ebp),%eax
-   0x08048f8a <+531>:	mov    %edx,0x8(%esp)
-   0x08048f8e <+535>:	mov    %eax,0x4(%esp)
+   0x08048f82 <+523>:	mov    %eax,%edx			
+   0x08048f84 <+525>:	mov    -0x2dc(%ebp),%eax	
+   0x08048f8a <+531>:	mov    %edx,0x8(%esp)		; third arg = strlen(reply)
+   0x08048f8e <+535>:	mov    %eax,0x4(%esp)		; second arg = counters.i
    0x08048f92 <+539>:	lea    -0x9c(%ebp),%eax
-   0x08048f98 <+545>:	mov    %eax,(%esp)
+   0x08048f98 <+545>:	mov    %eax,(%esp)			; first arg = errorbuf
    0x08048f9b <+548>:	call   0x8048b16 <check_error>
    0x08048fa0 <+553>:	mov    %eax,-0x2dc(%ebp)
    0x08048fa6 <+559>:	mov    -0x2dc(%ebp),%eax
