@@ -1,0 +1,104 @@
+Dump of assembler code for function validatebuf:
+   0x08048cba <+0>:	 	55							push   %ebp
+   0x08048cbb <+1>:	 	89 e5						mov    %esp,%ebp
+   0x08048cbd <+3>:	 	83 ec 38					sub    $0x38,%esp
+   0x08048cc0 <+6>:	 	83 7d 08 12					cmpl   $0x12,0x8(%ebp)
+   0x08048cc4 <+10>:	 7f 0a						jg     0x8048cd0 <validatebuf+22>
+   0x08048cc6 <+12>:	 b8 00 00 00 00				mov    $0x0,%eax 						return false;
+   0x08048ccb <+17>:	 e9 3d 01 00 00				jmp    0x8048e0d <validatebuf+339>
+   0x08048cd0 <+22>:	 8b 55 08					mov    0x8(%ebp),%edx
+   0x08048cd3 <+25>:	 8b 45 0c					mov    0xc(%ebp),%eax
+   0x08048cd6 <+28>:	 01 d0						add    %edx,%eax
+   0x08048cd8 <+30>:	 c6 00 00					movb   $0x0,(%eax)
+   0x08048cdb <+33>:	 c7 44 24 04 81 9a 04 08	movl   $0x8049a81,0x4(%esp)
+   0x08048ce3 <+41>:	 8b 45 0c					mov    0xc(%ebp),%eax
+   0x08048ce6 <+44>:	 89 04 24					mov    %eax,(%esp)
+   0x08048ce9 <+47>:	 e8 ba fc ff ff				call   0x80489a8 <strstr@plt>
+   0x08048cee <+52>:	 89 45 f4					mov    %eax,-0xc(%ebp)
+   0x08048cf1 <+55>:	 83 7d f4 00				cmpl   $0x0,-0xc(%ebp)
+   0x08048cf5 <+59>:	 75 0a						jne    0x8048d01 <validatebuf+71>
+   0x08048cf7 <+61>:	 b8 00 00 00 00				mov    $0x0,%eax 						return false;
+   0x08048cfc <+66>:	 e9 0c 01 00 00				jmp    0x8048e0d <validatebuf+339>
+   0x08048d01 <+71>:	 c7 44 24 04 86 9a 04 08	movl   $0x8049a86,0x4(%esp)
+   0x08048d09 <+79>:	 8b 45 0c					mov    0xc(%ebp),%eax
+   0x08048d0c <+82>:	 89 04 24					mov    %eax,(%esp)
+   0x08048d0f <+85>:	 e8 94 fc ff ff				call   0x80489a8 <strstr@plt>
+   0x08048d14 <+90>:	 89 45 f0					mov    %eax,-0x10(%ebp)
+   0x08048d17 <+93>:	 c7 44 24 04 8c 9a 04 08	movl   $0x8049a8c,0x4(%esp)
+   0x08048d1f <+101>:	 8b 45 0c					mov    0xc(%ebp),%eax
+   0x08048d22 <+104>:	 89 04 24					mov    %eax,(%esp)
+   0x08048d25 <+107>:	 e8 7e fc ff ff				call   0x80489a8 <strstr@plt>
+   0x08048d2a <+112>:	 89 45 ec					mov    %eax,-0x14(%ebp)
+   0x08048d2d <+115>:	 c7 44 24 04 92 9a 04 08	movl   $0x8049a92,0x4(%esp)
+   0x08048d35 <+123>:	 8b 45 0c					mov    0xc(%ebp),%eax
+   0x08048d38 <+126>:	 89 04 24					mov    %eax,(%esp)
+   0x08048d3b <+129>:	 e8 68 fc ff ff				call   0x80489a8 <strstr@plt>
+   0x08048d40 <+134>:	 89 45 e8					mov    %eax,-0x18(%ebp)
+   0x08048d43 <+137>:	 83 7d f0 00				cmpl   $0x0,-0x10(%ebp)
+   0x08048d47 <+141>:	 74 0c						je     0x8048d55 <validatebuf+155>
+   0x08048d49 <+143>:	 83 7d ec 00				cmpl   $0x0,-0x14(%ebp)
+   0x08048d4d <+147>:	 74 06						je     0x8048d55 <validatebuf+155>
+   0x08048d4f <+149>:	 83 7d e8 00				cmpl   $0x0,-0x18(%ebp)
+   0x08048d53 <+153>:	 75 0a						jne    0x8048d5f <validatebuf+165>
+   0x08048d55 <+155>:	 b8 00 00 00 00				mov    $0x0,%eax 						return false;
+   0x08048d5a <+160>:	 e9 ae 00 00 00				jmp    0x8048e0d <validatebuf+339>
+   0x08048d5f <+165>:	 8b 45 ec					mov    -0x14(%ebp),%eax
+   0x08048d62 <+168>:	 3b 45 f0					cmp    -0x10(%ebp),%eax
+   0x08048d65 <+171>:	 76 08						jbe    0x8048d6f <validatebuf+181>
+   0x08048d67 <+173>:	 8b 45 e8					mov    -0x18(%ebp),%eax
+   0x08048d6a <+176>:	 3b 45 ec					cmp    -0x14(%ebp),%eax
+   0x08048d6d <+179>:	 77 0a						ja     0x8048d79 <validatebuf+191>
+   0x08048d6f <+181>:	 b8 00 00 00 00				mov    $0x0,%eax 						return false;
+   0x08048d74 <+186>:	 e9 94 00 00 00				jmp    0x8048e0d <validatebuf+339>
+   0x08048d79 <+191>:	 8b 45 f0					mov    -0x10(%ebp),%eax
+   0x08048d7c <+194>:	 83 e8 04					sub    $0x4,%eax
+   0x08048d7f <+197>:	 89 c2						mov    %eax,%edx
+   0x08048d81 <+199>:	 8b 45 f4					mov    -0xc(%ebp),%eax
+   0x08048d84 <+202>:	 29 c2						sub    %eax,%edx
+   0x08048d86 <+204>:	 89 d0						mov    %edx,%eax
+   0x08048d88 <+206>:	 83 f8 32					cmp    $0x32,%eax
+   0x08048d8b <+209>:	 7e 07						jle    0x8048d94 <validatebuf+218>
+   0x08048d8d <+211>:	 b8 00 00 00 00				mov    $0x0,%eax 						return false;
+   0x08048d92 <+216>:	 eb 79						jmp    0x8048e0d <validatebuf+339>
+   0x08048d94 <+218>:	 8b 45 f0					mov    -0x10(%ebp),%eax
+   0x08048d97 <+221>:	 83 c0 05					add    $0x5,%eax
+   0x08048d9a <+224>:	 89 04 24					mov    %eax,(%esp)
+   0x08048d9d <+227>:	 e8 b6 fb ff ff				call   0x8048958 <atof@plt>
+   0x08048da2 <+232>:	 d9 5d e4					fstps  -0x1c(%ebp)
+   0x08048da5 <+235>:	 d9 45 e4					flds   -0x1c(%ebp)
+   0x08048da8 <+238>:	 d9 05 90 9b 04 08			flds   0x8049b90
+   0x08048dae <+244>:	 d9 c9						fxch   %st(1)
+   0x08048db0 <+246>:	 df e9						fucomip %st(1),%st
+   0x08048db2 <+248>:	 dd d8						fstp   %st(0)
+   0x08048db4 <+250>:	 77 11						ja     0x8048dc7 <validatebuf+269>
+   0x08048db6 <+252>:	 d9 05 94 9b 04 08			flds   0x8049b94
+   0x08048dbc <+258>:	 d9 45 e4					flds   -0x1c(%ebp)
+   0x08048dbf <+261>:	 d9 c9						fxch   %st(1)
+   0x08048dc1 <+263>:	 df e9						fucomip %st(1),%st
+   0x08048dc3 <+265>:	 dd d8						fstp   %st(0)
+   0x08048dc5 <+267>:	 76 07						jbe    0x8048dce <validatebuf+276>
+   0x08048dc7 <+269>:	 b8 00 00 00 00				mov    $0x0,%eax 						return false;
+   0x08048dcc <+274>:	 eb 3f						jmp    0x8048e0d <validatebuf+339>
+   0x08048dce <+276>:	 8b 45 ec					mov    -0x14(%ebp),%eax
+   0x08048dd1 <+279>:	 83 c0 05					add    $0x5,%eax
+   0x08048dd4 <+282>:	 89 04 24					mov    %eax,(%esp)
+   0x08048dd7 <+285>:	 e8 7c fb ff ff	 			call   0x8048958 <atof@plt>
+   0x08048ddc <+290>:	 d9 5d e0					fstps  -0x20(%ebp)
+   0x08048ddf <+293>:	 d9 45 e0					flds   -0x20(%ebp)
+   0x08048de2 <+296>:	 d9 05 98 9b 04 08			flds   0x8049b98
+   0x08048de8 <+302>:	 d9 c9						fxch   %st(1)
+   0x08048dea <+304>:	 df e9						fucomip %st(1),%st
+   0x08048dec <+306>:	 dd d8						fstp   %st(0)
+   0x08048dee <+308>:	 77 11						ja     0x8048e01 <validatebuf+327>
+   0x08048df0 <+310>:	 d9 05 9c 9b 04 08			flds   0x8049b9c
+   0x08048df6 <+316>:	 d9 45 e0					flds   -0x20(%ebp)
+   0x08048df9 <+319>:	 d9 c9						fxch   %st(1)
+   0x08048dfb <+321>:	 df e9						fucomip %st(1),%st
+   0x08048dfd <+323>:	 dd d8						fstp   %st(0)
+   0x08048dff <+325>:	 76 07						jbe    0x8048e08 <validatebuf+334>
+   0x08048e01 <+327>:	 b8 00 00 00 00				mov    $0x0,%eax 						return false;
+   0x08048e06 <+332>:	 eb 05						jmp    0x8048e0d <validatebuf+339>
+   0x08048e08 <+334>:	 b8 01 00 00 00				mov    $0x1,%eax 						return true;
+   0x08048e0d <+339>:	 c9							leave  
+   0x08048e0e <+340>:	 c3							ret    
+End of assembler dump.

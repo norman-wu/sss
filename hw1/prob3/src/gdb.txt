@@ -1,0 +1,34 @@
+Dump of assembler code for function main:
+   0x080483c4 <+0>:	 55	push   %ebp
+   0x080483c5 <+1>:	 89 e5	mov    %esp,%ebp
+   0x080483c7 <+3>:	 83 e4 f0	and    $0xfffffff0,%esp
+   0x080483ca <+6>:	 83 ec 10	sub    $0x10,%esp
+   0x080483cd <+9>:	 c7 04 24 a4 84 04 08	movl   $0x80484a4,(%esp)
+   0x080483d4 <+16>:	 e8 0b ff ff ff	call   0x80482e4 <system@plt>
+   0x080483d9 <+21>:	 b8 00 00 00 00	mov    $0x0,%eax
+   0x080483de <+26>:	 c9	leave  
+   0x080483df <+27>:	 c3	ret    
+End of assembler dump.
+Dump of assembler code for function system@plt:
+   0x080482e4 <+0>:	 ff 25 58 96 04 08	jmp    *0x8049658
+   0x080482ea <+6>:	 68 08 00 00 00	push   $0x8
+   0x080482ef <+11>:	 e9 d0 ff ff ff	jmp    0x80482c4
+End of assembler dump.
+Undefined command: "ls".  Try "help".
+Dump of assembler code from 0x7ad3fa to 0x7ad418:
+   0x007ad3fa:	Cannot access memory at address 0x7ad3fa
+Dump of assembler code from 0x8049658 to 0x8049676:
+   0x08049658 <system@got.plt+0>:	 ea 82 04 08 fa 82 04	ljmp   $0x482,$0xfa080482
+   0x0804965f <__libc_start_main@got.plt+3>:	 08 00	or     %al,(%eax)
+   0x08049661 <data_start+1>:	 00 00	add    %al,(%eax)
+   0x08049663 <data_start+3>:	 00 00	add    %al,(%eax)
+   0x08049665:	 00 00	add    %al,(%eax)
+   0x08049667:	 00 00	add    %al,(%eax)
+   0x08049669 <dtor_idx.5991+1>:	 00 00	add    %al,(%eax)
+   0x0804966b <dtor_idx.5991+3>:	 00	.byte 0x0
+   0x0804966c:	Cannot access memory at address 0x804966c
+Invalid number "0x0xfa080482".
+Dump of assembler code from 0xfa080482 to 0xfa0804a0:
+   0xfa080482:	Cannot access memory at address 0xfa080482
+Dump of assembler code from 0x482 to 0x4a0:
+   0x00000482:	Cannot access memory at address 0x482

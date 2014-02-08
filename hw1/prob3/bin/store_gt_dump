@@ -1,0 +1,49 @@
+Dump of assembler code for function store_gt:
+   0x08048c50 <+0>:	push   %ebp
+   0x08048c51 <+1>:	mov    %esp,%ebp
+   0x08048c53 <+3>:	sub    $0x28,%esp
+
+- Preamble, reserve 40 bytes for variables
+
+   0x08048c56 <+6>:	movl   $0x8049a64,0x4(%esp)
+   0x08048c5e <+14>:	movl   $0x8049a66,(%esp)
+   0x08048c65 <+21>:	call   0x8048918 <fopen@plt>
+
+- Open the gt.db file (call it fd)
+
+   0x08048c6a <+26>:	mov    %eax,-0xc(%ebp)
+   0x08048c6d <+29>:	cmpl   $0x0,-0xc(%ebp)
+   0x08048c71 <+33>:	jne    0x8048c86 <store_gt+54>
+
+- If file opened (not null), go to line +54
+- else, go to line +35 (under normal operation we go to line 54)
+
+   0x08048c73 <+35>:	movl   $0x8049a6c,(%esp)
+   0x08048c7a <+42>:	call   0x8048938 <printf@plt>
+   0x08048c7f <+47>:	mov    $0x0,%eax
+   0x08048c84 <+52>:	jmp    0x8048cb8 <store_gt+104>
+
+
+   0x08048c86 <+54>:	mov    -0xc(%ebp),%eax
+   0x08048c89 <+57>:	mov    %eax,0xc(%esp)
+   0x08048c8d <+61>:	movl   $0x1,0x8(%esp)
+   0x08048c95 <+69>:	movl   $0x23a,0x4(%esp)
+   0x08048c9d <+77>:	mov    0x8(%ebp),%eax
+   0x08048ca0 <+80>:	mov    %eax,(%esp)
+   0x08048ca3 <+83>:	call   0x8048998 <fwrite@plt>
+
+- call: fwrite(gt,sizeof(gt)=570,1,fd)
+
+   0x08048ca8 <+88>:	mov    -0xc(%ebp),%eax
+   0x08048cab <+91>:	mov    %eax,(%esp)
+   0x08048cae <+94>:	call   0x80488f8 <fclose@plt>
+
+- call: fclose(fd)
+
+   0x08048cb3 <+99>:	mov    $0x1,%eax
+   0x08048cb8 <+104>:	leave  
+   0x08048cb9 <+105>:	ret    
+
+- return 1
+
+End of assembler dump.

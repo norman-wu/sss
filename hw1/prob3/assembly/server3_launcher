@@ -1,0 +1,72 @@
+Dump of assembler code for function launcher:
+   0x08049755 <+0>:	push   %ebp
+   0x08049756 <+1>:	mov    %esp,%ebp
+   0x08049758 <+3>:	sub    $0x38,%esp
+
+    1. Push old base pointer onto stack.
+    2. Copy old stack pointer to be new base pointer.
+    3. Move stack pointer to allocate 56 new bytes for local variables.
+
+   0x0804975b <+6>:	mov    0x8(%ebp),%eax
+   0x0804975e <+9>:	mov    %eax,0x804af4c
+
+    1. Copy the input to launcher (probably int nitro) to global_nitro
+       however, this is NEVER USED
+
+   0x08049763 <+14>:	mov    0xc(%ebp),%eax
+   0x08049766 <+17>:	mov    %eax,0x804af50
+
+    1. Copy the input to launcher (probably int offset) to global_offset
+       however, this is NEVER USED
+
+   0x0804976b <+22>:	movl   $0x0,(%esp)
+   0x08049772 <+29>:	call   0x80489b8 <time@plt>
+
+    1. Call time(null) - returns current UNIX time into %eax
+
+   0x08049777 <+34>:	mov    %eax,(%esp)
+   0x0804977a <+37>:	call   0x8048978 <srandom@plt>
+
+    1. Call srandom(current_time). Seeds random with current UNIX time.
+
+   0x0804977f <+42>:	call   0x8048838 <random@plt>
+   0x08049784 <+47>:	and    $0xff000,%eax
+   0x08049789 <+52>:	mov    %eax,-0xc(%ebp)
+   0x0804978c <+55>:	mov    -0xc(%ebp),%eax
+   0x0804978f <+58>:	add    $0x55385c00,%eax
+   0x08049794 <+63>:	movl   $0x0,0x14(%esp)
+   0x0804979c <+71>:	movl   $0x0,0x10(%esp)
+   0x080497a4 <+79>:	movl   $0x22,0xc(%esp)
+   0x080497ac <+87>:	movl   $0x7,0x8(%esp)
+   0x080497b4 <+95>:	movl   $0x100000,0x4(%esp)
+   0x080497bc <+103>:	mov    %eax,(%esp)
+   0x080497bf <+106>:	call   0x8048828 <mmap@plt>
+   0x080497c4 <+111>:	mov    %eax,-0x10(%ebp)
+   0x080497c7 <+114>:	cmpl   $0xffffffff,-0x10(%ebp)
+   0x080497cb <+118>:	jne    0x80497fe <launcher+169>
+   0x080497cd <+120>:	mov    0x804af40,%eax
+   0x080497d2 <+125>:	mov    %eax,0xc(%esp)
+   0x080497d6 <+129>:	movl   $0x23,0x8(%esp)
+   0x080497de <+137>:	movl   $0x1,0x4(%esp)
+   0x080497e6 <+145>:	movl   $0x8049b6c,(%esp)
+   0x080497ed <+152>:	call   0x8048998 <fwrite@plt>
+   0x080497f2 <+157>:	movl   $0x1,(%esp)
+   0x080497f9 <+164>:	call   0x8048a28 <exit@plt>
+   0x080497fe <+169>:	mov    -0x10(%ebp),%eax
+   0x08049801 <+172>:	add    $0xffff8,%eax
+   0x08049806 <+177>:	mov    %eax,0x8052e08
+   0x0804980b <+182>:	mov    0x8052e08,%edx
+   0x08049811 <+188>:	mov    %esp,%eax
+   0x08049813 <+190>:	mov    %edx,%esp
+   0x08049815 <+192>:	mov    %eax,%edx
+   0x08049817 <+194>:	mov    %edx,0x804af54
+   0x0804981d <+200>:	call   0x804906e <server>
+   0x08049822 <+205>:	mov    0x804af54,%eax
+   0x08049827 <+210>:	mov    %eax,%esp
+   0x08049829 <+212>:	movl   $0x100000,0x4(%esp)
+   0x08049831 <+220>:	mov    -0x10(%ebp),%eax
+   0x08049834 <+223>:	mov    %eax,(%esp)
+   0x08049837 <+226>:	call   0x8048a08 <munmap@plt>
+   0x0804983c <+231>:	leave  
+   0x0804983d <+232>:	ret    
+End of assembler dump.

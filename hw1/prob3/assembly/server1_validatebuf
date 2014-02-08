@@ -1,0 +1,116 @@
+Dump of assembler code for function validatebuf:
+   0x08048bfa <+0>:	push   %ebp
+   0x08048bfb <+1>:	mov    %esp,%ebp
+   0x08048bfd <+3>:	sub    $0x38,%esp
+   0x08048c00 <+6>:	cmpl   $0x12,0x8(%ebp)
+   0x08048c04 <+10>:	jg     0x8048c10 <validatebuf+22>
+   0x08048c06 <+12>:	mov    $0x0,%eax
+   0x08048c0b <+17>:	jmp    0x8048d75 <validatebuf+379>
+   0x08048c10 <+22>:	mov    0x8(%ebp),%edx
+   0x08048c13 <+25>:	mov    0xc(%ebp),%eax
+   0x08048c16 <+28>:	add    %edx,%eax
+   0x08048c18 <+30>:	movb   $0x0,(%eax)
+   0x08048c1b <+33>:	movl   $0x4,0x8(%esp)
+   0x08048c23 <+41>:	movl   $0x80499a1,0x4(%esp)
+   0x08048c2b <+49>:	mov    0xc(%ebp),%eax
+   0x08048c2e <+52>:	mov    %eax,(%esp)
+   0x08048c31 <+55>:	call   0x8048950 <strncmp@plt>
+   0x08048c36 <+60>:	test   %eax,%eax
+   0x08048c38 <+62>:	je     0x8048c44 <validatebuf+74>
+   0x08048c3a <+64>:	mov    $0x0,%eax
+   0x08048c3f <+69>:	jmp    0x8048d75 <validatebuf+379>
+   0x08048c44 <+74>:	movl   $0x80499a6,0x4(%esp)
+   0x08048c4c <+82>:	mov    0xc(%ebp),%eax
+   0x08048c4f <+85>:	mov    %eax,(%esp)
+   0x08048c52 <+88>:	call   0x8048900 <strstr@plt>
+   0x08048c57 <+93>:	mov    %eax,-0xc(%ebp)
+   0x08048c5a <+96>:	movl   $0x80499ac,0x4(%esp)
+   0x08048c62 <+104>:	mov    0xc(%ebp),%eax
+   0x08048c65 <+107>:	mov    %eax,(%esp)
+   0x08048c68 <+110>:	call   0x8048900 <strstr@plt>
+   0x08048c6d <+115>:	mov    %eax,-0x10(%ebp)
+   0x08048c70 <+118>:	movl   $0x80499b2,0x4(%esp)
+   0x08048c78 <+126>:	mov    0xc(%ebp),%eax
+   0x08048c7b <+129>:	mov    %eax,(%esp)
+   0x08048c7e <+132>:	call   0x8048900 <strstr@plt>
+   0x08048c83 <+137>:	mov    %eax,-0x14(%ebp)
+   0x08048c86 <+140>:	cmpl   $0x0,-0xc(%ebp)
+   0x08048c8a <+144>:	je     0x8048c98 <validatebuf+158>
+   0x08048c8c <+146>:	cmpl   $0x0,-0x10(%ebp)
+   0x08048c90 <+150>:	je     0x8048c98 <validatebuf+158>
+   0x08048c92 <+152>:	cmpl   $0x0,-0x14(%ebp)
+   0x08048c96 <+156>:	jne    0x8048ca2 <validatebuf+168>
+   0x08048c98 <+158>:	mov    $0x0,%eax
+   0x08048c9d <+163>:	jmp    0x8048d75 <validatebuf+379>
+   0x08048ca2 <+168>:	mov    -0x10(%ebp),%eax
+   0x08048ca5 <+171>:	cmp    -0xc(%ebp),%eax
+   0x08048ca8 <+174>:	jbe    0x8048cb2 <validatebuf+184>
+   0x08048caa <+176>:	mov    -0x14(%ebp),%eax
+   0x08048cad <+179>:	cmp    -0x10(%ebp),%eax
+   0x08048cb0 <+182>:	ja     0x8048cbc <validatebuf+194>
+   0x08048cb2 <+184>:	mov    $0x0,%eax
+   0x08048cb7 <+189>:	jmp    0x8048d75 <validatebuf+379>
+   0x08048cbc <+194>:	mov    -0xc(%ebp),%eax
+   0x08048cbf <+197>:	sub    $0x4,%eax
+   0x08048cc2 <+200>:	mov    %eax,%edx
+   0x08048cc4 <+202>:	mov    0xc(%ebp),%eax
+   0x08048cc7 <+205>:	sub    %eax,%edx
+   0x08048cc9 <+207>:	mov    %edx,%eax
+   0x08048ccb <+209>:	cmp    $0x30,%eax
+   0x08048cce <+212>:	jle    0x8048cda <validatebuf+224>
+   0x08048cd0 <+214>:	mov    $0x0,%eax
+   0x08048cd5 <+219>:	jmp    0x8048d75 <validatebuf+379>
+   0x08048cda <+224>:	mov    -0xc(%ebp),%eax
+   0x08048cdd <+227>:	add    $0x5,%eax
+   0x08048ce0 <+230>:	mov    %eax,(%esp)
+   0x08048ce3 <+233>:	call   0x80488b0 <atof@plt>
+   0x08048ce8 <+238>:	fstps  -0x18(%ebp)
+   0x08048ceb <+241>:	flds   -0x18(%ebp)
+   0x08048cee <+244>:	flds   0x8049ab0
+   0x08048cf4 <+250>:	fxch   %st(1)
+   0x08048cf6 <+252>:	fucomip %st(1),%st
+   0x08048cf8 <+254>:	fstp   %st(0)
+   0x08048cfa <+256>:	ja     0x8048d0d <validatebuf+275>
+   0x08048cfc <+258>:	flds   0x8049ab4
+   0x08048d02 <+264>:	flds   -0x18(%ebp)
+   0x08048d05 <+267>:	fxch   %st(1)
+   0x08048d07 <+269>:	fucomip %st(1),%st
+   0x08048d09 <+271>:	fstp   %st(0)
+   0x08048d0b <+273>:	jbe    0x8048d14 <validatebuf+282>
+   0x08048d0d <+275>:	mov    $0x0,%eax
+   0x08048d12 <+280>:	jmp    0x8048d75 <validatebuf+379>
+   0x08048d14 <+282>:	mov    -0x10(%ebp),%eax
+   0x08048d17 <+285>:	add    $0x5,%eax
+   0x08048d1a <+288>:	mov    %eax,(%esp)
+   0x08048d1d <+291>:	call   0x80488b0 <atof@plt>
+   0x08048d22 <+296>:	fstps  -0x1c(%ebp)
+   0x08048d25 <+299>:	flds   -0x1c(%ebp)
+   0x08048d28 <+302>:	flds   0x8049ab8
+   0x08048d2e <+308>:	fxch   %st(1)
+   0x08048d30 <+310>:	fucomip %st(1),%st
+   0x08048d32 <+312>:	fstp   %st(0)
+   0x08048d34 <+314>:	ja     0x8048d47 <validatebuf+333>
+   0x08048d36 <+316>:	flds   0x8049abc
+   0x08048d3c <+322>:	flds   -0x1c(%ebp)
+   0x08048d3f <+325>:	fxch   %st(1)
+   0x08048d41 <+327>:	fucomip %st(1),%st
+   0x08048d43 <+329>:	fstp   %st(0)
+   0x08048d45 <+331>:	jbe    0x8048d4e <validatebuf+340>
+   0x08048d47 <+333>:	mov    $0x0,%eax
+   0x08048d4c <+338>:	jmp    0x8048d75 <validatebuf+379>
+   0x08048d4e <+340>:	mov    0x8(%ebp),%edx
+   0x08048d51 <+343>:	mov    0xc(%ebp),%eax
+   0x08048d54 <+346>:	add    %edx,%eax
+   0x08048d56 <+348>:	mov    %eax,%edx
+   0x08048d58 <+350>:	mov    -0x14(%ebp),%eax
+   0x08048d5b <+353>:	sub    %eax,%edx
+   0x08048d5d <+355>:	mov    %edx,%eax
+   0x08048d5f <+357>:	sub    $0x4,%eax
+   0x08048d62 <+360>:	cmp    $0x1f4,%eax
+   0x08048d67 <+365>:	jle    0x8048d70 <validatebuf+374>
+   0x08048d69 <+367>:	mov    $0x0,%eax
+   0x08048d6e <+372>:	jmp    0x8048d75 <validatebuf+379>
+   0x08048d70 <+374>:	mov    $0x1,%eax
+   0x08048d75 <+379>:	leave  
+   0x08048d76 <+380>:	ret    
+End of assembler dump.
