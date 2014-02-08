@@ -1,0 +1,161 @@
+Dump of assembler code for function validatebuf:
+   0x08048cba <+0>:	push   %ebp
+   0x08048cbb <+1>:	mov    %esp,%ebp
+   0x08048cbd <+3>:	sub    $0x38,%esp
+
+- Preamble set up 56 bytes for local variables
+
+   0x08048cc0 <+6>:	cmpl   $0x12,0x8(%ebp)
+   0x08048cc4 <+10>:	jg     0x8048cd0 <validatebuf+22>
+   0x08048cc6 <+12>:	mov    $0x0,%eax
+   0x08048ccb <+17>:	jmp    0x8048e0d <validatebuf+339>
+
+- If len < 19, then return 0
+- 0x8(%ebp) = len
+- 0xc(%ebp) = *buf
+
+   0x08048cd0 <+22>:	mov    0x8(%ebp),%edx
+   0x08048cd3 <+25>:	mov    0xc(%ebp),%eax
+   0x08048cd6 <+28>:	add    %edx,%eax
+   0x08048cd8 <+30>:	movb   $0x0,(%eax)
+
+- buf[len] = 0;
+
+   0x08048cdb <+33>:	movl   $0x8049a81,0x4(%esp)
+   0x08048ce3 <+41>:	mov    0xc(%ebp),%eax
+   0x08048ce6 <+44>:	mov    %eax,(%esp)
+   0x08048ce9 <+47>:	call   0x80489a8 <strstr@plt>
+   0x08048cee <+52>:	mov    %eax,-0xc(%ebp)
+   0x08048cf1 <+55>:	cmpl   $0x0,-0xc(%ebp)
+   0x08048cf5 <+59>:	jne    0x8048d01 <validatebuf+71>
+   0x08048cf7 <+61>:	mov    $0x0,%eax
+   0x08048cfc <+66>:	jmp    0x8048e0d <validatebuf+339>
+
+- *pos0 = strstr(*buf,"IMG:");
+  if *pos0 == 0 [AKA if IMG: is not in the buffer]
+    return 0;
+
+   0x08048d01 <+71>:	movl   $0x8049a86,0x4(%esp)
+   0x08048d09 <+79>:	mov    0xc(%ebp),%eax
+   0x08048d0c <+82>:	mov    %eax,(%esp)
+   0x08048d0f <+85>:	call   0x80489a8 <strstr@plt>
+   0x08048d14 <+90>:	mov    %eax,-0x10(%ebp)
+
+- *pos1 = strstr(*buf,";LAT:");
+
+   0x08048d17 <+93>:	movl   $0x8049a8c,0x4(%esp)
+   0x08048d1f <+101>:	mov    0xc(%ebp),%eax
+   0x08048d22 <+104>:	mov    %eax,(%esp)
+   0x08048d25 <+107>:	call   0x80489a8 <strstr@plt>
+   0x08048d2a <+112>:	mov    %eax,-0x14(%ebp)
+
+- *pos2 = strstr(*buf,";LON:");
+
+   0x08048d2d <+115>:	movl   $0x8049a92,0x4(%esp)
+   0x08048d35 <+123>:	mov    0xc(%ebp),%eax
+   0x08048d38 <+126>:	mov    %eax,(%esp)
+   0x08048d3b <+129>:	call   0x80489a8 <strstr@plt>
+   0x08048d40 <+134>:	mov    %eax,-0x18(%ebp)
+
+- *pos3 = strstr(*buf,";CAP:");
+
+   0x08048d43 <+137>:	cmpl   $0x0,-0x10(%ebp)
+   0x08048d47 <+141>:	je     0x8048d55 <validatebuf+155>
+   0x08048d49 <+143>:	cmpl   $0x0,-0x14(%ebp)
+   0x08048d4d <+147>:	je     0x8048d55 <validatebuf+155>
+   0x08048d4f <+149>:	cmpl   $0x0,-0x18(%ebp)
+   0x08048d53 <+153>:	jne    0x8048d5f <validatebuf+165>
+   0x08048d55 <+155>:	mov    $0x0,%eax
+   0x08048d5a <+160>:	jmp    0x8048e0d <validatebuf+339>
+
+- if (pos1 == 0 || pos2 == 0 || pos3 == 0)
+    return 0;
+
+   0x08048d5f <+165>:	mov    -0x14(%ebp),%eax
+   0x08048d62 <+168>:	cmp    -0x10(%ebp),%eax
+   0x08048d65 <+171>:	jbe    0x8048d6f <validatebuf+181>
+
+- if pos2 < pos1
+    return 0;
+
+   0x08048d67 <+173>:	mov    -0x18(%ebp),%eax
+   0x08048d6a <+176>:	cmp    -0x14(%ebp),%eax
+   0x08048d6d <+179>:	ja     0x8048d79 <validatebuf+191>
+   0x08048d6f <+181>:	mov    $0x0,%eax
+   0x08048d74 <+186>:	jmp    0x8048e0d <validatebuf+339>
+
+- if pos3 < pos2
+    return 0;
+
+   0x08048d79 <+191>:	mov    -0x10(%ebp),%eax
+   0x08048d7c <+194>:	sub    $0x4,%eax
+   0x08048d7f <+197>:	mov    %eax,%edx
+   0x08048d81 <+199>:	mov    -0xc(%ebp),%eax
+   0x08048d84 <+202>:	sub    %eax,%edx
+   0x08048d86 <+204>:	mov    %edx,%eax
+   0x08048d88 <+206>:	cmp    $0x32,%eax
+   0x08048d8b <+209>:	jle    0x8048d94 <validatebuf+218>
+   0x08048d8d <+211>:	mov    $0x0,%eax
+   0x08048d92 <+216>:	jmp    0x8048e0d <validatebuf+339>
+
+- if (pos1 - 4 - buf > 50)
+    return 0;
+
+   0x08048d94 <+218>:	mov    -0x10(%ebp),%eax
+   0x08048d97 <+221>:	add    $0x5,%eax
+   0x08048d9a <+224>:	mov    %eax,(%esp)
+   0x08048d9d <+227>:	call   0x8048958 <atof@plt>
+   0x08048da2 <+232>:	fstps  -0x1c(%ebp)
+   0x08048da5 <+235>:	flds   -0x1c(%ebp)
+   0x08048da8 <+238>:	flds   0x8049b90
+   0x08048dae <+244>:	fxch   %st(1)
+   0x08048db0 <+246>:	fucomip %st(1),%st
+   0x08048db2 <+248>:	fstp   %st(0)
+   0x08048db4 <+250>:	ja     0x8048dc7 <validatebuf+269>
+   0x08048db6 <+252>:	flds   0x8049b94
+   0x08048dbc <+258>:	flds   -0x1c(%ebp)
+   0x08048dbf <+261>:	fxch   %st(1)
+   0x08048dc1 <+263>:	fucomip %st(1),%st
+   0x08048dc3 <+265>:	fstp   %st(0)
+   0x08048dc5 <+267>:	jbe    0x8048dce <validatebuf+276>
+   0x08048dc7 <+269>:	mov    $0x0,%eax
+
+- lat = atof(pos1 + 5)
+  if (lat < -90 || lat > 90)
+    return 0;
+
+   0x08048dcc <+274>:	jmp    0x8048e0d <validatebuf+339>
+   0x08048dce <+276>:	mov    -0x14(%ebp),%eax
+   0x08048dd1 <+279>:	add    $0x5,%eax
+   0x08048dd4 <+282>:	mov    %eax,(%esp)
+   0x08048dd7 <+285>:	call   0x8048958 <atof@plt>
+   0x08048ddc <+290>:	fstps  -0x20(%ebp)
+   0x08048ddf <+293>:	flds   -0x20(%ebp)
+   0x08048de2 <+296>:	flds   0x8049b98
+   0x08048de8 <+302>:	fxch   %st(1)
+   0x08048dea <+304>:	fucomip %st(1),%st
+   0x08048dec <+306>:	fstp   %st(0)
+   0x08048dee <+308>:	ja     0x8048e01 <validatebuf+327>
+   0x08048df0 <+310>:	flds   0x8049b9c
+   0x08048df6 <+316>:	flds   -0x20(%ebp)
+   0x08048df9 <+319>:	fxch   %st(1)
+   0x08048dfb <+321>:	fucomip %st(1),%st
+   0x08048dfd <+323>:	fstp   %st(0)
+   0x08048dff <+325>:	jbe    0x8048e08 <validatebuf+334>
+   0x08048e01 <+327>:	mov    $0x0,%eax
+   0x08048e06 <+332>:	jmp    0x8048e0d <validatebuf+339>
+
+- lon = atof(pos2 + 5)
+  if (lon < -180 || lon > 180)
+    return 0;
+
+   0x08048e08 <+334>:	mov    $0x1,%eax
+
+- return 1;
+  ***NO BOUNDS CHECKING ON pos3 :D :D :D
+
+
+
+   0x08048e0d <+339>:	leave  
+   0x08048e0e <+340>:	ret    
+End of assembler dump.

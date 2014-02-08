@@ -1,4 +1,4 @@
-/* file: clien3.c class: 18-732, Spring 2013 assignment: Homework 1
+/* file: client1.c class: 18-732, Spring 2013, assignment: Homework 1
 */
 
 /* Obligatory includes */
@@ -25,18 +25,18 @@
 
 int main(int argc, char** argv)
 {
-  char reqstring[1000] = "1|The cure for boredom is curiosity. There is no cure for curiosity. --Dorothy Parker";
+  char reqstring[1000] = "IMG:DEADBEEFCAFEDEADBEEFCAFEDEADBEEFCAFEDEA\x77\xe7\xff\xff;LAT:57.64911;LON:10.40744;CAP:Good morning!";
  ;
 	int PORTNUM;
 	char SERVER_IP[16];
-    
+
 	int sock, nbytes, i, total, s;
 	char request[1000];
 	char recvline[1000];
 	struct sockaddr_in srv;
  
 	/* Set up some defaults for if you don't enter any parameters */ 
-	PORTNUM = 9011;
+	PORTNUM = 9010;
 	strcpy(SERVER_IP, "127.0.0.1");	
 
     printf("\nUsage: client [-port <port_number>] [-server <server_IP>]\n");
@@ -49,7 +49,8 @@ int main(int argc, char** argv)
 				PORTNUM = atoi(argv[++i]);
 			}else if(strcmp(argv[i], "-server") == 0){
 				strncpy(SERVER_IP, argv[++i],16);
-		 }else{
+	
+            }else{
 				printf("Unknown switch \"%s\"\n", argv[i]);
 				exit(1);
 			}

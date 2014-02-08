@@ -1,0 +1,32 @@
+Dump of assembler code for function check_error:
+   0x08048bd6 <+0>:	push   %ebp
+   0x08048bd7 <+1>:	mov    %esp,%ebp
+   0x08048bd9 <+3>:	sub    $0x18,%esp
+   0x08048bdc <+6>:	cmpl   $0xffffffff,0xc(%ebp)
+   0x08048be0 <+10>:	jne    0x8048c07 <check_error+49>
+   0x08048be2 <+12>:	call   0x8048808 <__errno_location@plt>
+   0x08048be7 <+17>:	mov    (%eax),%eax
+   0x08048be9 <+19>:	mov    %eax,0x8(%esp)
+   0x08048bed <+23>:	movl   $0x8049a20,0x4(%esp)
+   0x08048bf5 <+31>:	mov    0x8(%ebp),%eax
+   0x08048bf8 <+34>:	mov    %eax,(%esp)
+   0x08048bfb <+37>:	call   0x8048818 <sprintf@plt>
+   0x08048c00 <+42>:	mov    $0x1,%eax
+   0x08048c05 <+47>:	jmp    0x8048c4e <check_error+120>
+   0x08048c07 <+49>:	mov    0xc(%ebp),%eax
+   0x08048c0a <+52>:	cmp    0x10(%ebp),%eax
+   0x08048c0d <+55>:	jge    0x8048c49 <check_error+115>
+   0x08048c0f <+57>:	mov    0x8(%ebp),%eax
+   0x08048c12 <+60>:	movl   $0x70736552,(%eax)
+   0x08048c18 <+66>:	movl   $0x65736e6f,0x4(%eax)
+   0x08048c1f <+73>:	movl   $0x72617020,0x8(%eax)
+   0x08048c26 <+80>:	movl   $0x6c616974,0xc(%eax)
+   0x08048c2d <+87>:	movl   $0x7320796c,0x10(%eax)
+   0x08048c34 <+94>:	movl   $0x20746e65,0x14(%eax)
+   0x08048c3b <+101>:	movl   $0xa2121,0x18(%eax)
+   0x08048c42 <+108>:	mov    $0x1,%eax
+   0x08048c47 <+113>:	jmp    0x8048c4e <check_error+120>
+   0x08048c49 <+115>:	mov    $0x0,%eax
+   0x08048c4e <+120>:	leave  
+   0x08048c4f <+121>:	ret    
+End of assembler dump.

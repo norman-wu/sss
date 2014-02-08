@@ -7,18 +7,9 @@
  * Spring 2014
 */
 
-#include <stdio.h>
-
-  char *filename = "foobar.txt";
-  char *contents = "I win again!";
-  char *write_flag = "w";
-
 int main() {
 
-  FILE *fp;
-  fp=fopen(filename, write_flag);
-  fprintf(fp, contents);
-  fclose(fp);
+  system("echo 'I win again!' > foobar.txt");
 
   return 0;
 }
