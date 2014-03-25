@@ -11,6 +11,8 @@ ANALYZE_TREE()
     CallSite gets("gets");
     CallSite strcpy("strcpy");
     CallSite strcat("strcat");
+    CallSite sprintf("sprintf");
+    CallSite rand("rand");
     
     if(MATCH(gets))
         OUTPUT_ERROR("buffer overflow "<<"gets() makes no guarantee of safety. "<<"Use fgets() instead."<<" VERY RISKY" << CURRENT_TREE);
@@ -20,6 +22,13 @@ ANALYZE_TREE()
     
     if(MATCH(strcat))
         OUTPUT_ERROR("buffer overflow "<<"strcat() makes no guarantee of safety. "<<"Use strncat() instead."<<" [VERY RISKY]" << CURRENT_TREE);
+    
+    if(MATCH(sprintf))
+        OUTPUT_ERROR("buffer overflow "<<"sprintf() makes no guarantee of safety. "<<"Use snprintf() instead."<<" [VERY RISKY]" << CURRENT_TREE);
+    
+    if(MATCH(rand))
+        OUTPUT_ERROR("buffer overflow "<<"rand() makes no guarantee of safety. "<<"Use srand() instead."<<" [VERY RISKY]" << CURRENT_TREE);
+    
 }
 
 
