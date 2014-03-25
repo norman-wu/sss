@@ -1,5 +1,5 @@
 
-// secure_coding.c
+// secure_coding.cpp
 // unsecure function checker
 
 #include "extend-lang.hpp"     // Extend API
