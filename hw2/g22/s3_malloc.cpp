@@ -3,16 +3,11 @@
 
 #include "extend-lang.hpp"     // Extend API
 
-
-// ------------------------ the checker ----------------------
-// This store maps expressions to AbsValue; unmapped expressions
-// have unknown sign.
 START_EXTEND_CHECKER( s3_malloc, int_store );
 
 
 ANALYZE_TREE()
 {
-  // general information about the current tree
   {
     CallSite malloc("malloc");
     Var lv;
