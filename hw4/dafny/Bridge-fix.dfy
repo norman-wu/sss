@@ -29,32 +29,27 @@ method Main()
  *   (You can change the event sequence for testing, but the autograder will blow any changes away.)
  *  FILL IN THE BRIDGE CONTROLLER CLASS TO MEET THE SPEC. **/
 class BridgeController {
-  //system initialization flag
-  var initFlag: bool;
+  //system state
+  datatype State = INIT | RR | GR | GRW | RG | RGW;
+  var state: State;
   
   //car counters at each side of the bridge
   var Wa: nat, Wb: nat;
   
-  //previous car counters at each side of the bridge
-  var WPa: nat, WPb: nat;
-  
   //previous car arrival
-  var previousCar: NextCar;
+  var car: NextCar;
   
   //how long a queue has been waiting at the red light
   var waitTimer: nat;
   
   //light colors at each end of the bridge
   var La: Color, Lb: Color;
-  
-  //previous light colors at each end of the bridge
-  var LPa: Color, LPb: Color;
 
   function valid() : bool
   //verifies all requirements R-B1 thru B-B8
     reads this;
   {
-       initFlag ==> validInitConditions() //R-B5
+       state == INIT ==> validInitConditions() //R-B5
     && bothLightsNeverGreen()             //R-B1
     && queuesUpdatedCorrectly()           //R-B2, R-B3b, R-B4, R-B5b
     && lightsUpdatedCorrectly()           //R-B3a, R-B5a, R-B6, R-B7, R-B8
@@ -65,11 +60,10 @@ class BridgeController {
   //verifies R-B5 (and then some)
     reads this;
   {
-        initFlag
-     && previousCar == N
-     && Wa == WPa == Wb == WPb == 0
+        car == N
+     && Wa == Wb == 0
      && waitTimer == 0
-     && La == LPa == Lb == LPb == RED
+     && La == Lb == RED
   }
   
   function bothLightsNeverGreen() : bool
@@ -83,12 +77,12 @@ class BridgeController {
   //verifies R-B2, R-B3b, R-B4, R-B5b
     reads this;
   {
-       Wa == WPa
-          + (if (previousCar==A || previousCar==T) then 1 else 0)
-          - (if (La == GREEN)                      then 1 else 0)
-    && Wb == WPb
-          + (if (previousCar==B || previousCar==T) then 1 else 0)
-          - (if (Lb == GREEN)                      then 1 else 0)
+       Wa == old(Wa)
+          + (if (car==A || car==T) then 1 else 0)
+          - (if (La == GREEN)      then 1 else 0)
+    && Wb == old(Wb)
+          + (if (car==B || car==T) then 1 else 0)
+          - (if (Lb == GREEN)      then 1 else 0)
   }
   
   function lightsUpdatedCorrectly() : bool
@@ -96,21 +90,21 @@ class BridgeController {
     reads this;
   {
     //R-B7: "A" gets precedence when lights are red
-    if (LPa == RED && LPb == RED) then
-       if (previousCar == A || previousCar == T) then (La == GREEN && Lb == RED)
-       else if (previousCar == B)                then (La == RED && Lb == GREEN)
-       else if (previousCar == N)                then (La == RED && Lb == RED)
+    if (old(La) == RED && old(Lb) == RED) then
+       if (car == A || car == T) then (La == GREEN && Lb == RED)
+       else if (car == B)        then (La == RED && Lb == GREEN)
+       else if (car == N)        then (La == RED && Lb == RED)
        else false
     //R-
-    else if (LPa == GREEN && LPb == RED) then
-       if (previousCar == A || previousCar == T || Wa > 0) && waitTimer  < 5                 then (La == GREEN && Lb == RED)
-       else if (previousCar != A && previousCar != T && Wa == 0 && Wb > 0) || waitTimer >= 5 then (La == RED && Lb == GREEN)
-       else if (previousCar == N && Wa == Wb == 0)                                           then (La == RED && Lb == RED)
+    else if (old(La) == GREEN && old(Lb) == RED) then
+       if (car == A || car == T || Wa > 0) && waitTimer < 5                  then (La == GREEN && Lb == RED)
+       else if (car != A && car != T && Wa == 0 && Wb > 0) || waitTimer >= 5 then (La == RED && Lb == GREEN)
+       else if (car == N && Wa == Wb == 0)                                   then (La == RED && Lb == RED)
        else false
     else if (LPa == RED && LPb == GREEN) then
-       if (previousCar == B || previousCar == T || Wb > 0) && waitTimer  < 5                 then (La == RED && Lb == GREEN)
-       else if (previousCar != B && previousCar != T && Wb == 0 && Wa > 0) || waitTimer >= 5 then (La == GREEN && Lb == RED)
-       else if (previousCar == N && WPa == Wb == 0)                                          then (La == RED && Lb == RED)
+       if (car == B || car == T || Wb > 0) && waitTimer  < 5                 then (La == RED && Lb == GREEN)
+       else if (car != B && car != T && Wb == 0 && Wa > 0) || waitTimer >= 5 then (La == GREEN && Lb == RED)
+       else if (car == N && WPa == Wb == 0)                                          then (La == RED && Lb == RED)
        else false   
     else false  
   }
@@ -127,7 +121,7 @@ class BridgeController {
     modifies this;
   {
     initFlag    := true;
-    previousCar := N;
+    car := N;
     Wa, Wb      := 0, 0;
     WPa, WPb    := 0, 0;
     waitTimer   := 0;
@@ -137,13 +131,13 @@ class BridgeController {
   
   method update(e : NextCar)
     returns(lightA_status : Color, lightB_status : Color, cars_at_A : int, cars_at_B : int)
-    modifies this;
-    ensures initFlag == false;
-    ensures valid();
+    //modifies this;
+    //ensures initFlag == false;
+    //ensures valid();
   {
-    //update state
+    /*//update state
     initFlag := false;
-    previousCar := e;
+    car := e;
     WPa := Wa;
     WPb := Wb;
     LPa := La;
@@ -233,7 +227,7 @@ class BridgeController {
     else if (Lb == RED && Wb > 0)
     {
       waitTimer := waitTimer + 1;
-    }
+    }*/
   }
 }
 
