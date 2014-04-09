@@ -1,4 +1,4 @@
-//Input type: Car at A, car at B, cars at both (Two), cars at Neither
+//Input type: Car at A, car at B, car at both (Two), car at Neither
 datatype NextCar = A | B | T | N;
 
 //Traffic light 
@@ -130,14 +130,25 @@ class BridgeController {
     returns(lightA_status : Color, lightB_status : Color, cars_at_A : int, cars_at_B : int)
     modifies this;
     requires valid();
-    //ensures valid();
-    ensures (validStateImplications());
-    ensures (bothLightsNeverGreen());
+    ensures valid();
+    ensures car == e;
+    ensures Wa == cars_at_A;
+    ensures Wb == cars_at_B;
+    ensures lightA_status == La;
+    ensures lightB_status == Lb;
+    ensures Wa == old(Wa)
+                  + (if (car==A || car==T) then 1 else 0)
+                  - (if (La == GREEN) then 1 else 0);
+    ensures Wb == old(Wb)
+                  + (if (car==B || car==T) then 1 else 0)
+                  - (if (Lb == GREEN) then 1 else 0);
+    ensures old(state) == GRW ==> (state != RR && state != GR);
+    ensures old(state) == RGW ==> (state != RR && state != RG);
   {
     //store variable locally
     car := e;
     
-    //cars arrive
+    //car arrive
     Wa := Wa + (if (car==A || car==T) then 1 else 0);
     Wb := Wb + (if (car==B || car==T) then 1 else 0);
     
