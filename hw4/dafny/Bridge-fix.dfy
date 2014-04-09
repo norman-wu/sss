@@ -28,9 +28,10 @@ method Main()
 /** YOU SHOULD NOT NEED ANY CHANGES ABOVE THIS POINT.
  *   (You can change the event sequence for testing, but the autograder will blow any changes away.)
  *  FILL IN THE BRIDGE CONTROLLER CLASS TO MEET THE SPEC. **/
+datatype State = RR | GR | GRW | RG | RGW;
+ 
 class BridgeController {
   //system state
-  datatype State = INIT | RR | GR | GRW | RG | RGW;
   var state: State;
   
   //car counters at each side of the bridge
@@ -49,185 +50,169 @@ class BridgeController {
   //verifies all requirements R-B1 thru B-B8
     reads this;
   {
-       state == INIT ==> validInitConditions() //R-B5
-    && bothLightsNeverGreen()             //R-B1
-    && queuesUpdatedCorrectly()           //R-B2, R-B3b, R-B4, R-B5b
-    && lightsUpdatedCorrectly()           //R-B3a, R-B5a, R-B6, R-B7, R-B8
-    && timerUpdatedCorrectly()
+       (validStateImplications())
+    && (bothLightsNeverGreen())
   } 
   
-  function validInitConditions() : bool
-  //verifies R-B5 (and then some)
+  function validStateImplications() : bool
     reads this;
   {
-        car == N
-     && Wa == Wb == 0
-     && waitTimer == 0
-     && La == Lb == RED
+       (state == RR || state == GR || state == GRW || state == RG || state == RGW)
+    && (state == RR   ==> validRRConditions())
+    && (state == GR   ==> validGRConditions())
+    && (state == GRW  ==> validGRWConditions())
+    && (state == RG   ==> validRGConditions())
+    && (state == RGW  ==> validRGWConditions())
+  }
+  
+  function validRRConditions() : bool
+    reads this;
+  {
+       (car == N)
+    && (La == Lb == RED)
+    && (Wa == Wb == 0)
+    && (waitTimer == 0)
+  }
+  
+  function validGRConditions() : bool
+    reads this;
+  {
+       (car == A || car == N)
+    && (La == GREEN && Lb == RED)
+    && (Wb == 0)
+    && (waitTimer == 0)
+  }
+  
+  function validGRWConditions() : bool
+    reads this;
+  {
+       (La == GREEN && Lb == RED)
+    && (0 < Wb)
+    && (0 < waitTimer <= 5)
+  }
+  
+  function validRGConditions() : bool
+    reads this;
+  {
+       (car == B || car == N)
+    && (La == RED && Lb == GREEN)
+    && (Wa == 0)
+    && (waitTimer == 0)
+  }
+  
+  function validRGWConditions() : bool
+    reads this;
+  {
+       (La == RED && Lb == GREEN)
+    && (0 < Wa)
+    && (0 < waitTimer <= 5)
   }
   
   function bothLightsNeverGreen() : bool
-  //verifies R-B1
     reads this;
   {
     !(La == GREEN && Lb == GREEN)
   }
   
-  function queuesUpdatedCorrectly() : bool
-  //verifies R-B2, R-B3b, R-B4, R-B5b
-    reads this;
-  {
-       Wa == old(Wa)
-          + (if (car==A || car==T) then 1 else 0)
-          - (if (La == GREEN)      then 1 else 0)
-    && Wb == old(Wb)
-          + (if (car==B || car==T) then 1 else 0)
-          - (if (Lb == GREEN)      then 1 else 0)
-  }
-  
-  function lightsUpdatedCorrectly() : bool
-  //verifies R-B3a, R-B5a, R-B6, R-B7, R-B8
-    reads this;
-  {
-    //R-B7: "A" gets precedence when lights are red
-    if (old(La) == RED && old(Lb) == RED) then
-       if (car == A || car == T) then (La == GREEN && Lb == RED)
-       else if (car == B)        then (La == RED && Lb == GREEN)
-       else if (car == N)        then (La == RED && Lb == RED)
-       else false
-    //R-
-    else if (old(La) == GREEN && old(Lb) == RED) then
-       if (car == A || car == T || Wa > 0) && waitTimer < 5                  then (La == GREEN && Lb == RED)
-       else if (car != A && car != T && Wa == 0 && Wb > 0) || waitTimer >= 5 then (La == RED && Lb == GREEN)
-       else if (car == N && Wa == Wb == 0)                                   then (La == RED && Lb == RED)
-       else false
-    else if (LPa == RED && LPb == GREEN) then
-       if (car == B || car == T || Wb > 0) && waitTimer  < 5                 then (La == RED && Lb == GREEN)
-       else if (car != B && car != T && Wb == 0 && Wa > 0) || waitTimer >= 5 then (La == GREEN && Lb == RED)
-       else if (car == N && WPa == Wb == 0)                                          then (La == RED && Lb == RED)
-       else false   
-    else false  
-  }
-  
-  function timerUpdatedCorrectly(): bool
-    reads this;
-  {
-    if (Wa > 0 && La == RED) || (Wb > 0 && Lb == RED) then waitTimer >  0
-    else                                                   waitTimer == 0
-  }
-  
   constructor() 
-    ensures validInitConditions();
+    ensures state == RR;
+    ensures valid();
     modifies this;
   {
-    initFlag    := true;
-    car := N;
+    state       := RR;
+    car         := N;
     Wa, Wb      := 0, 0;
-    WPa, WPb    := 0, 0;
     waitTimer   := 0;
     La, Lb      := RED, RED;
-    LPa, LPb    := RED, RED;
   }		
   
   method update(e : NextCar)
     returns(lightA_status : Color, lightB_status : Color, cars_at_A : int, cars_at_B : int)
-    //modifies this;
-    //ensures initFlag == false;
+    modifies this;
+    requires valid();
     //ensures valid();
+    ensures (validStateImplications());
+    ensures (bothLightsNeverGreen());
   {
-    /*//update state
-    initFlag := false;
+    //store variable locally
     car := e;
-    WPa := Wa;
-    WPb := Wb;
-    LPa := La;
-    LPb := Lb;
     
     //cars arrive
-    if      (e == A) { Wa := Wa + 1; }
-    else if (e == B) { Wb := Wb + 1; }
-    else if (e == T)
-    {
-      Wa := Wa + 1;
-      Wb := Wb + 1;
-    }
+    Wa := Wa + (if (car==A || car==T) then 1 else 0);
+    Wb := Wb + (if (car==B || car==T) then 1 else 0);
     
-    //lights change
-    //both lights start red
-    if (La == RED && Lb == RED)
+    var nextState: State;
+    if ( state == RR   )
     {
-      assert Wa <= 1 && Wb <= 1;
-      assert waitTimer == 0;
-      
-      //side A takes precedence
-      if (Wa == 1)
-      {
-        La := GREEN;
-        Lb := RED;
-      }
-      else if (Wb == 1)
-      {
-        La := RED;
-        Lb := GREEN;
-      }
-      
+      if      (Wa >  0 && Wb == 0) { nextState := GR; }
+      else if (Wa == 0 && Wb >  0) { nextState := RG; }
+      else if (Wa >  0 && Wb >  0) { nextState := GRW; }
+      else if (Wa == 0 && Wb == 0) { nextState := RR; }
+      else { assert(false); }
     }
-    else if (La == GREEN && Lb == RED)
+    else if ( state == GR   )
     {
-      //if wait timer > 5, switch lights
-      //if no cars at A, but cars at B, switch lights
-      if (waitTimer >= 5 || (Wa == 0 && Wb > 0))
-      {
-        La := RED;
-        Lb := GREEN;
-      }
-      //if there are no cars on either side, turn both to RED
-      else if (Wa == Wb == 0)
-      {
-        La := RED;
-        Lb := RED;
-      }
+      if      (Wa >  0 && Wb == 0) { nextState := GR; }
+      else if (Wa == 0 && Wb >  0) { nextState := RG; }
+      else if (Wa >  0 && Wb >  0) { nextState := GRW; }
+      else if (Wa == 0 && Wb == 0) { nextState := RR; }
+      else { assert(false); }
     }
-    else if (La == RED && Lb == GREEN)
+    else if ( state == GRW  )
     {
-      //if wait timer > 5, switch lights
-      //if no cars at B, but cars at A, switch lights
-      if (waitTimer >= 5 || (Wa > 0 && Wb == 0))
-      {
-        La := GREEN;
-        Lb := RED;
-      }
-      //if there are no cars on either side, turn both to RED
-      else if (Wa == Wb == 0)
-      {
-        La := RED;
-        Lb := RED;
-      }
-      
+      if      (Wa >  0 && Wb == 0 && waitTimer == 5) { assert(false); }
+      else if (Wa >  0 && Wb == 0 && waitTimer <  5) { assert(false); }
+      else if (Wa == 0 && Wb >  0 && waitTimer == 5) { nextState := RG; }
+      else if (Wa == 0 && Wb >  0 && waitTimer <  5) { nextState := RG; }
+      else if (Wa >  0 && Wb >  0 && waitTimer == 5) { nextState := RGW; }
+      else if (Wa >  0 && Wb >  0 && waitTimer <  5) { nextState := GRW; }
+      else if (Wa == 0 && Wb == 0 && waitTimer == 5) { assert(false); }
+      else if (Wa == 0 && Wb == 0 && waitTimer <  5) { assert(false); }
+      else { assert(false); }
     }
-    else { assert false; }
+    else if ( state == RG   )
+    {
+      if      (Wa >  0 && Wb == 0) { nextState := GR; }
+      else if (Wa == 0 && Wb >  0) { nextState := RG; }
+      else if (Wa >  0 && Wb >  0) { nextState := RGW; }
+      else if (Wa == 0 && Wb == 0) { nextState := RR; }
+      else { assert(false); }
+    }
+    else if ( state == RGW  )
+    {
+      if      (Wa >  0 && Wb == 0 && waitTimer == 5) { nextState := GR; }
+      else if (Wa >  0 && Wb == 0 && waitTimer <  5) { nextState := GR; }
+      else if (Wa == 0 && Wb >  0 && waitTimer == 5) { assert(false); }
+      else if (Wa == 0 && Wb >  0 && waitTimer <  5) { assert(false); }
+      else if (Wa >  0 && Wb >  0 && waitTimer == 5) { nextState := GRW; }
+      else if (Wa >  0 && Wb >  0 && waitTimer <  5) { nextState := RGW; }
+      else if (Wa == 0 && Wb == 0 && waitTimer == 5) { assert(false); }
+      else if (Wa == 0 && Wb == 0 && waitTimer <  5) { assert(false); }
+      else { assert(false); }      
+    }
+    else { assert(false); }
     
-    //car travels across bridge
-    if (La == GREEN) { Wa := Wa - 1; }
-    else if (Lb == GREEN) { Wb := Wb - 1; }
+    //lights change based on state
+    if      (nextState == RR)                     { La, Lb := RED, RED; }
+    else if (nextState == GR || nextState == GRW) { La, Lb := GREEN, RED; }
+    else if (nextState == RG || nextState == RGW) { La, Lb := RED, GREEN; }
+    else { assert(false); }
     
-    //Update queue timers
-    if (La == Lb == RED)
-    {
-      waitTimer := 0;
-    }
-    else if (La != LPa && Lb != LPb)
-    {
-      waitTimer := 0;
-    }
-    else if (La == RED && Wa > 0)
-    {
-      waitTimer := waitTimer + 1;
-    }
-    else if (Lb == RED && Wb > 0)
-    {
-      waitTimer := waitTimer + 1;
-    }*/
+    //car travels across bridge based on lights
+    Wa := Wa - if (La == GREEN) then 1 else 0;
+    Wb := Wb - if (Lb == GREEN) then 1 else 0;
+    
+    //Update wait timers
+    if (state != nextState) { waitTimer := 0; }
+    if (nextState == GRW || nextState == RGW) { waitTimer := waitTimer + 1; }
+    else                                      { waitTimer := 0; }     
+    
+    //set outputs
+    state         := nextState;
+    lightA_status := La;
+    lightB_status := Lb;
+    cars_at_A     := Wa;
+    cars_at_B     := Wb;
   }
 }
 
