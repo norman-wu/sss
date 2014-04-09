@@ -12,8 +12,6 @@ class Stack {
       then false
     else if (topOfStack < -1 || topOfStack >= objArr.Length)
       then false
-    //else if ( !isEmpty() && !isFull() && !(0 <= topOfStack <= objArr.Length-2))
-    //  then false
     else
       true
   }
@@ -34,8 +32,7 @@ class Stack {
   function method isEmpty(): bool 
     reads this;
   // TODO: write requires, ensures clauses if necessary
-    requires valid();
-    ensures valid();
+  requires valid();
   // functions and function methods don't need ensures clauses; their body is their spec
   {
     topOfStack == -1
@@ -45,7 +42,6 @@ class Stack {
     reads this;
   // TODO: write requires, ensures clauses if necessary
    requires valid();
-   ensures valid();
   {
     topOfStack == (objArr.Length-1)
   }
