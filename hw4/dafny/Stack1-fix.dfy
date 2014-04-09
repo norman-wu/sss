@@ -20,13 +20,12 @@ class Stack {
   }
 
   constructor(capacity: int)
+    requires capacity > 0;
     modifies this;          // don't change this
     ensures fresh(objArr);  // don't change this
     ensures valid();
     ensures objArr.Length == capacity;
 	// TODO: write requires, ensures clauses if necessary
-    requires capacity > 0;
-    ensures valid();
     ensures isEmpty();
   {
     objArr := new int[capacity];
