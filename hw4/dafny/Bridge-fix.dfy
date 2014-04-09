@@ -166,7 +166,7 @@ class BridgeController {
       if      (Wa >  0 && Wb == 0) { nextState := GR; }
       else if (Wa == 0 && Wb >  0) { nextState := RG; }
       else if (Wa >  0 && Wb >  0) { nextState := GRW; }
-      else if (Wa == 0 && Wb == 0) { nextState := RR; }
+      else if (Wa == 0 && Wb == 0) { nextState := GR; }
       else { assert(false); }
     }
     else if ( state == GRW  )
@@ -186,7 +186,7 @@ class BridgeController {
       if      (Wa >  0 && Wb == 0) { nextState := GR; }
       else if (Wa == 0 && Wb >  0) { nextState := RG; }
       else if (Wa >  0 && Wb >  0) { nextState := RGW; }
-      else if (Wa == 0 && Wb == 0) { nextState := RR; }
+      else if (Wa == 0 && Wb == 0) { nextState := RG; }
       else { assert(false); }
     }
     else if ( state == RGW  )
