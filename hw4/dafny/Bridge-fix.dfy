@@ -138,10 +138,10 @@ class BridgeController {
     ensures lightB_status == Lb;
     ensures Wa == old(Wa)
                   + (if (car==A || car==T) then 1 else 0)
-                  - (if (La == GREEN) then 1 else 0);
+                  - (if (La == GREEN && (old(Wa) > 0 || car == A || car == T)) then 1 else 0);
     ensures Wb == old(Wb)
                   + (if (car==B || car==T) then 1 else 0)
-                  - (if (Lb == GREEN) then 1 else 0);
+                  - (if (Lb == GREEN && (old(Wb) > 0 || car == B || car == T)) then 1 else 0);
     ensures old(state) == GRW ==> (state != RR && state != GR);
     ensures old(state) == RGW ==> (state != RR && state != RG);
   {
@@ -210,8 +210,8 @@ class BridgeController {
     else { assert(false); }
     
     //car travels across bridge based on lights
-    Wa := Wa - if (La == GREEN) then 1 else 0;
-    Wb := Wb - if (Lb == GREEN) then 1 else 0;
+    Wa := Wa - if (La == GREEN && Wa > 0) then 1 else 0;
+    Wb := Wb - if (Lb == GREEN && Wb > 0) then 1 else 0;
     
     //Update wait timers
     if (state != nextState) { waitTimer := 0; }
