@@ -1,0 +1,1392 @@
+Terminals unused in grammar
+
+   '='
+   '%'
+   '.'
+   T_Lower_Than_Else
+
+
+Grammar
+
+    0 $accept: Start $end
+
+    1 Start: StmtList
+
+    2 StmtList: StmtList Stmt
+    3         | /* empty */
+
+    4 Stmt: IfThenElseStmt
+    5     | AssertStmt ';'
+    6     | PrintStmt ';'
+    7     | AssignStmt ';'
+    8     | error ';'
+
+    9 AssignStmt: LValue T_Assign Exp
+   10           | /* empty */
+
+   11 LValue: T_Identifier
+   12       | T_Mem '[' Exp ']'
+
+   13 Exp: LValue
+   14    | Constant
+   15    | Exp '+' Exp
+   16    | Exp '-' Exp
+   17    | Exp '/' Exp
+   18    | Exp '*' Exp
+   19    | Exp T_Equal Exp
+   20    | Exp T_NotEqual Exp
+   21    | Exp '<' Exp
+   22    | Exp '>' Exp
+   23    | Exp T_LessEqual Exp
+   24    | Exp T_GreaterEqual Exp
+   25    | Exp T_And Exp
+   26    | Exp T_Or Exp
+   27    | '(' Exp ')'
+   28    | '-' Exp
+   29    | '!' Exp
+   30    | T_ReadInteger '(' ')'
+   31    | T_ReadSecretInt '(' ')'
+
+   32 BoolExpr: Exp
+
+   33 Constant: T_IntConstant
+   34         | T_StringConstant
+
+   35 IfThenElseStmt: T_If '(' BoolExpr ')' '{' StmtList '}' T_Else '{' StmtList '}'
+
+   36 PrintStmt: T_Print '(' Exp ')'
+
+   37 AssertStmt: T_Assert '(' BoolExpr ')'
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'!' (33) 29
+'%' (37)
+'(' (40) 27 30 31 35 36 37
+')' (41) 27 30 31 35 36 37
+'*' (42) 18
+'+' (43) 15
+'-' (45) 16 28
+'.' (46)
+'/' (47) 17
+';' (59) 5 6 7 8
+'<' (60) 21
+'=' (61)
+'>' (62) 22
+'[' (91) 12
+']' (93) 12
+'{' (123) 35
+'}' (125) 35
+error (256) 8
+T_Print (258) 36
+T_ReadInteger (259) 30
+T_Assign (260) 9
+T_Assert (261) 37
+T_LessEqual (262) 23
+T_GreaterEqual (263) 24
+T_Equal (264) 19
+T_NotEqual (265) 20
+T_And (266) 25
+T_Or (267) 26
+T_If (268) 35
+T_Else (269) 35
+T_Mem (270) 12
+T_ReadSecretInt (271) 31
+T_Identifier (272) 11
+T_StringConstant (273) 34
+T_IntConstant (274) 33
+T_UnaryMinus (275)
+T_Lower_Than_Else (276)
+
+
+Nonterminals, with rules where they appear
+
+$accept (39)
+    on left: 0
+Start (40)
+    on left: 1, on right: 0
+StmtList (41)
+    on left: 2 3, on right: 1 2 35
+Stmt (42)
+    on left: 4 5 6 7 8, on right: 2
+AssignStmt (43)
+    on left: 9 10, on right: 7
+LValue (44)
+    on left: 11 12, on right: 9 13
+Exp (45)
+    on left: 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30
+    31, on right: 9 12 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+    32 36
+BoolExpr (46)
+    on left: 32, on right: 35 37
+Constant (47)
+    on left: 33 34, on right: 14
+IfThenElseStmt (48)
+    on left: 35, on right: 4
+PrintStmt (49)
+    on left: 36, on right: 6
+AssertStmt (50)
+    on left: 37, on right: 5
+
+
+state 0
+
+    0 $accept: . Start $end
+
+    $default  reduce using rule 3 (StmtList)
+
+    Start     go to state 1
+    StmtList  go to state 2
+
+
+state 1
+
+    0 $accept: Start . $end
+
+    $end  shift, and go to state 3
+
+
+state 2
+
+    1 Start: StmtList .
+    2 StmtList: StmtList . Stmt
+
+    error         shift, and go to state 4
+    T_Print       shift, and go to state 5
+    T_Assert      shift, and go to state 6
+    T_If          shift, and go to state 7
+    T_Mem         shift, and go to state 8
+    T_Identifier  shift, and go to state 9
+
+    $end  reduce using rule 1 (Start)
+    ';'   reduce using rule 10 (AssignStmt)
+
+    Stmt            go to state 10
+    AssignStmt      go to state 11
+    LValue          go to state 12
+    IfThenElseStmt  go to state 13
+    PrintStmt       go to state 14
+    AssertStmt      go to state 15
+
+
+state 3
+
+    0 $accept: Start $end .
+
+    $default  accept
+
+
+state 4
+
+    8 Stmt: error . ';'
+
+    ';'  shift, and go to state 16
+
+
+state 5
+
+   36 PrintStmt: T_Print . '(' Exp ')'
+
+    '('  shift, and go to state 17
+
+
+state 6
+
+   37 AssertStmt: T_Assert . '(' BoolExpr ')'
+
+    '('  shift, and go to state 18
+
+
+state 7
+
+   35 IfThenElseStmt: T_If . '(' BoolExpr ')' '{' StmtList '}' T_Else '{' StmtList '}'
+
+    '('  shift, and go to state 19
+
+
+state 8
+
+   12 LValue: T_Mem . '[' Exp ']'
+
+    '['  shift, and go to state 20
+
+
+state 9
+
+   11 LValue: T_Identifier .
+
+    $default  reduce using rule 11 (LValue)
+
+
+state 10
+
+    2 StmtList: StmtList Stmt .
+
+    $default  reduce using rule 2 (StmtList)
+
+
+state 11
+
+    7 Stmt: AssignStmt . ';'
+
+    ';'  shift, and go to state 21
+
+
+state 12
+
+    9 AssignStmt: LValue . T_Assign Exp
+
+    T_Assign  shift, and go to state 22
+
+
+state 13
+
+    4 Stmt: IfThenElseStmt .
+
+    $default  reduce using rule 4 (Stmt)
+
+
+state 14
+
+    6 Stmt: PrintStmt . ';'
+
+    ';'  shift, and go to state 23
+
+
+state 15
+
+    5 Stmt: AssertStmt . ';'
+
+    ';'  shift, and go to state 24
+
+
+state 16
+
+    8 Stmt: error ';' .
+
+    $default  reduce using rule 8 (Stmt)
+
+
+state 17
+
+   36 PrintStmt: T_Print '(' . Exp ')'
+
+    T_ReadInteger     shift, and go to state 25
+    T_Mem             shift, and go to state 8
+    T_ReadSecretInt   shift, and go to state 26
+    T_Identifier      shift, and go to state 9
+    T_StringConstant  shift, and go to state 27
+    T_IntConstant     shift, and go to state 28
+    '-'               shift, and go to state 29
+    '!'               shift, and go to state 30
+    '('               shift, and go to state 31
+
+    LValue    go to state 32
+    Exp       go to state 33
+    Constant  go to state 34
+
+
+state 18
+
+   37 AssertStmt: T_Assert '(' . BoolExpr ')'
+
+    T_ReadInteger     shift, and go to state 25
+    T_Mem             shift, and go to state 8
+    T_ReadSecretInt   shift, and go to state 26
+    T_Identifier      shift, and go to state 9
+    T_StringConstant  shift, and go to state 27
+    T_IntConstant     shift, and go to state 28
+    '-'               shift, and go to state 29
+    '!'               shift, and go to state 30
+    '('               shift, and go to state 31
+
+    LValue    go to state 32
+    Exp       go to state 35
+    BoolExpr  go to state 36
+    Constant  go to state 34
+
+
+state 19
+
+   35 IfThenElseStmt: T_If '(' . BoolExpr ')' '{' StmtList '}' T_Else '{' StmtList '}'
+
+    T_ReadInteger     shift, and go to state 25
+    T_Mem             shift, and go to state 8
+    T_ReadSecretInt   shift, and go to state 26
+    T_Identifier      shift, and go to state 9
+    T_StringConstant  shift, and go to state 27
+    T_IntConstant     shift, and go to state 28
+    '-'               shift, and go to state 29
+    '!'               shift, and go to state 30
+    '('               shift, and go to state 31
+
+    LValue    go to state 32
+    Exp       go to state 35
+    BoolExpr  go to state 37
+    Constant  go to state 34
+
+
+state 20
+
+   12 LValue: T_Mem '[' . Exp ']'
+
+    T_ReadInteger     shift, and go to state 25
+    T_Mem             shift, and go to state 8
+    T_ReadSecretInt   shift, and go to state 26
+    T_Identifier      shift, and go to state 9
+    T_StringConstant  shift, and go to state 27
+    T_IntConstant     shift, and go to state 28
+    '-'               shift, and go to state 29
+    '!'               shift, and go to state 30
+    '('               shift, and go to state 31
+
+    LValue    go to state 32
+    Exp       go to state 38
+    Constant  go to state 34
+
+
+state 21
+
+    7 Stmt: AssignStmt ';' .
+
+    $default  reduce using rule 7 (Stmt)
+
+
+state 22
+
+    9 AssignStmt: LValue T_Assign . Exp
+
+    T_ReadInteger     shift, and go to state 25
+    T_Mem             shift, and go to state 8
+    T_ReadSecretInt   shift, and go to state 26
+    T_Identifier      shift, and go to state 9
+    T_StringConstant  shift, and go to state 27
+    T_IntConstant     shift, and go to state 28
+    '-'               shift, and go to state 29
+    '!'               shift, and go to state 30
+    '('               shift, and go to state 31
+
+    LValue    go to state 32
+    Exp       go to state 39
+    Constant  go to state 34
+
+
+state 23
+
+    6 Stmt: PrintStmt ';' .
+
+    $default  reduce using rule 6 (Stmt)
+
+
+state 24
+
+    5 Stmt: AssertStmt ';' .
+
+    $default  reduce using rule 5 (Stmt)
+
+
+state 25
+
+   30 Exp: T_ReadInteger . '(' ')'
+
+    '('  shift, and go to state 40
+
+
+state 26
+
+   31 Exp: T_ReadSecretInt . '(' ')'
+
+    '('  shift, and go to state 41
+
+
+state 27
+
+   34 Constant: T_StringConstant .
+
+    $default  reduce using rule 34 (Constant)
+
+
+state 28
+
+   33 Constant: T_IntConstant .
+
+    $default  reduce using rule 33 (Constant)
+
+
+state 29
+
+   28 Exp: '-' . Exp
+
+    T_ReadInteger     shift, and go to state 25
+    T_Mem             shift, and go to state 8
+    T_ReadSecretInt   shift, and go to state 26
+    T_Identifier      shift, and go to state 9
+    T_StringConstant  shift, and go to state 27
+    T_IntConstant     shift, and go to state 28
+    '-'               shift, and go to state 29
+    '!'               shift, and go to state 30
+    '('               shift, and go to state 31
+
+    LValue    go to state 32
+    Exp       go to state 42
+    Constant  go to state 34
+
+
+state 30
+
+   29 Exp: '!' . Exp
+
+    T_ReadInteger     shift, and go to state 25
+    T_Mem             shift, and go to state 8
+    T_ReadSecretInt   shift, and go to state 26
+    T_Identifier      shift, and go to state 9
+    T_StringConstant  shift, and go to state 27
+    T_IntConstant     shift, and go to state 28
+    '-'               shift, and go to state 29
+    '!'               shift, and go to state 30
+    '('               shift, and go to state 31
+
+    LValue    go to state 32
+    Exp       go to state 43
+    Constant  go to state 34
+
+
+state 31
+
+   27 Exp: '(' . Exp ')'
+
+    T_ReadInteger     shift, and go to state 25
+    T_Mem             shift, and go to state 8
+    T_ReadSecretInt   shift, and go to state 26
+    T_Identifier      shift, and go to state 9
+    T_StringConstant  shift, and go to state 27
+    T_IntConstant     shift, and go to state 28
+    '-'               shift, and go to state 29
+    '!'               shift, and go to state 30
+    '('               shift, and go to state 31
+
+    LValue    go to state 32
+    Exp       go to state 44
+    Constant  go to state 34
+
+
+state 32
+
+   13 Exp: LValue .
+
+    $default  reduce using rule 13 (Exp)
+
+
+state 33
+
+   15 Exp: Exp . '+' Exp
+   16    | Exp . '-' Exp
+   17    | Exp . '/' Exp
+   18    | Exp . '*' Exp
+   19    | Exp . T_Equal Exp
+   20    | Exp . T_NotEqual Exp
+   21    | Exp . '<' Exp
+   22    | Exp . '>' Exp
+   23    | Exp . T_LessEqual Exp
+   24    | Exp . T_GreaterEqual Exp
+   25    | Exp . T_And Exp
+   26    | Exp . T_Or Exp
+   36 PrintStmt: T_Print '(' Exp . ')'
+
+    T_LessEqual     shift, and go to state 45
+    T_GreaterEqual  shift, and go to state 46
+    T_Equal         shift, and go to state 47
+    T_NotEqual      shift, and go to state 48
+    T_And           shift, and go to state 49
+    T_Or            shift, and go to state 50
+    '<'             shift, and go to state 51
+    '>'             shift, and go to state 52
+    '+'             shift, and go to state 53
+    '-'             shift, and go to state 54
+    '*'             shift, and go to state 55
+    '/'             shift, and go to state 56
+    ')'             shift, and go to state 57
+
+
+state 34
+
+   14 Exp: Constant .
+
+    $default  reduce using rule 14 (Exp)
+
+
+state 35
+
+   15 Exp: Exp . '+' Exp
+   16    | Exp . '-' Exp
+   17    | Exp . '/' Exp
+   18    | Exp . '*' Exp
+   19    | Exp . T_Equal Exp
+   20    | Exp . T_NotEqual Exp
+   21    | Exp . '<' Exp
+   22    | Exp . '>' Exp
+   23    | Exp . T_LessEqual Exp
+   24    | Exp . T_GreaterEqual Exp
+   25    | Exp . T_And Exp
+   26    | Exp . T_Or Exp
+   32 BoolExpr: Exp .
+
+    T_LessEqual     shift, and go to state 45
+    T_GreaterEqual  shift, and go to state 46
+    T_Equal         shift, and go to state 47
+    T_NotEqual      shift, and go to state 48
+    T_And           shift, and go to state 49
+    T_Or            shift, and go to state 50
+    '<'             shift, and go to state 51
+    '>'             shift, and go to state 52
+    '+'             shift, and go to state 53
+    '-'             shift, and go to state 54
+    '*'             shift, and go to state 55
+    '/'             shift, and go to state 56
+
+    $default  reduce using rule 32 (BoolExpr)
+
+
+state 36
+
+   37 AssertStmt: T_Assert '(' BoolExpr . ')'
+
+    ')'  shift, and go to state 58
+
+
+state 37
+
+   35 IfThenElseStmt: T_If '(' BoolExpr . ')' '{' StmtList '}' T_Else '{' StmtList '}'
+
+    ')'  shift, and go to state 59
+
+
+state 38
+
+   12 LValue: T_Mem '[' Exp . ']'
+   15 Exp: Exp . '+' Exp
+   16    | Exp . '-' Exp
+   17    | Exp . '/' Exp
+   18    | Exp . '*' Exp
+   19    | Exp . T_Equal Exp
+   20    | Exp . T_NotEqual Exp
+   21    | Exp . '<' Exp
+   22    | Exp . '>' Exp
+   23    | Exp . T_LessEqual Exp
+   24    | Exp . T_GreaterEqual Exp
+   25    | Exp . T_And Exp
+   26    | Exp . T_Or Exp
+
+    T_LessEqual     shift, and go to state 45
+    T_GreaterEqual  shift, and go to state 46
+    T_Equal         shift, and go to state 47
+    T_NotEqual      shift, and go to state 48
+    T_And           shift, and go to state 49
+    T_Or            shift, and go to state 50
+    '<'             shift, and go to state 51
+    '>'             shift, and go to state 52
+    '+'             shift, and go to state 53
+    '-'             shift, and go to state 54
+    '*'             shift, and go to state 55
+    '/'             shift, and go to state 56
+    ']'             shift, and go to state 60
+
+
+state 39
+
+    9 AssignStmt: LValue T_Assign Exp .
+   15 Exp: Exp . '+' Exp
+   16    | Exp . '-' Exp
+   17    | Exp . '/' Exp
+   18    | Exp . '*' Exp
+   19    | Exp . T_Equal Exp
+   20    | Exp . T_NotEqual Exp
+   21    | Exp . '<' Exp
+   22    | Exp . '>' Exp
+   23    | Exp . T_LessEqual Exp
+   24    | Exp . T_GreaterEqual Exp
+   25    | Exp . T_And Exp
+   26    | Exp . T_Or Exp
+
+    T_LessEqual     shift, and go to state 45
+    T_GreaterEqual  shift, and go to state 46
+    T_Equal         shift, and go to state 47
+    T_NotEqual      shift, and go to state 48
+    T_And           shift, and go to state 49
+    T_Or            shift, and go to state 50
+    '<'             shift, and go to state 51
+    '>'             shift, and go to state 52
+    '+'             shift, and go to state 53
+    '-'             shift, and go to state 54
+    '*'             shift, and go to state 55
+    '/'             shift, and go to state 56
+
+    $default  reduce using rule 9 (AssignStmt)
+
+
+state 40
+
+   30 Exp: T_ReadInteger '(' . ')'
+
+    ')'  shift, and go to state 61
+
+
+state 41
+
+   31 Exp: T_ReadSecretInt '(' . ')'
+
+    ')'  shift, and go to state 62
+
+
+state 42
+
+   15 Exp: Exp . '+' Exp
+   16    | Exp . '-' Exp
+   17    | Exp . '/' Exp
+   18    | Exp . '*' Exp
+   19    | Exp . T_Equal Exp
+   20    | Exp . T_NotEqual Exp
+   21    | Exp . '<' Exp
+   22    | Exp . '>' Exp
+   23    | Exp . T_LessEqual Exp
+   24    | Exp . T_GreaterEqual Exp
+   25    | Exp . T_And Exp
+   26    | Exp . T_Or Exp
+   28    | '-' Exp .
+
+    $default  reduce using rule 28 (Exp)
+
+
+state 43
+
+   15 Exp: Exp . '+' Exp
+   16    | Exp . '-' Exp
+   17    | Exp . '/' Exp
+   18    | Exp . '*' Exp
+   19    | Exp . T_Equal Exp
+   20    | Exp . T_NotEqual Exp
+   21    | Exp . '<' Exp
+   22    | Exp . '>' Exp
+   23    | Exp . T_LessEqual Exp
+   24    | Exp . T_GreaterEqual Exp
+   25    | Exp . T_And Exp
+   26    | Exp . T_Or Exp
+   29    | '!' Exp .
+
+    $default  reduce using rule 29 (Exp)
+
+
+state 44
+
+   15 Exp: Exp . '+' Exp
+   16    | Exp . '-' Exp
+   17    | Exp . '/' Exp
+   18    | Exp . '*' Exp
+   19    | Exp . T_Equal Exp
+   20    | Exp . T_NotEqual Exp
+   21    | Exp . '<' Exp
+   22    | Exp . '>' Exp
+   23    | Exp . T_LessEqual Exp
+   24    | Exp . T_GreaterEqual Exp
+   25    | Exp . T_And Exp
+   26    | Exp . T_Or Exp
+   27    | '(' Exp . ')'
+
+    T_LessEqual     shift, and go to state 45
+    T_GreaterEqual  shift, and go to state 46
+    T_Equal         shift, and go to state 47
+    T_NotEqual      shift, and go to state 48
+    T_And           shift, and go to state 49
+    T_Or            shift, and go to state 50
+    '<'             shift, and go to state 51
+    '>'             shift, and go to state 52
+    '+'             shift, and go to state 53
+    '-'             shift, and go to state 54
+    '*'             shift, and go to state 55
+    '/'             shift, and go to state 56
+    ')'             shift, and go to state 63
+
+
+state 45
+
+   23 Exp: Exp T_LessEqual . Exp
+
+    T_ReadInteger     shift, and go to state 25
+    T_Mem             shift, and go to state 8
+    T_ReadSecretInt   shift, and go to state 26
+    T_Identifier      shift, and go to state 9
+    T_StringConstant  shift, and go to state 27
+    T_IntConstant     shift, and go to state 28
+    '-'               shift, and go to state 29
+    '!'               shift, and go to state 30
+    '('               shift, and go to state 31
+
+    LValue    go to state 32
+    Exp       go to state 64
+    Constant  go to state 34
+
+
+state 46
+
+   24 Exp: Exp T_GreaterEqual . Exp
+
+    T_ReadInteger     shift, and go to state 25
+    T_Mem             shift, and go to state 8
+    T_ReadSecretInt   shift, and go to state 26
+    T_Identifier      shift, and go to state 9
+    T_StringConstant  shift, and go to state 27
+    T_IntConstant     shift, and go to state 28
+    '-'               shift, and go to state 29
+    '!'               shift, and go to state 30
+    '('               shift, and go to state 31
+
+    LValue    go to state 32
+    Exp       go to state 65
+    Constant  go to state 34
+
+
+state 47
+
+   19 Exp: Exp T_Equal . Exp
+
+    T_ReadInteger     shift, and go to state 25
+    T_Mem             shift, and go to state 8
+    T_ReadSecretInt   shift, and go to state 26
+    T_Identifier      shift, and go to state 9
+    T_StringConstant  shift, and go to state 27
+    T_IntConstant     shift, and go to state 28
+    '-'               shift, and go to state 29
+    '!'               shift, and go to state 30
+    '('               shift, and go to state 31
+
+    LValue    go to state 32
+    Exp       go to state 66
+    Constant  go to state 34
+
+
+state 48
+
+   20 Exp: Exp T_NotEqual . Exp
+
+    T_ReadInteger     shift, and go to state 25
+    T_Mem             shift, and go to state 8
+    T_ReadSecretInt   shift, and go to state 26
+    T_Identifier      shift, and go to state 9
+    T_StringConstant  shift, and go to state 27
+    T_IntConstant     shift, and go to state 28
+    '-'               shift, and go to state 29
+    '!'               shift, and go to state 30
+    '('               shift, and go to state 31
+
+    LValue    go to state 32
+    Exp       go to state 67
+    Constant  go to state 34
+
+
+state 49
+
+   25 Exp: Exp T_And . Exp
+
+    T_ReadInteger     shift, and go to state 25
+    T_Mem             shift, and go to state 8
+    T_ReadSecretInt   shift, and go to state 26
+    T_Identifier      shift, and go to state 9
+    T_StringConstant  shift, and go to state 27
+    T_IntConstant     shift, and go to state 28
+    '-'               shift, and go to state 29
+    '!'               shift, and go to state 30
+    '('               shift, and go to state 31
+
+    LValue    go to state 32
+    Exp       go to state 68
+    Constant  go to state 34
+
+
+state 50
+
+   26 Exp: Exp T_Or . Exp
+
+    T_ReadInteger     shift, and go to state 25
+    T_Mem             shift, and go to state 8
+    T_ReadSecretInt   shift, and go to state 26
+    T_Identifier      shift, and go to state 9
+    T_StringConstant  shift, and go to state 27
+    T_IntConstant     shift, and go to state 28
+    '-'               shift, and go to state 29
+    '!'               shift, and go to state 30
+    '('               shift, and go to state 31
+
+    LValue    go to state 32
+    Exp       go to state 69
+    Constant  go to state 34
+
+
+state 51
+
+   21 Exp: Exp '<' . Exp
+
+    T_ReadInteger     shift, and go to state 25
+    T_Mem             shift, and go to state 8
+    T_ReadSecretInt   shift, and go to state 26
+    T_Identifier      shift, and go to state 9
+    T_StringConstant  shift, and go to state 27
+    T_IntConstant     shift, and go to state 28
+    '-'               shift, and go to state 29
+    '!'               shift, and go to state 30
+    '('               shift, and go to state 31
+
+    LValue    go to state 32
+    Exp       go to state 70
+    Constant  go to state 34
+
+
+state 52
+
+   22 Exp: Exp '>' . Exp
+
+    T_ReadInteger     shift, and go to state 25
+    T_Mem             shift, and go to state 8
+    T_ReadSecretInt   shift, and go to state 26
+    T_Identifier      shift, and go to state 9
+    T_StringConstant  shift, and go to state 27
+    T_IntConstant     shift, and go to state 28
+    '-'               shift, and go to state 29
+    '!'               shift, and go to state 30
+    '('               shift, and go to state 31
+
+    LValue    go to state 32
+    Exp       go to state 71
+    Constant  go to state 34
+
+
+state 53
+
+   15 Exp: Exp '+' . Exp
+
+    T_ReadInteger     shift, and go to state 25
+    T_Mem             shift, and go to state 8
+    T_ReadSecretInt   shift, and go to state 26
+    T_Identifier      shift, and go to state 9
+    T_StringConstant  shift, and go to state 27
+    T_IntConstant     shift, and go to state 28
+    '-'               shift, and go to state 29
+    '!'               shift, and go to state 30
+    '('               shift, and go to state 31
+
+    LValue    go to state 32
+    Exp       go to state 72
+    Constant  go to state 34
+
+
+state 54
+
+   16 Exp: Exp '-' . Exp
+
+    T_ReadInteger     shift, and go to state 25
+    T_Mem             shift, and go to state 8
+    T_ReadSecretInt   shift, and go to state 26
+    T_Identifier      shift, and go to state 9
+    T_StringConstant  shift, and go to state 27
+    T_IntConstant     shift, and go to state 28
+    '-'               shift, and go to state 29
+    '!'               shift, and go to state 30
+    '('               shift, and go to state 31
+
+    LValue    go to state 32
+    Exp       go to state 73
+    Constant  go to state 34
+
+
+state 55
+
+   18 Exp: Exp '*' . Exp
+
+    T_ReadInteger     shift, and go to state 25
+    T_Mem             shift, and go to state 8
+    T_ReadSecretInt   shift, and go to state 26
+    T_Identifier      shift, and go to state 9
+    T_StringConstant  shift, and go to state 27
+    T_IntConstant     shift, and go to state 28
+    '-'               shift, and go to state 29
+    '!'               shift, and go to state 30
+    '('               shift, and go to state 31
+
+    LValue    go to state 32
+    Exp       go to state 74
+    Constant  go to state 34
+
+
+state 56
+
+   17 Exp: Exp '/' . Exp
+
+    T_ReadInteger     shift, and go to state 25
+    T_Mem             shift, and go to state 8
+    T_ReadSecretInt   shift, and go to state 26
+    T_Identifier      shift, and go to state 9
+    T_StringConstant  shift, and go to state 27
+    T_IntConstant     shift, and go to state 28
+    '-'               shift, and go to state 29
+    '!'               shift, and go to state 30
+    '('               shift, and go to state 31
+
+    LValue    go to state 32
+    Exp       go to state 75
+    Constant  go to state 34
+
+
+state 57
+
+   36 PrintStmt: T_Print '(' Exp ')' .
+
+    $default  reduce using rule 36 (PrintStmt)
+
+
+state 58
+
+   37 AssertStmt: T_Assert '(' BoolExpr ')' .
+
+    $default  reduce using rule 37 (AssertStmt)
+
+
+state 59
+
+   35 IfThenElseStmt: T_If '(' BoolExpr ')' . '{' StmtList '}' T_Else '{' StmtList '}'
+
+    '{'  shift, and go to state 76
+
+
+state 60
+
+   12 LValue: T_Mem '[' Exp ']' .
+
+    $default  reduce using rule 12 (LValue)
+
+
+state 61
+
+   30 Exp: T_ReadInteger '(' ')' .
+
+    $default  reduce using rule 30 (Exp)
+
+
+state 62
+
+   31 Exp: T_ReadSecretInt '(' ')' .
+
+    $default  reduce using rule 31 (Exp)
+
+
+state 63
+
+   27 Exp: '(' Exp ')' .
+
+    $default  reduce using rule 27 (Exp)
+
+
+state 64
+
+   15 Exp: Exp . '+' Exp
+   16    | Exp . '-' Exp
+   17    | Exp . '/' Exp
+   18    | Exp . '*' Exp
+   19    | Exp . T_Equal Exp
+   20    | Exp . T_NotEqual Exp
+   21    | Exp . '<' Exp
+   22    | Exp . '>' Exp
+   23    | Exp . T_LessEqual Exp
+   23    | Exp T_LessEqual Exp .
+   24    | Exp . T_GreaterEqual Exp
+   25    | Exp . T_And Exp
+   26    | Exp . T_Or Exp
+
+    '+'  shift, and go to state 53
+    '-'  shift, and go to state 54
+    '*'  shift, and go to state 55
+    '/'  shift, and go to state 56
+
+    T_LessEqual     error (nonassociative)
+    T_GreaterEqual  error (nonassociative)
+    '<'             error (nonassociative)
+    '>'             error (nonassociative)
+
+    $default  reduce using rule 23 (Exp)
+
+
+state 65
+
+   15 Exp: Exp . '+' Exp
+   16    | Exp . '-' Exp
+   17    | Exp . '/' Exp
+   18    | Exp . '*' Exp
+   19    | Exp . T_Equal Exp
+   20    | Exp . T_NotEqual Exp
+   21    | Exp . '<' Exp
+   22    | Exp . '>' Exp
+   23    | Exp . T_LessEqual Exp
+   24    | Exp . T_GreaterEqual Exp
+   24    | Exp T_GreaterEqual Exp .
+   25    | Exp . T_And Exp
+   26    | Exp . T_Or Exp
+
+    '+'  shift, and go to state 53
+    '-'  shift, and go to state 54
+    '*'  shift, and go to state 55
+    '/'  shift, and go to state 56
+
+    T_LessEqual     error (nonassociative)
+    T_GreaterEqual  error (nonassociative)
+    '<'             error (nonassociative)
+    '>'             error (nonassociative)
+
+    $default  reduce using rule 24 (Exp)
+
+
+state 66
+
+   15 Exp: Exp . '+' Exp
+   16    | Exp . '-' Exp
+   17    | Exp . '/' Exp
+   18    | Exp . '*' Exp
+   19    | Exp . T_Equal Exp
+   19    | Exp T_Equal Exp .
+   20    | Exp . T_NotEqual Exp
+   21    | Exp . '<' Exp
+   22    | Exp . '>' Exp
+   23    | Exp . T_LessEqual Exp
+   24    | Exp . T_GreaterEqual Exp
+   25    | Exp . T_And Exp
+   26    | Exp . T_Or Exp
+
+    T_LessEqual     shift, and go to state 45
+    T_GreaterEqual  shift, and go to state 46
+    '<'             shift, and go to state 51
+    '>'             shift, and go to state 52
+    '+'             shift, and go to state 53
+    '-'             shift, and go to state 54
+    '*'             shift, and go to state 55
+    '/'             shift, and go to state 56
+
+    T_Equal     error (nonassociative)
+    T_NotEqual  error (nonassociative)
+
+    $default  reduce using rule 19 (Exp)
+
+
+state 67
+
+   15 Exp: Exp . '+' Exp
+   16    | Exp . '-' Exp
+   17    | Exp . '/' Exp
+   18    | Exp . '*' Exp
+   19    | Exp . T_Equal Exp
+   20    | Exp . T_NotEqual Exp
+   20    | Exp T_NotEqual Exp .
+   21    | Exp . '<' Exp
+   22    | Exp . '>' Exp
+   23    | Exp . T_LessEqual Exp
+   24    | Exp . T_GreaterEqual Exp
+   25    | Exp . T_And Exp
+   26    | Exp . T_Or Exp
+
+    T_LessEqual     shift, and go to state 45
+    T_GreaterEqual  shift, and go to state 46
+    '<'             shift, and go to state 51
+    '>'             shift, and go to state 52
+    '+'             shift, and go to state 53
+    '-'             shift, and go to state 54
+    '*'             shift, and go to state 55
+    '/'             shift, and go to state 56
+
+    T_Equal     error (nonassociative)
+    T_NotEqual  error (nonassociative)
+
+    $default  reduce using rule 20 (Exp)
+
+
+state 68
+
+   15 Exp: Exp . '+' Exp
+   16    | Exp . '-' Exp
+   17    | Exp . '/' Exp
+   18    | Exp . '*' Exp
+   19    | Exp . T_Equal Exp
+   20    | Exp . T_NotEqual Exp
+   21    | Exp . '<' Exp
+   22    | Exp . '>' Exp
+   23    | Exp . T_LessEqual Exp
+   24    | Exp . T_GreaterEqual Exp
+   25    | Exp . T_And Exp
+   25    | Exp T_And Exp .
+   26    | Exp . T_Or Exp
+
+    T_LessEqual     shift, and go to state 45
+    T_GreaterEqual  shift, and go to state 46
+    T_Equal         shift, and go to state 47
+    T_NotEqual      shift, and go to state 48
+    '<'             shift, and go to state 51
+    '>'             shift, and go to state 52
+    '+'             shift, and go to state 53
+    '-'             shift, and go to state 54
+    '*'             shift, and go to state 55
+    '/'             shift, and go to state 56
+
+    $default  reduce using rule 25 (Exp)
+
+
+state 69
+
+   15 Exp: Exp . '+' Exp
+   16    | Exp . '-' Exp
+   17    | Exp . '/' Exp
+   18    | Exp . '*' Exp
+   19    | Exp . T_Equal Exp
+   20    | Exp . T_NotEqual Exp
+   21    | Exp . '<' Exp
+   22    | Exp . '>' Exp
+   23    | Exp . T_LessEqual Exp
+   24    | Exp . T_GreaterEqual Exp
+   25    | Exp . T_And Exp
+   26    | Exp . T_Or Exp
+   26    | Exp T_Or Exp .
+
+    T_LessEqual     shift, and go to state 45
+    T_GreaterEqual  shift, and go to state 46
+    T_Equal         shift, and go to state 47
+    T_NotEqual      shift, and go to state 48
+    T_And           shift, and go to state 49
+    '<'             shift, and go to state 51
+    '>'             shift, and go to state 52
+    '+'             shift, and go to state 53
+    '-'             shift, and go to state 54
+    '*'             shift, and go to state 55
+    '/'             shift, and go to state 56
+
+    $default  reduce using rule 26 (Exp)
+
+
+state 70
+
+   15 Exp: Exp . '+' Exp
+   16    | Exp . '-' Exp
+   17    | Exp . '/' Exp
+   18    | Exp . '*' Exp
+   19    | Exp . T_Equal Exp
+   20    | Exp . T_NotEqual Exp
+   21    | Exp . '<' Exp
+   21    | Exp '<' Exp .
+   22    | Exp . '>' Exp
+   23    | Exp . T_LessEqual Exp
+   24    | Exp . T_GreaterEqual Exp
+   25    | Exp . T_And Exp
+   26    | Exp . T_Or Exp
+
+    '+'  shift, and go to state 53
+    '-'  shift, and go to state 54
+    '*'  shift, and go to state 55
+    '/'  shift, and go to state 56
+
+    T_LessEqual     error (nonassociative)
+    T_GreaterEqual  error (nonassociative)
+    '<'             error (nonassociative)
+    '>'             error (nonassociative)
+
+    $default  reduce using rule 21 (Exp)
+
+
+state 71
+
+   15 Exp: Exp . '+' Exp
+   16    | Exp . '-' Exp
+   17    | Exp . '/' Exp
+   18    | Exp . '*' Exp
+   19    | Exp . T_Equal Exp
+   20    | Exp . T_NotEqual Exp
+   21    | Exp . '<' Exp
+   22    | Exp . '>' Exp
+   22    | Exp '>' Exp .
+   23    | Exp . T_LessEqual Exp
+   24    | Exp . T_GreaterEqual Exp
+   25    | Exp . T_And Exp
+   26    | Exp . T_Or Exp
+
+    '+'  shift, and go to state 53
+    '-'  shift, and go to state 54
+    '*'  shift, and go to state 55
+    '/'  shift, and go to state 56
+
+    T_LessEqual     error (nonassociative)
+    T_GreaterEqual  error (nonassociative)
+    '<'             error (nonassociative)
+    '>'             error (nonassociative)
+
+    $default  reduce using rule 22 (Exp)
+
+
+state 72
+
+   15 Exp: Exp . '+' Exp
+   15    | Exp '+' Exp .
+   16    | Exp . '-' Exp
+   17    | Exp . '/' Exp
+   18    | Exp . '*' Exp
+   19    | Exp . T_Equal Exp
+   20    | Exp . T_NotEqual Exp
+   21    | Exp . '<' Exp
+   22    | Exp . '>' Exp
+   23    | Exp . T_LessEqual Exp
+   24    | Exp . T_GreaterEqual Exp
+   25    | Exp . T_And Exp
+   26    | Exp . T_Or Exp
+
+    '*'  shift, and go to state 55
+    '/'  shift, and go to state 56
+
+    $default  reduce using rule 15 (Exp)
+
+
+state 73
+
+   15 Exp: Exp . '+' Exp
+   16    | Exp . '-' Exp
+   16    | Exp '-' Exp .
+   17    | Exp . '/' Exp
+   18    | Exp . '*' Exp
+   19    | Exp . T_Equal Exp
+   20    | Exp . T_NotEqual Exp
+   21    | Exp . '<' Exp
+   22    | Exp . '>' Exp
+   23    | Exp . T_LessEqual Exp
+   24    | Exp . T_GreaterEqual Exp
+   25    | Exp . T_And Exp
+   26    | Exp . T_Or Exp
+
+    '*'  shift, and go to state 55
+    '/'  shift, and go to state 56
+
+    $default  reduce using rule 16 (Exp)
+
+
+state 74
+
+   15 Exp: Exp . '+' Exp
+   16    | Exp . '-' Exp
+   17    | Exp . '/' Exp
+   18    | Exp . '*' Exp
+   18    | Exp '*' Exp .
+   19    | Exp . T_Equal Exp
+   20    | Exp . T_NotEqual Exp
+   21    | Exp . '<' Exp
+   22    | Exp . '>' Exp
+   23    | Exp . T_LessEqual Exp
+   24    | Exp . T_GreaterEqual Exp
+   25    | Exp . T_And Exp
+   26    | Exp . T_Or Exp
+
+    $default  reduce using rule 18 (Exp)
+
+
+state 75
+
+   15 Exp: Exp . '+' Exp
+   16    | Exp . '-' Exp
+   17    | Exp . '/' Exp
+   17    | Exp '/' Exp .
+   18    | Exp . '*' Exp
+   19    | Exp . T_Equal Exp
+   20    | Exp . T_NotEqual Exp
+   21    | Exp . '<' Exp
+   22    | Exp . '>' Exp
+   23    | Exp . T_LessEqual Exp
+   24    | Exp . T_GreaterEqual Exp
+   25    | Exp . T_And Exp
+   26    | Exp . T_Or Exp
+
+    $default  reduce using rule 17 (Exp)
+
+
+state 76
+
+   35 IfThenElseStmt: T_If '(' BoolExpr ')' '{' . StmtList '}' T_Else '{' StmtList '}'
+
+    $default  reduce using rule 3 (StmtList)
+
+    StmtList  go to state 77
+
+
+state 77
+
+    2 StmtList: StmtList . Stmt
+   35 IfThenElseStmt: T_If '(' BoolExpr ')' '{' StmtList . '}' T_Else '{' StmtList '}'
+
+    error         shift, and go to state 4
+    T_Print       shift, and go to state 5
+    T_Assert      shift, and go to state 6
+    T_If          shift, and go to state 7
+    T_Mem         shift, and go to state 8
+    T_Identifier  shift, and go to state 9
+    '}'           shift, and go to state 78
+
+    ';'  reduce using rule 10 (AssignStmt)
+
+    Stmt            go to state 10
+    AssignStmt      go to state 11
+    LValue          go to state 12
+    IfThenElseStmt  go to state 13
+    PrintStmt       go to state 14
+    AssertStmt      go to state 15
+
+
+state 78
+
+   35 IfThenElseStmt: T_If '(' BoolExpr ')' '{' StmtList '}' . T_Else '{' StmtList '}'
+
+    T_Else  shift, and go to state 79
+
+
+state 79
+
+   35 IfThenElseStmt: T_If '(' BoolExpr ')' '{' StmtList '}' T_Else . '{' StmtList '}'
+
+    '{'  shift, and go to state 80
+
+
+state 80
+
+   35 IfThenElseStmt: T_If '(' BoolExpr ')' '{' StmtList '}' T_Else '{' . StmtList '}'
+
+    $default  reduce using rule 3 (StmtList)
+
+    StmtList  go to state 81
+
+
+state 81
+
+    2 StmtList: StmtList . Stmt
+   35 IfThenElseStmt: T_If '(' BoolExpr ')' '{' StmtList '}' T_Else '{' StmtList . '}'
+
+    error         shift, and go to state 4
+    T_Print       shift, and go to state 5
+    T_Assert      shift, and go to state 6
+    T_If          shift, and go to state 7
+    T_Mem         shift, and go to state 8
+    T_Identifier  shift, and go to state 9
+    '}'           shift, and go to state 82
+
+    ';'  reduce using rule 10 (AssignStmt)
+
+    Stmt            go to state 10
+    AssignStmt      go to state 11
+    LValue          go to state 12
+    IfThenElseStmt  go to state 13
+    PrintStmt       go to state 14
+    AssertStmt      go to state 15
+
+
+state 82
+
+   35 IfThenElseStmt: T_If '(' BoolExpr ')' '{' StmtList '}' T_Else '{' StmtList '}' .
+
+    $default  reduce using rule 35 (IfThenElseStmt)
