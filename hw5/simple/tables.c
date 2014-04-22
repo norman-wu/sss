@@ -8,7 +8,8 @@ varctx_t *newvar(char *name, varctx_t *o)
 {
   varctx_t *n = (varctx_t *)malloc(sizeof(varctx_t));
   n->name = name;
-  n->val = DEFAULT_VAL;
+  n->val.value = DEFAULT_VAL;
+  n->val.tained = DEFAULT_TAINT;
   n->next = o;
   return n;
 }

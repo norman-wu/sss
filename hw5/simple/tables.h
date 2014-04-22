@@ -3,22 +3,24 @@
 
 #include <stdio.h>
 
-typedef unsigned int value_t;
+typedef struct value_t {
+  unsigned int value;
+  bool tainted;
+} value_t;
 
 #define DEFAULT_VAL 0
+#define DEFAULT_TAINT false
 
 typedef struct varctx_t {
   char *name;
   value_t val;
   struct varctx_t *next;
-  bool tainted;
 } varctx_t;
 
 typedef struct memctx_t {
   unsigned int addr;
   value_t val;
   struct memctx_t *next;
-  bool tainted;
 } memctx_t; 
 
 
