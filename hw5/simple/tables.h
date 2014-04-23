@@ -5,7 +5,7 @@
 
 typedef struct value_t {
   unsigned int value;
-  bool tainted;
+  bool taint;
 } value_t;
 
 #define DEFAULT_VAL 0
