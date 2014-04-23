@@ -14,43 +14,52 @@ value_t eval_exp(ast_t *e, varctx_t *tbl, memctx_t *mem)
 {
   value_t ret;
   ret.value = DEFAULT_VAL;
-  ret.tainted = DEFAULT_TAINT;
+  ret.taint = DEFAULT_TAINT;
+
+  value_t e1;
+  value_t e2;
 
     switch(e->tag){
-    case int_ast: return e->info.integer; break;
-    case var_ast: return lookup_var(e->info.varname, tbl); break;
+    case int_ast: 
+      ret.value = e->info.integer;
+      ret.taint = false;
+      return ret;
+      break;
+    case var_ast:
+      return lookup_var(e->info.varname, tbl);
+      break;
     case node_ast: {
 	switch(e->info.node.tag){
 	case MEM:
-          value_t e1 = eval_exp(e->info.node.arguments->elem, tbl,mem);
+          e1 = eval_exp(e->info.node.arguments->elem, tbl,mem);
 	  ret = load(e1.value, mem);
           ret.taint = ret.taint || e1.taint;
           return ret;
 	  break;
 	case PLUS:
-          value_t e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
-          value_t e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
+          e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
+          e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
           ret.value = e1.value + e2.value;
           ret.taint = e1.taint || e2.taint;
           return ret;
 	  break;
 	case MINUS:
-	  value_t e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
-          value_t e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
+	  e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
+          e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
           ret.value = e1.value - e2.value;
           ret.taint = e1.taint || e2.taint;
           return ret;
 	  break;
 	case DIVIDE:
-	  value_t e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
-          value_t e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
+	  e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
+          e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
           ret.value = e1.value / e2.value;
           ret.taint = e1.taint || e2.taint;
           return ret;
 	  break;
 	case TIMES:
-	  value_t e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
-          value_t e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
+	  e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
+          e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
           ret.value = e1.value * e2.value;
           ret.taint = (e1.value != 0 && e2.taint) ||
                       (e1.taint && e2.value != 0) ||
@@ -59,50 +68,50 @@ value_t eval_exp(ast_t *e, varctx_t *tbl, memctx_t *mem)
 	  break;
 
 	case EQ:
-          value_t e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
-          value_t e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
+          e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
+          e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
           ret.value = e1.value == e2.value;
           ret.taint = e1.taint || e2.taint;
           return ret;
 	  break;
 	case NEQ:
-	  value_t e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
-          value_t e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
+	  e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
+          e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
           ret.value = e1.value != e2.value;
           ret.taint = e1.taint || e2.taint;
           return ret;
 	  break;
 	case GT:
-	  value_t e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
-          value_t e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
+	  e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
+          e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
           ret.value = e1.value > e2.value;
           ret.taint = e1.taint || e2.taint;
           return ret;
 	    break;
 	case LT:
-	  value_t e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
-          value_t e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
+	  e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
+          e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
           ret.value = e1.value < e2.value;
           ret.taint = e1.taint || e2.taint;
           return ret;
 	    break;
 	case LEQ:
-	  value_t e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
-          value_t e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
+	  e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
+          e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
           ret.value = e1.value <= e2.value;
           ret.taint = e1.taint || e2.taint;
           return ret;
 	    break;
 	case GEQ:
-	  value_t e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
-          value_t e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
+	  e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
+          e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
           ret.value = e1.value >= e2.value;
           ret.taint = e1.taint || e2.taint;
           return ret;
 	    break;
 	case AND:
-	  value_t e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
-          value_t e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
+	  e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
+          e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
           ret.value = e1.value && e2.value;
           ret.taint = (e1.value == true && e2.taint) ||
                       (e1.taint && e2.value == true) ||
@@ -110,8 +119,8 @@ value_t eval_exp(ast_t *e, varctx_t *tbl, memctx_t *mem)
           return ret;
 	    break;
 	case OR:
-	  value_t e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
-          value_t e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
+	  e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
+          e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
           ret.value = e1.value && e2.value;
           ret.taint = (e1.value == true && e2.taint) ||
                       (e1.taint && e2.value == true) ||
@@ -119,13 +128,13 @@ value_t eval_exp(ast_t *e, varctx_t *tbl, memctx_t *mem)
           return ret;
 	  break;
 	case NEGATIVE:
-          value_t e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
+          e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
           ret.value = -e1.value;
           ret.taint = e1.taint;
           return ret;
           break;
 	case NOT:
-	  value_t e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
+	  e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
           ret.value = !e1.value;
           ret.taint = e1.taint;
           return ret;
@@ -179,7 +188,7 @@ state_t* eval_stmts(ast_t *p, state_t *state)
 		assert(t1->info.node.tag == MEM);
 		state->mem = store(eval_exp(t1->info.node.arguments->elem,
 					  state->tbl, 
-					  state->mem), v, state->mem);
+					  state->mem).value, v, state->mem);
 		break;
 	    default:
 		assert(0);
@@ -193,7 +202,7 @@ state_t* eval_stmts(ast_t *p, state_t *state)
 	    default:
 		printf("%u\n", eval_exp(s->info.node.arguments->elem, 
 					state->tbl,
-					state->mem));
+					state->mem).value);
 		break;
 	    }
 
@@ -201,7 +210,7 @@ state_t* eval_stmts(ast_t *p, state_t *state)
 	case IF:
         //control-flow taint shall NOT be tracked, so no changes here
 
-	    if(eval_exp(s->info.node.arguments->elem, state->tbl, state->mem)){
+	    if(eval_exp(s->info.node.arguments->elem, state->tbl, state->mem).value){
 		state = eval_stmts(s->info.node.arguments->next->elem, state);
 	    } else {
 		state = eval_stmts(s->info.node.arguments->next->next->elem, state);
@@ -211,7 +220,7 @@ state_t* eval_stmts(ast_t *p, state_t *state)
 	    state = eval_stmts(s->info.node.arguments->next->elem, state);
 	  break;
 	case ASSERT:
-	    if(eval_exp(s->info.node.arguments->elem, state->tbl,state->mem) ==0){
+	    if(eval_exp(s->info.node.arguments->elem, state->tbl,state->mem).value ==0){
 		printf("Assert failed!\n");
 	    }
 	  break;

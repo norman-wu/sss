@@ -16,6 +16,9 @@ varctx_t *newvar(char *name, varctx_t *o)
 
 value_t lookup_var(char *name, varctx_t *c)
 {
+  value_t ret;
+  ret.value = DEFAULT_VAL;
+  ret.taint = DEFAULT_TAINT;
   while(c != NULL){
     if(strcmp(c->name, name) == 0){
       if(eval_debug)
@@ -26,7 +29,7 @@ value_t lookup_var(char *name, varctx_t *c)
   }
   if(eval_debug)
     printf("[Debug] lookup: %s <uninitialized. returning %d>", name, DEFAULT_VAL);
-  return DEFAULT_VAL;
+  return ret;
 }
 
 varctx_t * update_var(char *name, value_t val, varctx_t *o)
@@ -85,6 +88,9 @@ memctx_t *store(unsigned int addr, value_t val, memctx_t *o)
 
 value_t load(unsigned int addr, memctx_t *c)
 {
+  value_t ret;
+  ret.value = DEFAULT_VAL;
+  ret.taint = DEFAULT_TAINT;
   while(c != NULL){
     if(c->addr == addr){
       if(eval_debug)
@@ -94,7 +100,7 @@ value_t load(unsigned int addr, memctx_t *c)
     c = c->next;
   }
   printf("[Debug] load: %x <uninitialized. returning %x>\n", addr, DEFAULT_VAL);
-  return DEFAULT_VAL;
+  return ret;
 }
 
 

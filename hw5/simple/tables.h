@@ -2,10 +2,11 @@
 #define taint_hw_tables_h
 
 #include <stdio.h>
+#include <stdbool.h>
 
 typedef struct value_t {
   unsigned int value;
-  bool taint;
+  _Bool taint;
 } value_t;
 
 #define DEFAULT_VAL 0
