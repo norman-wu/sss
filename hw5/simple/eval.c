@@ -54,7 +54,9 @@ value_t eval_exp(ast_t *e, varctx_t *tbl, memctx_t *mem)
 	  e1 = eval_exp(e->info.node.arguments->elem,tbl,mem);
           e2 = eval_exp(e->info.node.arguments->next->elem,tbl,mem);
           ret.value = e1.value / e2.value;
-          ret.taint = e1.taint || e2.taint;
+          ret.taint = (e1.value != 0 && e2.taint) ||
+                      (e1.taint && e2.value != 0) ||
+                      (e1.taint && e2.taint);
           return ret;
 	  break;
 	case TIMES:
