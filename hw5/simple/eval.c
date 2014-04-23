@@ -172,6 +172,7 @@ state_t* eval_stmts(ast_t *p, state_t *state)
     while(ip != NULL)
     {
 	s = ip->elem;
+        value_t e1;
 
 	switch(s->info.node.tag){
 	case ASSIGN:
@@ -200,9 +201,17 @@ state_t* eval_stmts(ast_t *p, state_t *state)
 		printf("%s\n", s->info.node.arguments->elem->info.string);
 		break;
 	    default:
-		printf("%u\n", eval_exp(s->info.node.arguments->elem, 
+                e1 = eval_exp(s->info.node.arguments->elem, 
 					state->tbl,
-					state->mem).value);
+					state->mem);
+                if (e1.taint) {
+                  fprintf(stderr,"%s\n","Tainted variable: Some");
+                  printf("%s\n", "<secret>");
+                }
+                else {
+                  fprintf(stderr,"%s\n","Tainted variable: None");
+                  printf("%u\n", e1.value);
+                }
 		break;
 	    }
 
