@@ -207,7 +207,7 @@ state_t* eval_stmts(ast_t *p, state_t *state)
 					state->tbl,
 					state->mem);
                 if (e1.taint) {
-                  fprintf(stderr,"%s\n","Tainted variable: Some");
+                  fprintf(stderr,"%s %d\n","Tainted variable: ", e1.value);
                   printf("%s\n", "<secret>");
                 }
                 else {
