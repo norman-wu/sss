@@ -1,0 +1,13 @@
+//Reveals the secret through assertions. When the input is 9, the assertion will not fail.
+
+a = get_int();
+b = a+get_secret_int();
+
+if (a > b) {
+  assert(b == 9);
+  print (a);
+} else {
+  print(b);
+}
+
+
