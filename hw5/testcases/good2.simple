@@ -1,0 +1,16 @@
+//a is never revealed because the if statement can never be true
+
+a = get_secret_int();
+b = get_int();
+
+assert(b > 10);
+
+if (a > 10 && a <= 10) {
+} 
+else {
+  c = get_int();
+  print(c);
+  print (b);
+  print(b > c); 
+}
+

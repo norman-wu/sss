@@ -1,0 +1,9 @@
+//accesses tainted memory and tainted values
+
+assert(9 > get_int());
+mem[9] = get_secret_int();
+mem[get_int()] = mem[9];
+mem[mem[9]] = 10;
+print(mem[9]);
+print(mem[mem[9]]);
+
