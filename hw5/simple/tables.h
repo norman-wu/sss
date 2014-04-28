@@ -13,6 +13,8 @@ typedef struct value_t {
 #define DEFAULT_TAINT false
 
 typedef struct varctx_t {
+  // is tainted flag. 0 for not tainted; 1 for tainted
+  //int tainted;
   char *name;
   value_t val;
   struct varctx_t *next;

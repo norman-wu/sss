@@ -19,6 +19,7 @@ value_t lookup_var(char *name, varctx_t *c)
   value_t ret;
   ret.value = DEFAULT_VAL;
   ret.taint = DEFAULT_TAINT;
+  
   while(c != NULL){
     if(strcmp(c->name, name) == 0){
       if(eval_debug)

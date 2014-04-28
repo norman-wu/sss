@@ -4,6 +4,11 @@
 #include <assert.h>
 
 int eval_debug = 0;
+int is_first_taint = 1;
+int is_first_eval = 1;
+
+
+value_t ret;
 
 void debug_eval(int val)
 {
@@ -12,7 +17,7 @@ void debug_eval(int val)
 
 value_t eval_exp(ast_t *e, varctx_t *tbl, memctx_t *mem)
 {
-  value_t ret;
+  //value_t ret;
   ret.value = DEFAULT_VAL;
   ret.taint = DEFAULT_TAINT;
 
@@ -22,7 +27,8 @@ value_t eval_exp(ast_t *e, varctx_t *tbl, memctx_t *mem)
     switch(e->tag){
     case int_ast: 
       ret.value = e->info.integer;
-      ret.taint = false;
+      //ret.taint = false;
+      //printf("reset was called\n");
       return ret;
       break;
     case var_ast:
@@ -32,8 +38,9 @@ value_t eval_exp(ast_t *e, varctx_t *tbl, memctx_t *mem)
 	switch(e->info.node.tag){
 	case MEM:
           e1 = eval_exp(e->info.node.arguments->elem, tbl,mem);
-	  ret = load(e1.value, mem);
+	  	  ret = load(e1.value, mem);
           ret.taint = ret.taint || e1.taint;
+          printf("%d\n", ret.taint);
           return ret;
 	  break;
 	case PLUS:
@@ -148,9 +155,12 @@ value_t eval_exp(ast_t *e, varctx_t *tbl, memctx_t *mem)
 	  return ret;
 	  break;
 	case READSECRETINT:
-	  printf("# ");
-	  scanf("%u", &(ret.value));
-          ret.taint = true;
+	  if(is_first_eval){
+		  printf("# ");
+		  scanf("%u", &(ret.value));
+		      ret.taint = true;
+		}
+		is_first_eval = 0;      
 	  return ret;
 	  break;
 	default:
@@ -189,9 +199,10 @@ state_t* eval_stmts(ast_t *p, state_t *state)
 		break;
 	    case node_ast:
 		assert(t1->info.node.tag == MEM);
-		state->mem = store(eval_exp(t1->info.node.arguments->elem,
-					  state->tbl, 
-					  state->mem).value, v, state->mem);
+		is_first_eval = 0;
+		state->mem = store(eval_exp(t1->info.node.arguments->elem, state->tbl, state->mem).value, v, state->mem);
+		eval_exp(t2, state->tbl, state->mem);	
+		is_first_eval = 0;		  
 		break;
 	    default:
 		assert(0);
@@ -207,7 +218,9 @@ state_t* eval_stmts(ast_t *p, state_t *state)
 					state->tbl,
 					state->mem);
                 if (e1.taint) {
-                  fprintf(stderr,"%s %d\n","Tainted variable: ", e1.value);
+                  fprintf(stderr,"%s", "Tainted variable: ");
+                  arithmetic_check(s->info.node.arguments->elem, state);
+                  fprintf(stderr,"\n");
                   printf("%s\n", "<secret>");
                 }
                 else {
@@ -240,7 +253,75 @@ state_t* eval_stmts(ast_t *p, state_t *state)
 	  assert(0);
 	  break;
 	}
+	is_first_eval = 1;
 	ip = ip->next;
     }
     return state;
 }
+
+//dfs to check whether the leaf was tainted
+void arithmetic_check(ast_t *p, state_t *state){
+    unsigned int addr = 0;
+	ast_list_t *c;		//child node
+	value_t e;
+	
+	switch(p->tag){
+	case int_ast:		//ignore
+		return;	
+		break;
+		
+	case var_ast:
+		e = lookup_var(p->info.varname, state->tbl);		
+		if(e.taint){
+			if(is_first_taint){	
+				fprintf(stderr, "%s", p->info.varname);
+				is_first_taint = 0;
+			}else{
+				fprintf(stderr, ", %s", p->info.varname);
+			}
+		}
+		break;
+	case node_ast:
+		if(p->info.node.tag == READSECRETINT){
+			if(is_first_taint){	
+				fprintf(stderr, "Direct", addr);
+				is_first_taint = 0;
+			}else{
+				fprintf(stderr, ", Direct", addr);
+			}
+		}
+		else if(p->info.node.tag == MEM){
+			is_first_eval = 0;
+			e = load(eval_exp(p->info.node.arguments->elem, state->tbl, state->mem).value,state->mem);
+			
+			//printf("test --- %d\n", e.taint);
+			arithmetic_check(p->info.node.arguments->elem, state);
+			
+			//printf("test --- %d\n", e.taint);
+			if(e.taint){
+				if(is_first_taint){	
+					fprintf(stderr, "mem[%d]", e.value);
+					is_first_taint = 0;
+				}
+				else{
+					fprintf(stderr, ", mem[%d]", e.value);
+				}
+			}
+			return;
+		}
+		c = p->info.node.arguments;
+		while(c){
+			arithmetic_check(c->elem, state);
+			c = c->next;
+		}
+		return;
+		break;				
+	}
+}
+
+
+
+
+
+
+
