@@ -219,6 +219,7 @@ state_t* eval_stmts(ast_t *p, state_t *state)
 					state->mem);
                 if (e1.taint) {
                   fprintf(stderr,"%s", "Tainted variable: ");
+                  is_first_taint = 1;
                   arithmetic_check(s->info.node.arguments->elem, state);
                   fprintf(stderr,"\n");
                   printf("%s\n", "<secret>");
