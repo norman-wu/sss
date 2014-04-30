@@ -10,6 +10,8 @@ int is_first_eval = 1;
 
 value_t ret;
 
+void arithmetic_check(ast_t *p, state_t *state);
+
 void debug_eval(int val)
 {
     eval_debug = val;
@@ -212,6 +214,7 @@ state_t* eval_stmts(ast_t *p, state_t *state)
 	    switch(s->info.node.arguments->elem->tag){
 	    case str_ast:
 		printf("%s\n", s->info.node.arguments->elem->info.string);
+		fprintf(stderr, "Tainted variable: None\n");
 		break;
 	    default:
                 e1 = eval_exp(s->info.node.arguments->elem, 
@@ -265,7 +268,6 @@ void arithmetic_check(ast_t *p, state_t *state){
     unsigned int addr = 0;
 	ast_list_t *c;		//child node
 	value_t e;
-	
 	switch(p->tag){
 	case int_ast:		//ignore
 		return;	
@@ -294,18 +296,19 @@ void arithmetic_check(ast_t *p, state_t *state){
 		else if(p->info.node.tag == MEM){
 			is_first_eval = 0;
 			e = load(eval_exp(p->info.node.arguments->elem, state->tbl, state->mem).value,state->mem);
-			
+			addr = eval_exp(p->info.node.arguments->elem, state->tbl, state->mem).value;
 			//printf("test --- %d\n", e.taint);
 			arithmetic_check(p->info.node.arguments->elem, state);
+			//printf("\n dfs eval_exp(p->info.node.arguments->elem, state->tbl, state->mem).value %d\n", eval_exp(p->info.node.arguments->elem, state->tbl, state->mem).value);
 			
 			//printf("test --- %d\n", e.taint);
 			if(e.taint){
 				if(is_first_taint){	
-					fprintf(stderr, "mem[%d]", eval_exp(p->info.node.arguments->elem, state->tbl, state->mem).value);
+					fprintf(stderr, "mem[%d]", addr);
 					is_first_taint = 0;
 				}
 				else{
-					fprintf(stderr, ", mem[%d]", e.value);
+					fprintf(stderr, ", mem[%d]", addr);
 				}
 			}
 			return;
