@@ -1,0 +1,12 @@
+//b gets zeroed so the secret int is never revealed even though it's used later
+
+a = get_int();
+b = 0*get_secret_int();
+if (a || (b>=0)) {
+  print(a);
+  print(a*get_int());
+  print(a/get_int());
+}
+else {
+  print (b);
+}
