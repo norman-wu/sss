@@ -1,8 +1,9 @@
-assert (b==b);
-a = get_secret_int();
-if(a==1) {
-  print (1);
-}
-else {
-  print (2);
+//won't be marked as tainted because z isn't printed directly, but revealed through control flow
+
+z = get_secret_int();
+w = z;
+if (z==10) {
+  print(10);
+} else {
+  print("ok");
 }
