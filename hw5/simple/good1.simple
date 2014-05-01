@@ -2,6 +2,7 @@
 
 a = get_secret_int();
 a = 10;
-mem[a] = get_int();
+b = get_int();
+mem[a] = b;
 print(mem[a]);
 print(mem[a]+a);
