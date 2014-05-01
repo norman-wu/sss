@@ -1,5 +1,8 @@
-w = get_secret_int();
-print(w);
-print(w);
-print(w);
-print(w);
+//prints a value that gets tainted with the secret through calculation
+
+a = get_int();
+b = a+get_secret_int();
+
+assert(a >= b);
+print(b);
+

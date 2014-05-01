@@ -1,5 +1,9 @@
-w = get_secret_int();
-y = get_secret_int();
-x = get_int();
+//accesses tainted memory and tainted values
 
-print(3*x + 7 - w - y);
+assert(9 > get_int());
+mem[9] = get_secret_int();
+a = get_int();
+mem[a] = mem[9];
+mem[mem[9]] = 10;
+print(mem[9]);
+print(mem[mem[9]]);

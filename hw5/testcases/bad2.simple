@@ -1,7 +1,0 @@
-//directly prints a secret value immediately after its created
-
-a = get_secret_int();
-mem[a] = get_int();
-print(mem[a]);
-print(get_secret_int()+a);
-

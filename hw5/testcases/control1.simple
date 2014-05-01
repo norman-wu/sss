@@ -1,9 +1,0 @@
-//won't be marked as tainted because z isn't printed directly, but revealed through control flow
-
-z = get_secret_int();
-w = z;
-if (z==10) {
-  print(10);
-} else {
-  print("ok");
-}

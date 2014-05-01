@@ -1,8 +1,0 @@
-w = get_int();
-k = get_secret();
-w = k + 3;
-mem[7] = w*6;
-sprocket = mem[7] - 2;
-mem[sprocket] = k;
-
-print(mem[sprocket] + k + w + mem[7] + get_secret_int());
